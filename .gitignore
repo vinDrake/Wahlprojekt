@@ -15,3 +15,9 @@
 /log/*
 !/log/.keep
 /tmp
+
+
+# For Travis: ignore the Gemfile and Gemfile.lock, becaur it contains some Windows Stuff
+
+/Gemfile
+/Gemfile.lock
