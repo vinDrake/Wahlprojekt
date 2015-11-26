@@ -1,0 +1,27 @@
+<%= form_for(@element) do |f| %>
+  <% if @element.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@element.errors.count, "error") %> prohibited this element from being saved:</h2>
+
+      <ul>
+      <% @element.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <strong>Challenge:</strong>
+  <div class="field">
+    <%= f.label :challenge %><br>
+    <%= f.select :challenge_id, @challenge_select.map { |c| [c.name,c.id]} %>
+  </div>
+  <strong>Question:</strong>
+  <div class="field">
+    <%= f.label :question %><br>
+    <%= f.select :question_id, @question_select.map { |q| [q.problem,q.id]} %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

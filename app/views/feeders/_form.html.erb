@@ -1,0 +1,22 @@
+<%= form_for(@feeder) do |f| %>
+  <% if @feeder.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@feeder.errors.count, "error") %> prohibited this feeder from being saved:</h2>
+
+      <ul>
+      <% @feeder.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <strong>User:</strong>
+  <div class="field">
+    <%= f.label :user %><br>
+    <%= f.select :user_id, @user_select.map { |u| [u.name,u.id]} %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

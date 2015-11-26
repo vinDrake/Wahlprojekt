@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Ties</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ties.each do |tie| %>
+      <tr>
+        <td><%= tie.question.problem %></td>
+        <td><%= tie.tag.name %></td>
+        <td><%= link_to 'Show', tie %></td>
+
+        <td><%= link_to 'Destroy', tie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<!-- Tie ist hier TY geschrieben, weil der pluralizer da rumspinnt -->
+<%= link_to 'New Tie', new_ty_path %>

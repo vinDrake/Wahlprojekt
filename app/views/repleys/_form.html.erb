@@ -1,0 +1,32 @@
+<%= form_for(@repley) do |f| %>
+  <% if @repley.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@repley.errors.count, "error") %> prohibited this repley from being saved:</h2>
+
+      <ul>
+      <% @repley.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <strong>User:</strong>
+  <div class="field">
+    <%= f.label :user %><br>
+    <%= f.select :user_id, @user_select.map { |u| [u.name,u.id]} %>
+  </div>
+  <strong>Question:</strong>
+  <div class="field">
+    <%= f.label :question %><br>
+    <%= f.select :question_id, @question_select.map { |q| [q.problem,q.id]} %>
+  </div>
+  <strong>Answer:</strong>
+  <div class="field">
+    <%= f.label :answer %><br>
+    <%= f.select :answer_id, @answer_select.map { |a| [a.answer_body,a.id]} %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
