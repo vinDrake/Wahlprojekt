@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Player:</strong>
+  <%= @participation.user.name %>
+</p>
+
+<p>
+  <strong>Challenge:</strong>
+  <%= @participation.challenge.name %>
+</p>
+
+<p>
+  <strong>Complete:</strong>
+  <%= @participation.complete %>
+</p>
+
+<%= link_to 'Edit', edit_participation_path(@participation) %> |
+<%= link_to 'Back', participations_path %>

@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @challenge.name %>
+</p>
+
+<p>
+  <strong>Alive:</strong>
+  <%= @challenge.alive %>
+</p>
+
+<strong>Questions:</strong>
+<% @challenge.elements.each do |e| %>
+  <%= e.question.problem %><br>
+<% end %><br>
+
+
+<strong>Users:</strong>
+<% @challenge.participations.each do |p| %>
+  <%= link_to p.user.name, user_path(p.user) %> <%= p.complete %><br>
+<% end %>
+<br>
+
+<%= link_to 'Edit', edit_challenge_path(@challenge) %> |
+<%= link_to 'Back', challenges_path %>

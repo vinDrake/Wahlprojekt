@@ -1,0 +1,27 @@
+<%= form_for(@tie) do |f| %>
+  <% if @tie.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tie.errors.count, "error") %> prohibited this tie from being saved:</h2>
+
+      <ul>
+      <% @tie.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <strong>Tag:</strong>
+  <div class="field">
+    <%= f.label :tag %><br>
+    <%= f.select :tag_id, @tag_select.map { |t| [t.name,t.id]} %>
+  </div>
+  <strong>Question:</strong>
+  <div class="field">
+    <%= f.label :question %><br>
+    <%= f.select :question_id, @question_select.map { |q| [q.problem,q.id]} %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Problem:</strong>
+  <%= @question.problem %>
+</p>
+
+<p>
+  <strong>Tags:</strong><br>
+  <% @tags.each do |t| %>
+    <%= t.name %><br>
+  <% end %>
+</p>
+
+<p>
+  <strong>Answers:</strong><br>
+
+    <% @question.answers.each do |a| %>
+
+      <%= a.answer_body %><br>
+
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_question_path(@question) %> |
+<%= link_to 'Back', questions_path %>

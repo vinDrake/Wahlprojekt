@@ -1,0 +1,16 @@
+<h1>Stats#show</h1>
+<p>Find me in app/views/stats/show.html.erb</p>
+
+
+<% @user.name %>
+
+<% @challenges.each do |c| %>
+  <%= c.name %><br>
+<% end %>
+<br>
+<%= @user.questions.size %> Questions answered.
+<!-- <% @questions.each do |q| %>
+  <%= q.problem %><br>
+<% end %> -->
+<br>
+<%= @hit_ratio %> Percent correct answers
