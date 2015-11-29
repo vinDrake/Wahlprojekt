@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151126154443) do
+ActiveRecord::Schema.define(version: 20151129174147) do
 
   create_table "answers", force: :cascade do |t|
     t.boolean  "correct"
@@ -39,9 +39,9 @@ ActiveRecord::Schema.define(version: 20151126154443) do
   add_index "elements", ["question_id"], name: "index_elements_on_question_id"
 
   create_table "feeders", force: :cascade do |t|
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "user_id"
   end
 
   add_index "feeders", ["user_id"], name: "index_feeders_on_user_id"
@@ -102,22 +102,12 @@ ActiveRecord::Schema.define(version: 20151126154443) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "questions_tags", id: false, force: :cascade do |t|
-    t.integer  "tags_id"
-    t.integer  "questions_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-  end
-
-  add_index "questions_tags", ["questions_id"], name: "index_questions_tags_on_questions_id"
-  add_index "questions_tags", ["tags_id"], name: "index_questions_tags_on_tags_id"
-
   create_table "repleys", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "question_id"
+    t.integer  "answer_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.integer  "answer_id"
   end
 
   add_index "repleys", ["answer_id"], name: "index_repleys_on_answer_id"
