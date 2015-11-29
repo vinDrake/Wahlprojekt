@@ -1,4 +1,6 @@
 language: ruby
-script: 'true'
+script:
+  - RAILS_ENV=test bundle exec rake db:migrate --trace
+  - bundle exec rake db:test
 gemfile: Travis_Gemfile
 install: bundle install --jobs=3 --retry=3
