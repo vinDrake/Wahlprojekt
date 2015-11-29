@@ -1,7 +1,4 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  problem: MyString
-
-two:
-  problem: MyString
+question_one:
+  problem: My Question Problem
