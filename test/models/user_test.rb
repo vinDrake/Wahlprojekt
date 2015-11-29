@@ -11,8 +11,9 @@ class UserTest < ActiveSupport::TestCase
   # assert true, "True is true"
   # end
 
-  test "should not save user without name" do
+  test "should not save user without content" do
     user = User.new
-    assert_not user.save, "Saved the user without a name"
+    assert_not user.save, "Saved the user without a name, email and password"
   end
+
 end
