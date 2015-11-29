@@ -6,7 +6,7 @@
 #
 
 
-repley_one:
+one:
   user: user_1
-  question: question_one
-  answer: answer_one
+  question: one
+  answer: one

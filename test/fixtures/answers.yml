@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-answer_one:
+one:
   correct: false
   answer_body: This is a wrong answer
-  question: question_one
+  question: one
 
-answer_two:
+two:
   correct: true
   answer_body: This is a right answer
-  question: question_one
+  question: one

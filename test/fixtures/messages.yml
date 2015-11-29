@@ -1,12 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-message_one:
+one:
   sender: user_1
   receiver: user_2
   subject: Subject 1
   content: MyText
 
-message_two:
+two:
   sender: user_2
   receiver: user_1
   subject: Subject 1

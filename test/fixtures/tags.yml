@@ -6,8 +6,8 @@
 #
 
 
-tag_one:
+one:
   name: Tag One
 
-tag_two:
+two:
   name: Tag Two

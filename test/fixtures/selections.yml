@@ -6,6 +6,6 @@
 #
 
 
-selection_one:
-  tag: tag_one
-  feeder: feeder_one
+one:
+  tag: one
+  feeder: one

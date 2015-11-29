@@ -1,6 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-participation_one:
+one:
   complete: true
   user: user_1
-  challenge: challenge_one
+  challenge: one

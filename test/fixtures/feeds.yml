@@ -4,12 +4,12 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-feed_one:
+one:
   priority: 1
-  feeder: feeder_one
-  question: question_one
+  feeder: one
+  question: one
 
-feed_two:
+two:
   priority: 1
-  feeder: feeder_one
-  question: question_one
+  feeder: one
+  question: one

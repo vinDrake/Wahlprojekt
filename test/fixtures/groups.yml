@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-group_one:
+one:
   name: Group 1
 
-group_two:
+two:
   name: Group 2

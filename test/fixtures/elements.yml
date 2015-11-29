@@ -4,12 +4,12 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-element_one:
-  challenge: challenge_one
-  question: question_one
+one:
+  challenge: one
+  question: one
 
 
 
-element_two: 
-  challenge: challenge_one
-  question: question_one
+two:
+  challenge: one
+  question: one

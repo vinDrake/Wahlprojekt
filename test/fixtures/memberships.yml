@@ -1,5 +1,5 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-membership_one:
+one:
   user: user_1
-  group: group_one
+  group: one
