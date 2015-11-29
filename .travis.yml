@@ -3,5 +3,5 @@ script: 'true'
 gemfile: Travis_Gemfile
 
 group :test do
-  gem 'rake'
+  gem 'rake test:models'
 end
