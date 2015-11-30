@@ -1,8 +1,7 @@
 language: ruby
-script:
- - RAILS_ENV=test bundle exec rake db:migrate --trace
+script: 'true'
 gemfile: Travis_Gemfile
 
 group :test do
-  gem 'rake test:models'
+  - RAILS_ENV=test bundle exec rake db:migrate --tracetest:models
 end
