@@ -5,7 +5,7 @@ gemfile: Travis_Gemfile
 install:
   bundle install --jobs=3 --retry=3
 
-after_deploy:
+after_script:
   gem 'rake test:models'
 
 # group :test do
