@@ -2,6 +2,6 @@ language: ruby
 script: 'true'
 gemfile: Travis_Gemfile
 
-group :test do
-  gem 'rake test:models'
-end
+# group :test do
+#   gem 'rake test:models'
+# end
