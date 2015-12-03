@@ -12,33 +12,29 @@
   <li>
     <a href="#">Spielen</a>
     <ul>
-      <li><a href="#">Eigene Fragen</a></li>
-      <li><a href="#">Challenge suchen</a></li>
-      <li><a href="#">Freund herrausfordern</a></li>
+      <li><%= link_to "Challenges", challenges_path %></li>
     </ul>
   </li>
   <li>
     <a href="#">Community</a>
     <ul>
-      <li><a href="HAHA">Freunde</a></li>
-      <li><a href="#">Gruppen</a></li>
-      <li><a href="#">Aktive Challenges</a></li>
+      <li><%= link_to "Nachrichten", messages_path %></li>
+      <li><%= link_to "Gruppen", groups_path %></li>
     </ul>
   </li>
   <li>
     <a href="#">Fragen</a>
     <ul>
-      <li><a href="#">Private Karten anlegen</a></li>
-      <li><a href="#">Oeffentliche Fragen anlegen</a></li>
-
+      <li><%= link_to "Fragen", questions_path %></li>
+      <li><%= link_to "Neue Frage", new_question_path %></li>
     </ul>
   </li>
   <li>
     <a href="#">Einstellungen</a>
     <ul>
-      <li><a href="javascript:void(0)" onclick="toggle_visibility('popupBoxOnePosition');">Benachrichtigungen</a></li>
-      <li><a href="#" onclick="oeffnefenster('2')">Feed bearbeiten</a></li>
-      <li><a href="#" onclick="oeffnefenster('3')">Sound</a></li>
+      <li>Benachrichtigungen</li>
+      <li>Feed bearbeiten</li>
+      <li>Sound</li>
     </ul>
   </li>
   <li>
