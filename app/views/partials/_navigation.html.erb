@@ -1,0 +1,57 @@
+
+
+
+
+<ul id="navigation">
+  <li>
+    <%= link_to "Startseite", user_path(current_user) %>
+  </li>
+
+
+  <% if current_user %>
+  <li>
+    <a href="#">Spielen</a>
+    <ul>
+      <li><a href="#">Eigene Fragen</a></li>
+      <li><a href="#">Challenge suchen</a></li>
+      <li><a href="#">Freund herrausfordern</a></li>
+    </ul>
+  </li>
+  <li>
+    <a href="#">Community</a>
+    <ul>
+      <li><a href="HAHA">Freunde</a></li>
+      <li><a href="#">Gruppen</a></li>
+      <li><a href="#">Aktive Challenges</a></li>
+    </ul>
+  </li>
+  <li>
+    <a href="#">Fragen</a>
+    <ul>
+      <li><a href="#">Private Karten anlegen</a></li>
+      <li><a href="#">Oeffentliche Fragen anlegen</a></li>
+
+    </ul>
+  </li>
+  <li>
+    <a href="#">Einstellungen</a>
+    <ul>
+      <li><a href="javascript:void(0)" onclick="toggle_visibility('popupBoxOnePosition');">Benachrichtigungen</a></li>
+      <li><a href="#" onclick="oeffnefenster('2')">Feed bearbeiten</a></li>
+      <li><a href="#" onclick="oeffnefenster('3')">Sound</a></li>
+    </ul>
+  </li>
+  <li>
+    <a href="#"><%= current_user.name %></a>
+    <ul>
+      <li><%= link_to current_user.email, user_path(current_user) %></li>
+      <li><%= link_to "Log out", logout_path, method: "delete" %></li>
+    </ul>
+  </li>
+  <% else %>
+
+    <li><%= link_to "Login", 'login' %></a></li>
+    <li><%= link_to "Signup", 'signup' %></a></li>
+
+  <% end %>
+</ul>
