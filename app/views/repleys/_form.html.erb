@@ -11,22 +11,38 @@
     </div>
   <% end %>
 
-  <strong>User:</strong>
-  <div class="field">
-    <%= f.label :user %><br>
-    <%= f.select :user_id, @user_select.map { |u| [u.name,u.id]} %>
-  </div>
+
+  <% if @user.nil? %>
+    <strong>User:</strong>
+    <div class="field">
+      <%= f.label :user %><br>
+      <%= f.select :user_id, @user_select.map { |u| [u.name,u.id]} %>
+    </div>
+  <% else %>
+    <%= f.hidden_field :user_id, :value => @user.id %>
+  <% end %>
+
   <strong>Question:</strong>
   <div class="field">
-    <%= f.label :question %><br>
-    <%= f.select :question_id, @question_select.map { |q| [q.problem,q.id]} %>
+    <% if @question.nil? %>
+      <%= f.label :question %><br>
+      <%= f.select :question_id, @question_select.map { |q| [q.problem,q.id]} %>
+    <% else %>
+      <%= f.label @question.problem %><br>
+      <%= f.hidden_field :question_id, :value => @question.id %>
+    <% end %>
   </div>
+
   <strong>Answer:</strong>
   <div class="field">
-    <%= f.label :answer %><br>
-    <%= f.select :answer_id, @answer_select.map { |a| [a.answer_body,a.id]} %>
-  </div>
+  <% unless @question.nil? %>
+      <%= f.select :answer_id, @question.answers.map { |a| [a.answer_body,a.id]} %>
+  <% else %>
+      <%= f.select :answer_id, @answer_select.map { |a| [a.answer_body,a.id]} %>
+  <% end %>
+    </div>
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Antworten" %>
   </div>
 <% end %>
