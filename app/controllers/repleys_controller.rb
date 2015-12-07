@@ -18,6 +18,12 @@ class RepleysController < ApplicationController
     @user_select = User.all
     @question_select = Question.all
     @answer_select = Answer.all
+    if current_user
+      @user = current_user
+      if @user.feeds
+        @question = @user.feeds.first.question
+      end
+    end
     @repley = Repley.new
   end
 
@@ -32,6 +38,9 @@ class RepleysController < ApplicationController
     @repley = Repley.new(repley_params)
 
     #Ben generated
+    # if repley_params[:user_id].nil?
+    #   repley_params[:user_id] = current_user.id
+    # end
 #    @question = Question.find(params[:question_id])
     #  @repley = Repleys.create(repley_params)
 
