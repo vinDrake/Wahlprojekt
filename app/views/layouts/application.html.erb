@@ -10,7 +10,33 @@
 
   <%= render "partials/navigation" %>
 
-  <%= yield %>
+<!-- Versuch Slider -->
 
+    <div id="messages">
+      <div  id="button"  >
+        <!-- <a href="javascript:void(0)" onclick="toggle_chat('messages');"> -->
+        <a href="#" onclick="toggle_chat('messages');">
+          <%= image_tag "x.png" %>
+        </a>
+      </div>
+      <!-- Versuch Messenger  -->
+        <%= render "partials/messenger" %>
+      <!-- Versuch Messenger -->
+      </div>
+      <div id="aufmachen">
+        <div id="button" >
+          <!-- <a href="javascript:void(0)" onclick="toggle_chat('2');"></a> -->
+          <a href="#" onclick="toggle_chat('2');">
+            <%= image_tag "x.png" %>
+          </a>
+        </div>
+
+    </div>
+<!-- Versuch Slider -->
+
+<div align="center">
+
+  <%= yield %>
+  </div>
 </body>
 </html>
