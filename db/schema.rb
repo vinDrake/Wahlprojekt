@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151129174147) do
+ActiveRecord::Schema.define(version: 20151210102415) do
 
   create_table "answers", force: :cascade do |t|
     t.boolean  "correct"
@@ -24,8 +24,12 @@ ActiveRecord::Schema.define(version: 20151129174147) do
   create_table "challenges", force: :cascade do |t|
     t.string   "name"
     t.boolean  "alive"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.integer  "max_challenge_time"
+    t.datetime "latest_end"
+    t.boolean  "strict_order"
+    t.integer  "strikes"
   end
 
   create_table "elements", force: :cascade do |t|
@@ -91,6 +95,8 @@ ActiveRecord::Schema.define(version: 20151129174147) do
     t.integer  "challenge_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.boolean  "succeeded"
+    t.integer  "strikes"
   end
 
   add_index "participations", ["challenge_id"], name: "index_participations_on_challenge_id"

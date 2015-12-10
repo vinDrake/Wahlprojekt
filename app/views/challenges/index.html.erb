@@ -16,6 +16,10 @@
       <tr>
         <td><%= challenge.name %></td>
         <td><%= challenge.alive %></td>
+        <td><%= challenge.max_challenge_time %></td>
+        <td><%= challenge.latest_end %></td>
+        <td><%= challenge.strict_order %></td>
+        <td><%= challenge.strikes %></td>
         <td><%= link_to 'Show', challenge %></td>
         <td><%= link_to 'Edit', edit_challenge_path(challenge) %></td>
         <td><%= link_to 'Destroy', challenge, method: :delete, data: { confirm: 'Are you sure?' } %></td>
