@@ -27,6 +27,7 @@ class AnswersController < ApplicationController
   # POST /answers.json
   def create
     @answer = Answer.new(answer_params)
+    @question_select = Question.all
 
     respond_to do |format|
       if @answer.save
