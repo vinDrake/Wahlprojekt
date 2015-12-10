@@ -1,6 +1,6 @@
 class RepleysController < ApplicationController
   before_action :set_repley, only: [:show, :edit, :update, :destroy]
-  before_action :require_user, only: [:index, :show]
+ # before_action :require_user, only: [:index, :show, :new]
 
   # GET /repleys
   # GET /repleys.json

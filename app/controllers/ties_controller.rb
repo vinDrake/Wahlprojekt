@@ -1,7 +1,7 @@
 class TiesController < ApplicationController
 
     before_action :set_tie, only: [:show, :edit, :update, :destroy]
-    before_action :require_user, only: [:index, :show]
+   # before_action :require_user, only: [:index, :show]
 
     # GET /ties
     # GET /ties.json
