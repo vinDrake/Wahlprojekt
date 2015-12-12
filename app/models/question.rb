@@ -8,4 +8,5 @@ class Question < ActiveRecord::Base
   has_many :feeder, through: :feeds
   has_many :ties, :class_name => 'Tie'
   has_many :tags, through: :ties
+  validates :problem, presence: true
 end
