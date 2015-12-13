@@ -13,7 +13,12 @@
 
   <div class="field">
     <%= f.label :question %><br>
-    <%= f.select :question_id, @question_select.map { |q| [q.problem,q.id]} %>
+    <% unless @question.nil? %>
+      <%= f.hidden_field :question_id, :value => @question_id %>
+      <%= @question.problem %>
+    <% else %>
+      <%= f.select :question_id, @question_select.map { |q| [q.problem,q.id]} %>
+    <% end %>
   </div>
   <div class="field">
     <%= f.label :correct %><br>
