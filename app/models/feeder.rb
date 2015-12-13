@@ -3,5 +3,4 @@ class Feeder < ActiveRecord::Base
   has_many :feeds
   has_many :questions, through: :feeds
   validates :user, presence: true
-  validates :user, numericality: { only_integer: true }
 end
