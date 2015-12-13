@@ -6,11 +6,11 @@ class User < ActiveRecord::Base
 
   after_create :add_feeder_to_user
 
-  has_many :repleys
+  has_many :repleys, dependent: :destroy
   has_many :questions, through: :repleys
-  has_many :participations
+  has_many :participations, dependent: :destroy
   has_many :challenges, through: :participations
-  has_one :feeder
+  has_one :feeder, dependent: :destroy
   has_many :feeds, through: :feeder
 
   has_many :received_messages, class_name: "Message",
