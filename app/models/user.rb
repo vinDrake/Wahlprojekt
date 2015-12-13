@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   has_many :challenges, through: :participations
   has_one :feeder, dependent: :destroy
   has_many :feeds, through: :feeder
+  has_many :memberships, dependent: :destroy
+  has_many :groups, through: :memberships
 
   has_many :received_messages, class_name: "Message",
                           foreign_key: "receiver_id"

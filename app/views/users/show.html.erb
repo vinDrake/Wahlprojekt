@@ -15,5 +15,19 @@
   <%= @user.email %>
 </p>
 
+<p>
+  <strong>Groups:</strong>
+  <% @user.groups.each do |group| %>
+    <%= group.name %><br>
+  <% end %>
+</p>
+
+<p>
+  <strong>Challenges:</strong>
+  <% @user.challenges.each do |challenge| %>
+    <%= challenge.name %><br>
+  <% end %>
+</p>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
