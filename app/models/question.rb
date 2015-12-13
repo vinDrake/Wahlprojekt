@@ -9,6 +9,4 @@ class Question < ActiveRecord::Base
   has_many :ties, :class_name => 'Tie'
   has_many :tags, through: :ties
   validates :problem, presence: true
-  validates :problem, format: { with: /\?$/,
-  message: "not a question" }, length: { in: 1..255 }
 end
