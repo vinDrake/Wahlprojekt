@@ -13,7 +13,11 @@
 
   <div class="field">
     <%= f.label :user %><br>
-    <%= f.select :user_id, @user_select.map { |u| [u.name,u.id]} %>
+    <% unless @user.nil? %>
+      <%= f.label :user, @user.name %>
+    <% else %>
+      <%= f.select :user_id, @user_select.map { |u| [u.name,u.id]} %>
+    <% end %>
   </div>
   <div class="field">
     <%= f.label :challenge %><br>

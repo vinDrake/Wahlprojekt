@@ -44,7 +44,13 @@ class ChallengesController < ApplicationController
   def update
     respond_to do |format|
       if @challenge.update(challenge_params)
-        format.html { redirect_to @challenge, notice: 'Challenge was successfully updated.' }
+        unless @challenge.alive
+          @challenge.participations.each do |participation|
+            participation.complete = true
+            participation.save
+          end
+        end
+        format.html { redirect_to challenges_path, notice: 'Challenge was successfully updated.' }
         format.json { render :show, status: :ok, location: @challenge }
       else
         format.html { render :edit }
