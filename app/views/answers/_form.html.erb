@@ -14,7 +14,7 @@
   <div class="field">
     <%= f.label :question %><br>
     <% unless @question.nil? %>
-      <%= f.hidden_field :question_id, :value => @question_id %>
+      <%= f.hidden_field :question_id, :value => @question.id %>
       <%= @question.problem %>
     <% else %>
       <%= f.select :question_id, @question_select.map { |q| [q.problem,q.id]} %>
