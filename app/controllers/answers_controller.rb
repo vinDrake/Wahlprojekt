@@ -16,6 +16,10 @@ class AnswersController < ApplicationController
   # GET /answers/new
   def new
     @answer = Answer.new
+    puts params
+    if params.has_key?(:question_id)
+     @question = Question.find(params[:question_id])
+    end
     @question_select = Question.all
   end
 
