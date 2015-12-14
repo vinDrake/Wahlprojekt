@@ -16,6 +16,7 @@ class ParticipationsController < ApplicationController
   # GET /participations/new
   def new
     @challenge_select = Challenge.all
+    @user = @current_user
     @user_select = User.all
     @participation = Participation.new
   end
@@ -28,6 +29,9 @@ class ParticipationsController < ApplicationController
   # POST /participations.json
   def create
     #Scaffold generated
+    @user = @current_user
+    @user_select = User.all
+    @challenge_select = Challenge.all
     @participation = Participation.new(participation_params)
 
     #Ben generated
