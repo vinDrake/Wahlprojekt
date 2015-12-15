@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
-  before_action :require_user, only: [:index, :show]
+ # before_action :require_user, only: [:index, :show]
 
   # GET /questions
   # GET /questions.json
@@ -31,7 +31,11 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.save
-        format.html { redirect_to @question, notice: 'Question was successfully created.' }
+        # Wenn man eine Frage erstellt, dann braucht die auch Antworten
+        format.html { redirect_to new_answer_path(question_id: @question)}
+        # Die alte Weiterleitung zu questions#show
+        # format.html { redirect_to @question, notice: 'Question was successfully created.' }
+        # Die JSON-Version gibt nach wie vor das gleiche zurück
         format.json { render :show, status: :created, location: @question }
       else
         format.html { render :new }

@@ -15,5 +15,15 @@
   <%= @participation.complete %>
 </p>
 
+<p>
+  <strong>Succeeded:</strong>
+  <%= @participation.succeeded %>
+</p>
+
+<p>
+  <strong>Strikes:</strong>
+  <%= @participation.strikes %>
+</p>
+
 <%= link_to 'Edit', edit_participation_path(@participation) %> |
 <%= link_to 'Back', participations_path %>

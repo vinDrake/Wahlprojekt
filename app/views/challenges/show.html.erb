@@ -10,6 +10,26 @@
   <%= @challenge.alive %>
 </p>
 
+<p>
+  <strong>Max Challenge Time:</strong>
+  <%= @challenge.max_challenge_time %>
+</p>
+
+<p>
+  <strong>Latest End:</strong>
+  <%= @challenge.latest_end %>
+</p>
+
+<p>
+  <strong>Strict Order:</strong>
+  <%= @challenge.strict_order %>
+</p>
+
+<p>
+  <strong>Strikes:</strong>
+  <%= @challenge.strikes %>
+</p>
+
 <strong>Questions:</strong>
 <% @challenge.elements.each do |e| %>
   <%= e.question.problem %><br>

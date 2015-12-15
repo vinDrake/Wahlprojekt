@@ -1,0 +1,10 @@
+<h1>Messeges</h1>
+<% unless current_user.nil? %>
+<!-- <#%= render :partial => "messages/message" , :collection => current_user.received_messages %> -->
+  <% current_user.received_messages.each do |m| %>
+    <strong><%= m.subject %></strong>
+    <br>
+    <%= m.content %>
+    <br>
+  <% end %>
+<% end %>

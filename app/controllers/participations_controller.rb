@@ -1,6 +1,6 @@
 class ParticipationsController < ApplicationController
   before_action :set_participation, only: [:show, :edit, :update, :destroy]
-  before_action :require_user, only: [:index, :show]
+ # before_action :require_user, only: [:index, :show]
 
   # GET /participations
   # GET /participations.json
@@ -16,6 +16,7 @@ class ParticipationsController < ApplicationController
   # GET /participations/new
   def new
     @challenge_select = Challenge.all
+    @user = @current_user
     @user_select = User.all
     @participation = Participation.new
   end
@@ -28,6 +29,9 @@ class ParticipationsController < ApplicationController
   # POST /participations.json
   def create
     #Scaffold generated
+    @user = @current_user
+    @user_select = User.all
+    @challenge_select = Challenge.all
     @participation = Participation.new(participation_params)
 
     #Ben generated
@@ -77,6 +81,6 @@ class ParticipationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def participation_params
-      params.require(:participation).permit(:user_id, :challenge_id, :complete)
+      params.require(:participation).permit(:user_id, :challenge_id, :complete, :succeeded, :strikes)
     end
 end

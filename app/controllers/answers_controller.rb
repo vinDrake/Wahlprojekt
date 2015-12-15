@@ -1,6 +1,7 @@
 class AnswersController < ApplicationController
   before_action :set_answer, only: [:show, :edit, :update, :destroy]
-  before_action :require_user, only: [:index, :show]
+ # before_action :require_user, only: [:index, :show]
+
 
   # GET /answers
   # GET /answers.json
@@ -16,6 +17,9 @@ class AnswersController < ApplicationController
   # GET /answers/new
   def new
     @answer = Answer.new
+    if params.has_key?(:question_id)
+     @question = Question.find(params[:question_id])
+    end
     @question_select = Question.all
   end
 
@@ -27,10 +31,23 @@ class AnswersController < ApplicationController
   # POST /answers.json
   def create
     @answer = Answer.new(answer_params)
+    @question_select = Question.all
+    if params.has_key?(:question_id)
+     @question = Question.find(params[:question_id])
+    end
+
 
     respond_to do |format|
       if @answer.save
-        format.html { redirect_to @answer, notice: 'Answer was successfully created.' }
+        # Wenn man eine Antwort erstellt und die Frage dazu noch keine 4 Antworten hat,
+        # dann braucht die noch eine Antworten
+        if @answer.question.answers.count < 4
+          format.html { redirect_to new_answer_path(question_id: @answer.question)}
+        else
+          # Die alte Weiterleitung zu questions#show
+          format.html { redirect_to @answer, notice: 'Answer was successfully created.' }
+        end
+        # Die JSON-Version gibt nach wie vor das gleiche zurück
         format.json { render :show, status: :created, location: @answer }
       else
         format.html { render :new }

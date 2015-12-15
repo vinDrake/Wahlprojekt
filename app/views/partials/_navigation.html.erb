@@ -1,0 +1,63 @@
+
+
+
+
+<ul id="navigation">
+  <li>
+    <% if current_user %>
+      <%= link_to "Startseite", '/home' %>
+    <% else %>
+      <%= link_to "Startseite", 'login' %>
+    <% end %>
+  </li>
+
+
+  <% if current_user %>
+  <li>
+    <a href="#">Spielen</a>
+    <ul>
+      <li><%= link_to "Challenges", challenges_path %></li>
+      <li><%= link_to "Challenge beitreten", new_participation_path %></li>
+      <li><%= link_to "Frage hinzufügen", new_element_path %></li>
+    </ul>
+  </li>
+  <li>
+    <a href="#">Community</a>
+    <ul>
+      <li><%= link_to "Nachrichten", messages_path %></li>
+      <li><%= link_to "Gruppen", groups_path %></li>
+      <li><%= link_to "Gruppe beitreten", new_membership_path %></li>
+    </ul>
+  </li>
+  <li>
+    <a href="#">Fragen</a>
+    <ul>
+      <li><%= link_to "Fragen", questions_path %></li>
+      <li><%= link_to "Neue Frage", new_question_path %></li>
+      <li><%= link_to "Neue Antwort", new_answer_path %></li>
+      <li><%= link_to "Neues Tag", new_tag_path %></li>
+      <li><%= link_to "Frage taggen", new_ty_path %></li>
+    </ul>
+  </li>
+  <li>
+    <a href="#">Einstellungen</a>
+    <ul>
+      <li>Benachrichtigungen</li>
+      <li>Feed bearbeiten</li>
+      <li>Sound</li>
+    </ul>
+  </li>
+  <li>
+    <a href="#"><%= current_user.name %></a>
+    <ul>
+      <li><%= link_to current_user.email, user_path(current_user) %></li>
+      <li><%= link_to "Log out", logout_path, method: "delete" %></li>
+    </ul>
+  </li>
+  <% else %>
+
+    <li><%= link_to "Login", 'login' %></a></li>
+    <li><%= link_to "Signup", 'signup' %></a></li>
+
+  <% end %>
+</ul>

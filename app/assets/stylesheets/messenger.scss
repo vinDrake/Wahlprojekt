@@ -1,0 +1,55 @@
+//
+//
+// #mitte{
+//   float:left;
+//   width:60%;
+// }
+// #links{
+//   padding: 125px 0 0 0;
+//   float:left;
+//   width:20%;
+// }
+// #rechts{
+//
+//   float:right;
+//   width:20%;
+// }
+
+
+
+#button{
+	top:47.5%;
+	left:100%;
+	width:30px;
+	height:30px;
+	position:absolute;
+
+}
+
+
+#messages{
+	box-shadow: 0 2px 3px #000;
+	border-radius: 7px;
+	position:absolute;
+	margin-bottom:10px;
+	margin-left:10px;
+	margin-right:10px;
+	margin-top:10px;
+	border: 2px solid black;
+	left:10px;
+	top:10%;
+	width:30%;
+	height:80%;
+	background-color: #CCCCCC;
+	background-image: linear-gradient(#999999,#CCCCCC);
+	display:none;
+	word-wrap: break-word;
+}
+
+#aufmachen{
+	display:block;
+	position:absolute;
+
+	top:47.5%;
+	left:20px;
+}

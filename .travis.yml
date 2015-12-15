@@ -1,2 +1,10 @@
 language: ruby
 script: 'true'
+gemfile: Travis_Gemfile
+
+install:
+  bundle install --jobs=3 --retry=3
+
+script:
+  - rake db:migrate RAILS_ENV=test
+  - rake test:models

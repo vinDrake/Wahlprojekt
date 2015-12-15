@@ -1,6 +1,6 @@
 class FeedsController < ApplicationController
   before_action :set_feed, only: [:show, :edit, :update, :destroy]
-  before_action :require_user, only: [:index, :show]
+ # before_action :require_user, only: [:index, :show]
 
   # GET /feeds
   # GET /feeds.json

@@ -1,6 +1,6 @@
 class ChallengesController < ApplicationController
   before_action :set_challenge, only: [:show, :edit, :update, :destroy]
-  before_action :require_user, only: [:index, :show]
+ # before_action :require_user, only: [:index, :show]
 
   # GET /challenges
   # GET /challenges.json
@@ -44,7 +44,13 @@ class ChallengesController < ApplicationController
   def update
     respond_to do |format|
       if @challenge.update(challenge_params)
-        format.html { redirect_to @challenge, notice: 'Challenge was successfully updated.' }
+        unless @challenge.alive
+          @challenge.participations.each do |participation|
+            participation.complete = true
+            participation.save
+          end
+        end
+        format.html { redirect_to challenges_path, notice: 'Challenge was successfully updated.' }
         format.json { render :show, status: :ok, location: @challenge }
       else
         format.html { render :edit }
@@ -71,6 +77,6 @@ class ChallengesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def challenge_params
-      params.require(:challenge).permit(:name, :alive)
+      params.require(:challenge).permit(:name, :alive, :max_challenge_time, :latest_end, :strict_order, :strikes)
     end
 end

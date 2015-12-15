@@ -1,7 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  complete: false
-
-two:
-  complete: false
+  complete: true
+  user: user_1
+  challenge: one
