@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-  protect_from_forgery with: :exception
+  # protect_from_forgery with: :exception
 
   helper_method :current_user
 
@@ -13,4 +13,17 @@ class ApplicationController < ActionController::Base
   def require_user
     # redirect_to '/login' unless current_user
   end
+
+  # Begin CORS-Code
+
+  protect_from_forgery unless: -> { request.format.json? }
+  after_filter :set_cross_domain_access
+
+  def set_cross_domain_access
+    headers['Access-Control-Allow-Origin'] = '*'
+    headers['Access-Control-Allow-Methods'] = 'POST, GET'
+    headers['Access-Control-Allow-Headers'] = '*'
+  end
+
+  # End CORS
 end
