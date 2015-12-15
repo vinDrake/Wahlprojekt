@@ -32,7 +32,6 @@ Answer.create("correct"=>false, "answer_body"=>"Flash", "question_id"=>5)
 Answer.create("correct"=>false, "answer_body"=>"Batman", "question_id"=>5)
 
 Challenge.create("name"=>"Comicverfilmungen", "alive"=>true, "max_challenge_time"=>1, "latest_end"=>Wed, 16 Dec 2015 12:29:00 UTC +00:00, "strict_order"=>false, "strikes"=>1)
-Challenge.create("name"=>"Höhere Mathematik", "alive"=>true, "max_challenge_time"=>1, "latest_end"=>Wed, 16 Dec 2015 12:30:00 UTC +00:00, "strict_order"=>false, "strikes"=>1)
 
 Element.create("challenge_id"=>1, "question_id"=>2)
 Element.create("challenge_id"=>1, "question_id"=>3)
