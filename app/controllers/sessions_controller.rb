@@ -5,11 +5,16 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_by_email(params[:session][:email])
-    if @user && @user.authenticate(params[:session][:password])
-      session[:user_id] = @user.id
-      redirect_to '/home'
-    else
-      redirect_to 'login'
+    respond_to do |format|
+      if @user && @user.authenticate(params[:session][:password])
+        session[:user_id] = @user.id
+        format.html { redirect_to '/home', notice: 'Session was successfully created.' }
+        format.json { render :show, status: :created, location: @user }
+      else
+        format.html { redirect_to 'login' }
+        format.json { render json: @session.errors, status: :unprocessable_entity }
+      end
+
     end
   end
 
