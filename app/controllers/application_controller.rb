@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
 
   def set_cross_domain_access
     headers['Access-Control-Allow-Origin'] = '*'
-    headers['Access-Control-Allow-Methods'] = 'POST, GET'
+    headers['Access-Control-Allow-Methods'] = 'GET, PUT, POST, DELETE, OPTIONS'
     headers['Access-Control-Allow-Headers'] = '*'
   end
 
