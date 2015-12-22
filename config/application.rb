@@ -10,7 +10,7 @@ Bundler.require(*Rails.groups)
 config.middleware.use Rack::Cors do
 allow do
   origins '*'
-  resource '*', headers: :any, methods: [:get, :put, :patch, :post]
+  resource '*', headers: :any, methods: [:get, :post, :put, :patch, :delete, :options]
 end
 end
 #
