@@ -9,12 +9,14 @@ class SessionsController < ApplicationController
       if @user && @user.authenticate(params[:session][:password])
         session[:user_id] = @user.id
         format.html { redirect_to '/home', notice: 'Session was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
+        # format.json { render :show, status: :created, location: @user }
+        format.json { render status: :created }
       else
         format.html { redirect_to 'login' }
-        format.json { render "users/show", status: :created, location: @user }
+        # format.json { render "users/show", status: :created, location: @user }
 
         # format.json { render json: @session.errors, status: :unprocessable_entity }
+        format.json { status: :not_acceptable }
       end
 
     end
