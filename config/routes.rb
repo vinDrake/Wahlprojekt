@@ -7,6 +7,11 @@ Rails.application.routes.draw do
   # root 'welcome#index'
   root 'users#index'
 
+  def handle_options_request
+    head(:ok) if request.request_method == "OPTIONS"
+  end
+
+  match '*path', :controller => 'application', :action => 'handle_options_request', :constraints => {:method => 'OPTIONS'}
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
