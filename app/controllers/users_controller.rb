@@ -29,6 +29,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     puts "Debug Code Params:"
     puts params
+    puts "Password:"
+    puts params[:password]
     puts user_params
     puts user_params[:name]
     puts user_params[:email]
