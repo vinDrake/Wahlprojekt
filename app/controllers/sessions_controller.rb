@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
         # format.json { render "users/show", status: :created, location: @user }
 
         # format.json { render json: @session.errors, status: :unprocessable_entity }
-        format.json { status: :not_acceptable }
+        format.json { render status: :not_acceptable }
       end
 
     end
