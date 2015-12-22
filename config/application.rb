@@ -22,12 +22,12 @@ module QuizStudy
     # config.i18n.default_locale = :de
 
     # Dealing with CORS
-    config.middleware.use Rack::Cors do
-    allow do
-      origins '*'
-      resource '*', headers: :any, methods: [:get, :post, :put, :patch, :delete, :options]
-    end
-    end
+    # config.middleware.use Rack::Cors do
+    # allow do
+    #   origins '*'
+    #   resource '*', headers: :any, methods: [:get, :post, :put, :patch, :delete, :options]
+    # end
+    # end
     #
 
 
