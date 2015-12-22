@@ -17,12 +17,12 @@ class ApplicationController < ActionController::Base
   # Begin CORS-Code
 
   protect_from_forgery unless: -> { request.format.json? }
-  after_filter :set_cross_domain_access
+  before_filter :set_cross_domain_access
 
   def set_cross_domain_access
     headers['Access-Control-Allow-Origin'] = '*'
     headers['Access-Control-Allow-Methods'] = 'GET, PUT, POST, DELETE, OPTIONS'
-    headers['Access-Control-Allow-Headers'] = '*'
+    # headers['Access-Control-Allow-Headers'] = '*'
   end
 
   # End CORS
