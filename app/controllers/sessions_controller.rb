@@ -19,10 +19,10 @@ class SessionsController < ApplicationController
 
         puts "Format:"
         puts format.to_s
-        
+
         format.html { redirect_to '/home', notice: 'Session was successfully created.' }
         # format.json { render :show, status: :created, location: @user }
-        format.json { }
+        format.json { render json: @user, status: :created }
       else
         puts "Debug Code Params:"
         puts "NO Session created!"
