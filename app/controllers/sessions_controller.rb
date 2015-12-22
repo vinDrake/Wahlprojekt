@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
         format.json { render :show, status: :created, location: @user }
       else
         format.html { redirect_to 'login' }
-        format.json { render :show, location: @user }
+        format.json { render "users/show", status: :created, location: @user }
 
         # format.json { render json: @session.errors, status: :unprocessable_entity }
       end
