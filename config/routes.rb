@@ -44,6 +44,7 @@ Rails.application.routes.draw do
   resources :questions
   resources :ties
   # resources :stats
+  resources sessions
 
 
   # Example resource route with options:
