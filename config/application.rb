@@ -6,14 +6,6 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-# Dealing with CORS
-config.middleware.use Rack::Cors do
-allow do
-  origins '*'
-  resource '*', headers: :any, methods: [:get, :post, :put, :patch, :delete, :options]
-end
-end
-#
 
 module QuizStudy
   class Application < Rails::Application
@@ -28,6 +20,16 @@ module QuizStudy
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+
+    # Dealing with CORS
+    config.middleware.use Rack::Cors do
+    allow do
+      origins '*'
+      resource '*', headers: :any, methods: [:get, :post, :put, :patch, :delete, :options]
+    end
+    end
+    #
+
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
