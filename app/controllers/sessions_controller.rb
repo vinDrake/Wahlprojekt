@@ -9,7 +9,17 @@ class SessionsController < ApplicationController
       if @user && @user.authenticate(params[:session][:password])
         puts "Debug Code Params:"
         puts "Session created"
+        puts "User_id:"
+        puts @user.id.to_s
+
         session[:user_id] = @user.id
+
+        puts "Session:"
+        puts session.to_s
+
+        puts "Format:"
+        puts format.to_s
+        
         format.html { redirect_to '/home', notice: 'Session was successfully created.' }
         # format.json { render :show, status: :created, location: @user }
         format.json { }
