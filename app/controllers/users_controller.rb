@@ -29,6 +29,12 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     puts "Debug Code Params:"
     puts params
+    puts user_params
+    puts user_params[:name]
+    puts user_params[:email]
+    puts user_params[:password]
+    puts @user.to_s
+
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
