@@ -71,7 +71,7 @@ class RepleysController < ApplicationController
     respond_to do |format|
       if @repley.save
         current_user.feeds.find_by(repley_params[:question]).destroy
-        format.html { redirect_to '@repley', notice: 'Repley was successfully created.' }
+        format.html { redirect_to @repley, notice: 'Repley was successfully created.' }
         format.json { render :show, status: :created, location: @repley }
       else
         format.html { render :new }
