@@ -44,6 +44,15 @@ class RepleysController < ApplicationController
 #    @question = Question.find(params[:question_id])
     #  @repley = Repleys.create(repley_params)
 
+
+    # Begin Points
+    if @repley.answer.correct
+      @repley.points = 1
+    else
+      @repley.points = 0
+    end
+    # End Points
+
     respond_to do |format|
       if @repley.save
         format.html { redirect_to @repley, notice: 'Repley was successfully created.' }
