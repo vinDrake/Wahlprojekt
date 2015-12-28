@@ -10,8 +10,8 @@
 
   <%= render "partials/navigation" %>
 
-<!-- Versuch Slider -->
-
+<!-- Messenger Slider -->
+<% if current_user %>
     <div id="messages">
       <div  id="button"  >
         <!-- <a href="javascript:void(0)" onclick="toggle_chat('messages');"> -->
@@ -32,7 +32,8 @@
         </div>
 
     </div>
-<!-- Versuch Slider -->
+    <% end %>
+<!-- Messenger Slider -->
 
 <div align="center">
 
