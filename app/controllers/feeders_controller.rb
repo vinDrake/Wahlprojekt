@@ -68,6 +68,8 @@ class FeedersController < ApplicationController
     end
   end
 
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_feeder
@@ -78,4 +80,5 @@ class FeedersController < ApplicationController
     def feeder_params
       params.require(:feeder).permit(:user_id)
     end
+
 end
