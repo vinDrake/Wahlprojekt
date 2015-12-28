@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151210102415) do
+ActiveRecord::Schema.define(version: 20151228141705) do
 
   create_table "answers", force: :cascade do |t|
     t.boolean  "correct"
@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(version: 20151210102415) do
     t.integer  "answer_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "points"
   end
 
   add_index "repleys", ["answer_id"], name: "index_repleys_on_answer_id"
