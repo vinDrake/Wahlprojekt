@@ -17,6 +17,7 @@ class FeedsController < ApplicationController
   def new
     @feed = Feed.new
     @question_select = Question.all
+    @user = current_user
     @feeder_select = Feeder.all
   end
 
