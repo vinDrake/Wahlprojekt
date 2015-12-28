@@ -30,7 +30,7 @@ class ChallengesController < ApplicationController
 
     respond_to do |format|
       if @challenge.save
-        format.html { redirect_to @challenge, notice: 'Challenge was successfully created.' }
+        format.html { redirect_to new_element_path(challenge_id: @challenge), notice: 'Challenge was successfully created.' }
         format.json { render :show, status: :created, location: @challenge }
       else
         format.html { render :new }
