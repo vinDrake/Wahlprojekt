@@ -14,7 +14,12 @@
   <strong>Challenge:</strong>
   <div class="field">
     <%= f.label :challenge %><br>
+    <% unless @challenge.nil? %>
+      <%= f.hidden_field :challenge_id, :value => @challenge.id %>
+      <%= @challenge.name %>
+    <% else %>
     <%= f.select :challenge_id, @challenge_select.map { |c| [c.name,c.id]} %>
+    <% end %>
   </div>
   <strong>Question:</strong>
   <div class="field">
