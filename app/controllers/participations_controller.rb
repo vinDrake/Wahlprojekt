@@ -38,6 +38,10 @@ class ParticipationsController < ApplicationController
     @challenge = Challenge.find(participation_params[:challenge_id])
     # @participation = @challenge.participation.create(participation_params)
 
+    # Begin Set strikes
+    @participation.strikes = 0
+    # End Set Strikes
+
     respond_to do |format|
       if @participation.save
         format.html { redirect_to @participation, notice: 'Participation was successfully created.' }
