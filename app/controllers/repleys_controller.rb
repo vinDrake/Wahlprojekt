@@ -20,7 +20,7 @@ class RepleysController < ApplicationController
     @answer_select = Answer.all
     if current_user
       @user = current_user
-      unless @user.feeds.size >= 1
+      unless @user.feeds.size >= 3
         question = Question.order("RANDOM()").first
         feed = Feed.new(:feeder_id => @user.feeder.id, :question_id => question.id, :priority => 0)
         feed.save
@@ -61,10 +61,17 @@ class RepleysController < ApplicationController
     end
     # End Points
 
+    @user = current_user
+    unless @user.feeds.size >= 1
+      question = Question.order("RANDOM()").first
+      feed = Feed.new(:feeder_id => @user.feeder.id, :question_id => question.id, :priority => 0)
+      feed.save
+    end
+
     respond_to do |format|
       if @repley.save
         current_user.feeds.find_by(repley_params[:question]).destroy
-        format.html { redirect_to @repley, notice: 'Repley was successfully created.' }
+        format.html { redirect_to '@repley', notice: 'Repley was successfully created.' }
         format.json { render :show, status: :created, location: @repley }
       else
         format.html { render :new }
