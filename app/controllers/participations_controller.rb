@@ -44,12 +44,7 @@ class ParticipationsController < ApplicationController
 
     respond_to do |format|
       if @participation.save
-        # Anfang Fragen in Feeder
-        @challenge.questions.each do |question|
-          feed = Feed.new(:feeder_id => @user.feeder.id, :question_id => question.id, :priority => 1)
-          feed.save
-        end
-        # Ende Fragen in Feeder
+        put_questions_in_feeder
         format.html { redirect_to @participation, notice: 'Participation was successfully created.' }
         format.json { render :show, status: :created, location: @participation }
       else
@@ -93,4 +88,33 @@ class ParticipationsController < ApplicationController
     def participation_params
       params.require(:participation).permit(:user_id, :challenge_id, :complete, :succeeded, :strikes)
     end
+
+    # Anfang Fragen in Feeder
+    def put_questions_in_feeder
+      base_priority = 0
+      @user.feeds.each do |feed|
+        if feed.priority > base_priority
+          base_priority = feed.priority
+        end
+      end
+
+      if @challenge.strict_order
+
+        question_count = @challenge.questions.count
+        order = question_count
+        @challenge.questions.each do |question|
+          feed = Feed.new(:feeder_id => @user.feeder.id, :question_id => question.id, :priority => base_priority+order+1)
+          feed.save
+          order -= 1
+        end
+      else
+        @challenge.questions.each do |question|
+          feed = Feed.new(:feeder_id => @user.feeder.id, :question_id => question.id, :priority => base_priority+1)
+          feed.save
+        end
+      end
+
+
+    end
+    # Ende Fragen in Feeder
 end
