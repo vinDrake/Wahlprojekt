@@ -71,7 +71,11 @@ class RepleysController < ApplicationController
     respond_to do |format|
       if @repley.save
         current_user.feeds.find_by(repley_params[:question]).destroy
-        format.html { redirect_to @repley, notice: 'Repley was successfully created.' }
+        if @repley.answer.correct
+          format.html { redirect_to @repley, notice: 'Repley was successfully created and the answer was correct.' }
+        else
+          format.html { redirect_to @repley, notice: 'Repley was successfully created and the answer was wrong.' }
+        end
         format.json { render :show, status: :created, location: @repley }
       else
         format.html { render :new }
