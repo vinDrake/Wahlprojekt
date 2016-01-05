@@ -16,6 +16,9 @@ class ElementsController < ApplicationController
   # GET /elements/new
   def new
     @element = Element.new
+    if params.has_key?(:challenge_id)
+     @challenge = Challenge.find(params[:challenge_id])
+    end
     @challenge_select = Challenge.all
     @question_select = Question.all
   end
@@ -31,7 +34,7 @@ class ElementsController < ApplicationController
 
     respond_to do |format|
       if @element.save
-        format.html { redirect_to @element, notice: 'Element was successfully created.' }
+        format.html { redirect_to new_element_path(challenge_id: @element.challenge), notice: 'Element was successfully created.' }
         format.json { render :show, status: :created, location: @element }
       else
         format.html { render :new }

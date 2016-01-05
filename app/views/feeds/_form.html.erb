@@ -14,7 +14,11 @@
   <strong>Feeder:</strong>
   <div class="field">
     <%= f.label :feeder %><br>
-    <%= f.select :feeder_id, @feeder_select.map { |f| [f.user.name,f.id]} %>
+    <% if @user.nil? %>
+      <%= f.select :feeder_id, @feeder_select.map { |f| [f.user.name,f.id]} %>
+    <% else %>
+      <%= f.hidden_field :feeder_id, :value => @user.feeder.id %>
+    <% end %>
   </div>
   <strong>Question:</strong>
   <div class="field">

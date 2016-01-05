@@ -6,6 +6,11 @@
 </p>
 
 <p>
+  <strong>Started at:</strong>
+  <%= @participation.created_at %>
+</p>
+
+<p>
   <strong>Challenge:</strong>
   <%= @participation.challenge.name %>
 </p>
@@ -24,6 +29,12 @@
   <strong>Strikes:</strong>
   <%= @participation.strikes %>
 </p>
+
+<p>
+  <strong>Personal Deadline:</strong>
+  <%= @participation.created_at + @participation.challenge.max_challenge_time %>
+</p>
+
 
 <%= link_to 'Edit', edit_participation_path(@participation) %> |
 <%= link_to 'Back', participations_path %>

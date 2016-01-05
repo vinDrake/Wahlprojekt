@@ -20,8 +20,16 @@ class RepleysController < ApplicationController
     @answer_select = Answer.all
     if current_user
       @user = current_user
+      unless @user.feeds.size >= 3
+        question = Question.order("RANDOM()").first
+        feed = Feed.new(:feeder_id => @user.feeder.id, :question_id => question.id, :priority => 0)
+        feed.save
+      end
       if @user.feeds
-        @question = @user.feeds.first.question
+
+        @feed = @user.feeds.first
+        @question = @feed.question
+
       end
     end
     @repley = Repley.new
@@ -44,9 +52,30 @@ class RepleysController < ApplicationController
 #    @question = Question.find(params[:question_id])
     #  @repley = Repleys.create(repley_params)
 
+
+    # Begin Points
+    if @repley.answer.correct
+      @repley.points = 1
+    else
+      @repley.points = 0
+    end
+    # End Points
+
+    @user = current_user
+    unless @user.feeds.size >= 1
+      question = Question.order("RANDOM()").first
+      feed = Feed.new(:feeder_id => @user.feeder.id, :question_id => question.id, :priority => 0)
+      feed.save
+    end
+
     respond_to do |format|
       if @repley.save
-        format.html { redirect_to @repley, notice: 'Repley was successfully created.' }
+        current_user.feeds.find_by(repley_params[:question]).destroy
+        if @repley.answer.correct
+          format.html { redirect_to @repley, notice: 'Repley was successfully created and the answer was correct.' }
+        else
+          format.html { redirect_to @repley, notice: 'Repley was successfully created and the answer was wrong.' }
+        end
         format.json { render :show, status: :created, location: @repley }
       else
         format.html { render :new }
