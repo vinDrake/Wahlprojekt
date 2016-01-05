@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151228141705) do
+ActiveRecord::Schema.define(version: 20160105140908) do
 
   create_table "answers", force: :cascade do |t|
     t.boolean  "correct"
@@ -54,10 +54,12 @@ ActiveRecord::Schema.define(version: 20151228141705) do
     t.integer  "priority"
     t.integer  "feeder_id"
     t.integer  "question_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "challenge_id"
   end
 
+  add_index "feeds", ["challenge_id"], name: "index_feeds_on_challenge_id"
   add_index "feeds", ["feeder_id"], name: "index_feeds_on_feeder_id"
   add_index "feeds", ["question_id"], name: "index_feeds_on_question_id"
 
