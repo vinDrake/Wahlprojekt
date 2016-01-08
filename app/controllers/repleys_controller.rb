@@ -44,7 +44,8 @@ class RepleysController < ApplicationController
   def create
     #Scaffold generated
     @repley = Repley.new(repley_params)
-
+    @user = current_user
+    @feed = @user.feeds.first
     #Ben generated
     # if repley_params[:user_id].nil?
     #   repley_params[:user_id] = current_user.id
@@ -61,7 +62,6 @@ class RepleysController < ApplicationController
     end
     # End Points
 
-    @user = current_user
     unless @user.feeds.size >= 1
       question = Question.order("RANDOM()").first
       feed = Feed.new(:feeder_id => @user.feeder.id, :question_id => question.id, :priority => 0)
@@ -70,12 +70,45 @@ class RepleysController < ApplicationController
 
     respond_to do |format|
       if @repley.save
-        current_user.feeds.find_by(repley_params[:question]).destroy
-        if @repley.answer.correct
-          format.html { redirect_to @repley, notice: 'Repley was successfully created and the answer was correct.' }
+        user_feeds = @user.feeds
+        user_feeds.find_by(repley_params[:question]).destroy
+
+        # Begin Check if it was the last one of this Challenge
+        logger.debug "Check, if it was a Challenge, qou are takeing part of"
+        unless @feed.participation.nil?
+          logger.debug "It was a Challenge-Question. Check, if it was the last Question of this Participation: "+@feed.participation.challenge.to_s
+          last = true
+          user_feeds.each do |feed|
+            if feed.participation_id == @feed.participation_id
+              logger.debug "No, there was an other Question"
+              last = false
+              break
+            end
+          end
+          if last
+            logger.debug "It was the last Question"
+            participation = @feed.participation
+            participation.attributes = { :complete => true, :succeeded => true }
+            if participation.save
+              logger.debug "This Participation is now complete and succeeded"
+            end
+            # participation.update(succeeded: true)
+            # logger.debug "It is now succeeded"
+          end
         else
-          format.html { redirect_to @repley, notice: 'Repley was successfully created and the answer was wrong.' }
+          logger.debug "No, it was no Challenge-Question"
         end
+        # End Check if it was the last one of this Challenge
+        if @repley.answer.correct
+          note = 'Repley was successfully created and the answer was correct.'
+        else
+          note = 'Repley was successfully created and the answer was wrong.'
+        end
+        if last
+          note += ' It also was the last Question of "'+participation.challenge.name+'".'
+        end
+
+        format.html { redirect_to @repley, notice: note }
         format.json { render :show, status: :created, location: @repley }
       else
         format.html { render :new }
