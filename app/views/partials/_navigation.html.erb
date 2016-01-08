@@ -4,7 +4,7 @@
 
 <ul id="navigation">
   <li>
-    <% if current_user %>
+    <% if @current_user %>
       <%= link_to "Startseite", '/home' %>
     <% else %>
       <%= link_to "Startseite", 'login' %>
@@ -12,7 +12,7 @@
   </li>
 
 
-  <% if current_user %>
+  <% if @current_user %>
   <li>
     <a href="#">Spielen</a>
     <ul>
@@ -48,9 +48,9 @@
     </ul>
   </li>
   <li>
-    <a href="#"><%= current_user.name %></a>
+    <a href="#"><%= @current_user.name %></a>
     <ul>
-      <li><%= link_to current_user.email, user_path(current_user) %></li>
+      <li><%= link_to @current_user.email, user_path(@current_user) %></li>
       <li><%= link_to "Log out", logout_path, method: "delete" %></li>
     </ul>
   </li>

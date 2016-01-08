@@ -15,19 +15,19 @@ class RepleysController < ApplicationController
 
   # GET /repleys/new
   def new
-    @user_select = User.all
+    # TODO
+    @user_select = @current_user.other_users
     @question_select = Question.all
     @answer_select = Answer.all
-    if current_user
-      @user = current_user
-      unless @user.feeds.size >= 3
+    if @current_user
+      unless @current_user.feeds.size >= 3
         question = Question.order("RANDOM()").first
-        feed = Feed.new(:feeder_id => @user.feeder.id, :question_id => question.id, :priority => 0)
+        feed = Feed.new(:feeder_id => @current_user.feeder.id, :question_id => question.id, :priority => 0)
         feed.save
       end
-      if @user.feeds
+      if @current_user.feeds
 
-        @feed = @user.feeds.first
+        @feed = @current_user.get_next_feed
         @question = @feed.question
 
       end
@@ -44,8 +44,7 @@ class RepleysController < ApplicationController
   def create
     #Scaffold generated
     @repley = Repley.new(repley_params)
-    @user = current_user
-    @feed = @user.feeds.first
+    @feed = @current_user.feeds.first
     #Ben generated
     # if repley_params[:user_id].nil?
     #   repley_params[:user_id] = current_user.id
@@ -62,15 +61,15 @@ class RepleysController < ApplicationController
     end
     # End Points
 
-    unless @user.feeds.size >= 1
+    unless @current_user.feeds.size >= 1
       question = Question.order("RANDOM()").first
-      feed = Feed.new(:feeder_id => @user.feeder.id, :question_id => question.id, :priority => 0)
+      feed = Feed.new(:feeder_id => @current_user.feeder.id, :question_id => question.id, :priority => 0)
       feed.save
     end
 
     respond_to do |format|
       if @repley.save
-        user_feeds = @user.feeds
+        user_feeds = @current_user.feeds
         user_feeds.find_by(repley_params[:question]).destroy
 
         # Begin Check if it was the last one of this Challenge

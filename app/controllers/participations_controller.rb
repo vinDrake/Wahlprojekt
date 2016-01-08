@@ -16,16 +16,14 @@ class ParticipationsController < ApplicationController
   # GET /participations/new
   def new
     @challenge_select = Challenge.all
-    @user = @current_user
-    @user_select = current_user.other_users
+    @user_select = @current_user.other_users
     @participation = Participation.new
   end
 
   # GET /participations/1/edit
   def edit
     @challenge_select = Challenge.all
-    @user = @current_user
-    @user_select = current_user.other_users
+    @user_select = @current_user.other_users
     @participation = Participation.new
   end
 
@@ -33,8 +31,7 @@ class ParticipationsController < ApplicationController
   # POST /participations.json
   def create
     #Scaffold generated
-    @user = @current_user
-    @user_select = current_user.other_users
+    @user_select = @current_user.other_users
     @challenge_select = Challenge.all
     @participation = Participation.new(participation_params)
 
@@ -108,7 +105,7 @@ class ParticipationsController < ApplicationController
 
     def remove_questions_from_feeder
       logger.debug "Remove Questions from Feeder"
-      @user.feeds.each do |feed|
+      @current_user.feeds.each do |feed|
         logger.debug "This is a Question in Feeder: "+feed.question.problem
         if feed.challenge = @participation.challenge
           logger.debug "Destroy Feed"
@@ -121,7 +118,7 @@ class ParticipationsController < ApplicationController
     # Anfang Fragen in Feeder
     def add_questions_to_feeder
       base_priority = 0
-      @user.feeds.each do |feed|
+      @current_user.feeds.each do |feed|
         if feed.priority > base_priority
           base_priority = feed.priority
         end
@@ -132,13 +129,13 @@ class ParticipationsController < ApplicationController
         question_count = @challenge.questions.count
         order = question_count
         @challenge.questions.each do |question|
-          feed = Feed.new(:feeder_id => @user.feeder.id, :question_id => question.id, :priority => base_priority+order+1, :challenge_id => @challenge.id, :participation_id => @participation.id)
+          feed = Feed.new(:feeder_id => @current_user.feeder.id, :question_id => question.id, :priority => base_priority+order+1, :challenge_id => @challenge.id, :participation_id => @participation.id)
           feed.save
           order -= 1
         end
       else
         @challenge.questions.each do |question|
-          feed = Feed.new(:feeder_id => @user.feeder.id, :question_id => question.id, :priority => base_priority+1, :challenge_id => @challenge.id, :participation_id => @participation.id)
+          feed = Feed.new(:feeder_id => @current_user.feeder.id, :question_id => question.id, :priority => base_priority+1, :challenge_id => @challenge.id, :participation_id => @participation.id)
           feed.save
         end
       end

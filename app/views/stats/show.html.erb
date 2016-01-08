@@ -2,13 +2,13 @@
 <p>Find me in app/views/stats/show.html.erb</p>
 
 
-<% @user.name %>
+<% @current_user.name %>
 
 <% @challenges.each do |c| %>
   <%= c.name %><br>
 <% end %>
 <br>
-<%= @user.questions.size %> Questions answered.
+<%= @current_user.questions.size %> Questions answered.
 <!-- <% @questions.each do |q| %>
   <%= q.problem %><br>
 <% end %> -->

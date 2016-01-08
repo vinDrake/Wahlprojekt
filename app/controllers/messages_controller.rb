@@ -15,7 +15,7 @@ class MessagesController < ApplicationController
 
   # GET /messages/new
   def new
-    @user_select = current_user.other_users
+    @user_select = @current_user.other_users
     @message = Message.new
   end
 

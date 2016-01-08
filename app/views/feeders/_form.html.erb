@@ -14,7 +14,7 @@
   <strong>User:</strong>
   <div class="field">
     <%= f.label :user %><br>
-    <%= f.select :user_id, @user_select.map { |u| [u.name,u.id]} %>
+    <%= f.select :user_id, @current_user_select.map { |u| [u.name,u.id]} %>
   </div>
   <div class="actions">
     <%= f.submit %>
