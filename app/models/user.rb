@@ -28,6 +28,17 @@ class User < ActiveRecord::Base
     return others
   end
 
+  # Returns the achieved Points.
+  def achieved_points
+    #
+    points = 0
+    self.repleys.each do |repley|
+      unless repley.points.nil?
+        points += repley.points
+      end
+    end
+    return points
+  end
   private
     def add_feeder_to_user
       self.feeder = Feeder.new(:user_id => self.id)

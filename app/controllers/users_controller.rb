@@ -12,12 +12,8 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user_points = 0
-    @user.repleys.each do |repley|
-      unless repley.points.nil?
-        @user_points += repley.points
-      end
-    end
+    # OPTIMIZE deprechated @user.archieved_points can be called in view
+    @user_points = @user.achieved_points
   end
 
   # GET /users/new
