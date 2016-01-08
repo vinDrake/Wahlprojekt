@@ -20,6 +20,13 @@ class User < ActiveRecord::Base
   has_many :sended_messages, class_name: "Message",
                           foreign_key: "sender_id"
 
+  # Returns an Array containing the other Users.
+  def other_users
+    others = Array.new
+    others.concat( User.all )
+    others.delete(self)
+    return others
+  end
 
   private
     def add_feeder_to_user

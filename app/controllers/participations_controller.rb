@@ -17,7 +17,7 @@ class ParticipationsController < ApplicationController
   def new
     @challenge_select = Challenge.all
     @user = @current_user
-    @user_select = User.all
+    @user_select = current_user.other_users
     @participation = Participation.new
   end
 
@@ -25,7 +25,7 @@ class ParticipationsController < ApplicationController
   def edit
     @challenge_select = Challenge.all
     @user = @current_user
-    @user_select = User.all
+    @user_select = current_user.other_users
     @participation = Participation.new
   end
 
@@ -34,7 +34,7 @@ class ParticipationsController < ApplicationController
   def create
     #Scaffold generated
     @user = @current_user
-    @user_select = User.all
+    @user_select = current_user.other_users
     @challenge_select = Challenge.all
     @participation = Participation.new(participation_params)
 
