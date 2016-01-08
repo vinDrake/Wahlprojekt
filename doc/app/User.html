@@ -64,7 +64,17 @@
 
     
     
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
     
+    <li ><a href="#method-i-achieved_points">#achieved_points</a>
+    
+  </ul>
+</div>
+
   </div>
 </nav>
 
@@ -90,6 +100,54 @@
     
 
     
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-achieved_points" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">achieved_points</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns the achieved Points.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="achieved_points-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">achieved_points</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-identifier">points</span> = <span class="ruby-value">0</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">repleys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">repley</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">repley</span>.<span class="ruby-identifier">points</span>.<span class="ruby-identifier">nil?</span>
+      <span class="ruby-identifier">points</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">repley</span>.<span class="ruby-identifier">points</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">points</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
   </section>
 </main>
 
