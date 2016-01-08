@@ -20,6 +20,21 @@ class User < ActiveRecord::Base
   has_many :sended_messages, class_name: "Message",
                           foreign_key: "sender_id"
 
+  # Class Methods
+  class << self
+    # Returns the first User with the highest Score 
+    def get_highscore_user
+      highscore = 0
+      highscore_user = User.first
+      User.all.each do |user|
+        if user.achieved_points > highscore
+          highscore = user.achieved_points
+          highscore_user = user
+        end
+      end
+      return highscore_user
+    end
+  end
   # Returns an Array containing the other Users.
   def other_users
     others = Array.new
