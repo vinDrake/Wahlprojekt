@@ -28,6 +28,10 @@ class User < ActiveRecord::Base
     return others
   end
 
+  # Returns next Feed.
+  def get_next_feed
+    return self.feeder.get_next_feed
+  end
   # Returns the achieved Points.
   def achieved_points
     #
