@@ -6,7 +6,11 @@ class Feeder < ActiveRecord::Base
 
   after_create :add_feed_to_feeder
 
-
+  # Returns next Feed.
+  def get_next_feed
+    # Sorts Feeds by Priority and returns the first one.
+    return self.feeds.order(priority: :desc).first
+  end
 
   private
     def add_feed_to_feeder
