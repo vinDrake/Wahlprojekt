@@ -18,6 +18,9 @@
         <% unless feed.challenge.nil? %>
           <td><%= feed.challenge.name %></td>
         <% end %>
+        <% unless feed.participation.nil? %>
+          <td><%= feed.participation.challenge.name %></td>
+        <% end %>
         <td><%= link_to 'Show', feed %></td>
         <td><%= link_to 'Edit', edit_feed_path(feed) %></td>
         <td><%= link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
