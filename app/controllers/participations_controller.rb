@@ -132,13 +132,13 @@ class ParticipationsController < ApplicationController
         question_count = @challenge.questions.count
         order = question_count
         @challenge.questions.each do |question|
-          feed = Feed.new(:feeder_id => @user.feeder.id, :question_id => question.id, :priority => base_priority+order+1, :challenge_id => @challenge.id)
+          feed = Feed.new(:feeder_id => @user.feeder.id, :question_id => question.id, :priority => base_priority+order+1, :challenge_id => @challenge.id, :participation_id => @participation.id)
           feed.save
           order -= 1
         end
       else
         @challenge.questions.each do |question|
-          feed = Feed.new(:feeder_id => @user.feeder.id, :question_id => question.id, :priority => base_priority+1, :challenge_id => @challenge.id)
+          feed = Feed.new(:feeder_id => @user.feeder.id, :question_id => question.id, :priority => base_priority+1, :challenge_id => @challenge.id, :participation_id => @participation.id)
           feed.save
         end
       end
