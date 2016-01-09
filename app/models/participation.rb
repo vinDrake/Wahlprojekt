@@ -2,10 +2,14 @@ class Participation < ActiveRecord::Base
   belongs_to :user
   belongs_to :challenge
   has_many :feeds
+
   validates :user, :challenge, :strikes, presence: true
   validates :strikes, numericality: { only_integer: true }
   validates :complete, :succeeded, inclusion: { in: [true, false] }
 
+
+  # TODO Dokumentieren
+  # OPTIMIZE 
   after_find do |participation|
     logger.debug "Participation touched"
 

@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_secure_password
+
   validates :name, :email, :password_digest, presence: true
   validates :name, format: { with: /\A[a-zA-Z0-9]+\z/,
     message: "only allows letters and numbers" }, length: { in: 4..24 }
@@ -20,9 +21,13 @@ class User < ActiveRecord::Base
   has_many :sended_messages, class_name: "Message",
                           foreign_key: "sender_id"
 
+  # TODO Dokumentieren
+  # OPTIMIZE Code Aufräumen
+                          
+
   # Class Methods
   class << self
-    # Returns the first User with the highest Score 
+    # Returns the first User with the highest Score
     def get_highscore_user
       highscore = 0
       highscore_user = User.first

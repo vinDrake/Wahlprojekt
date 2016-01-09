@@ -3,5 +3,12 @@ class Tag < ActiveRecord::Base
   has_many :questions, through: :ties
   has_many :selections
   has_many :feeder, through: :selections
+
   validates :name, presence: true
+
+  # TODO Dokumentieren
+
+  # TODO Validieren, ob es schon ein gleiches/ähnliches gibt
+
+  
 end

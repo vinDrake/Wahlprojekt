@@ -4,15 +4,23 @@ class Feeder < ActiveRecord::Base
   has_many :questions, through: :feeds
   has_many :selections
   has_many :tags, through: :selections
+
   validates :user, presence: true
 
   after_create :add_feed_to_feeder
+
+  # TODO Dokumentieren
+  # OPTIMIZE Code aufräumen
 
   # Returns next Feed.
   def get_next_feed
     # Sorts Feeds by Priority and returns the first one.
     return self.feeds.order(priority: :desc).first
   end
+
+  # TODO remove_feeds(participation)
+
+
 
   # OPTIMIZE Hübscher und sinnvoller sollte das schon sein
   # TODO Dokumentation
