@@ -141,8 +141,7 @@
   <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
     <span class="ruby-comment">#Scaffold generated</span>
     <span class="ruby-ivar">@repley</span> = <span class="ruby-constant">Repley</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">repley_params</span>)
-    <span class="ruby-ivar">@user</span> = <span class="ruby-identifier">current_user</span>
-    <span class="ruby-ivar">@feed</span> = <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">feeds</span>.<span class="ruby-identifier">first</span>
+    <span class="ruby-ivar">@feed</span> = <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">feeds</span>.<span class="ruby-identifier">first</span>
     <span class="ruby-comment">#Ben generated</span>
     <span class="ruby-comment"># if repley_params[:user_id].nil?</span>
     <span class="ruby-comment">#   repley_params[:user_id] = current_user.id</span>
@@ -159,15 +158,15 @@
     <span class="ruby-keyword">end</span>
     <span class="ruby-comment"># End Points</span>
 
-    <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">feeds</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">1</span>
+    <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">feeds</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">1</span>
       <span class="ruby-identifier">question</span> = <span class="ruby-constant">Question</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;RANDOM()&quot;</span>).<span class="ruby-identifier">first</span>
-      <span class="ruby-identifier">feed</span> = <span class="ruby-constant">Feed</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:feeder_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">feeder</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:question_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">question</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:priority</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
+      <span class="ruby-identifier">feed</span> = <span class="ruby-constant">Feed</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:feeder_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">feeder</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:question_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">question</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:priority</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
       <span class="ruby-identifier">feed</span>.<span class="ruby-identifier">save</span>
     <span class="ruby-keyword">end</span>
 
     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
       <span class="ruby-keyword">if</span> <span class="ruby-ivar">@repley</span>.<span class="ruby-identifier">save</span>
-        <span class="ruby-identifier">user_feeds</span> = <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">feeds</span>
+        <span class="ruby-identifier">user_feeds</span> = <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">feeds</span>
         <span class="ruby-identifier">user_feeds</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">repley_params</span>[<span class="ruby-value">:question</span>]).<span class="ruby-identifier">destroy</span>
 
         <span class="ruby-comment"># Begin Check if it was the last one of this Challenge</span>
@@ -242,7 +241,7 @@
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/repleys_controller.rb, line 136</span>
+            <pre><span class="ruby-comment"># File app/controllers/repleys_controller.rb, line 135</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-ivar">@repley</span>.<span class="ruby-identifier">destroy</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
@@ -346,19 +345,19 @@
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File app/controllers/repleys_controller.rb, line 17</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
-  <span class="ruby-ivar">@user_select</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-comment"># TODO</span>
+  <span class="ruby-ivar">@user_select</span> = <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">other_users</span>
   <span class="ruby-ivar">@question_select</span> = <span class="ruby-constant">Question</span>.<span class="ruby-identifier">all</span>
   <span class="ruby-ivar">@answer_select</span> = <span class="ruby-constant">Answer</span>.<span class="ruby-identifier">all</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_user</span>
-    <span class="ruby-ivar">@user</span> = <span class="ruby-identifier">current_user</span>
-    <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">feeds</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">3</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@current_user</span>
+    <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">feeds</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">3</span>
       <span class="ruby-identifier">question</span> = <span class="ruby-constant">Question</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;RANDOM()&quot;</span>).<span class="ruby-identifier">first</span>
-      <span class="ruby-identifier">feed</span> = <span class="ruby-constant">Feed</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:feeder_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">feeder</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:question_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">question</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:priority</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
+      <span class="ruby-identifier">feed</span> = <span class="ruby-constant">Feed</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:feeder_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">feeder</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:question_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">question</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:priority</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
       <span class="ruby-identifier">feed</span>.<span class="ruby-identifier">save</span>
     <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">feeds</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">feeds</span>
 
-      <span class="ruby-ivar">@feed</span> = <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">feeds</span>.<span class="ruby-identifier">first</span>
+      <span class="ruby-ivar">@feed</span> = <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">get_next_feed</span>
       <span class="ruby-ivar">@question</span> = <span class="ruby-ivar">@feed</span>.<span class="ruby-identifier">question</span>
 
     <span class="ruby-keyword">end</span>
@@ -426,7 +425,7 @@
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/repleys_controller.rb, line 122</span>
+            <pre><span class="ruby-comment"># File app/controllers/repleys_controller.rb, line 121</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@repley</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">repley_params</span>)

@@ -137,12 +137,11 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/participations_controller.rb, line 34</span>
+            <pre><span class="ruby-comment"># File app/controllers/participations_controller.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-comment">#Scaffold generated</span>
-  <span class="ruby-ivar">@user</span> = <span class="ruby-ivar">@current_user</span>
-  <span class="ruby-ivar">@user_select</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">all</span>
-  <span class="ruby-ivar">@challenge_select</span> = <span class="ruby-constant">Challenge</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-ivar">@user_select</span> = <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">other_users</span>
+  <span class="ruby-ivar">@challenge_select</span> = <span class="ruby-constant">Challenge</span>.<span class="ruby-identifier">get_alive_challenges</span>
   <span class="ruby-ivar">@participation</span> = <span class="ruby-constant">Participation</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">participation_params</span>)
 
   <span class="ruby-comment">#Ben generated</span>
@@ -193,7 +192,7 @@
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/participations_controller.rb, line 82</span>
+            <pre><span class="ruby-comment"># File app/controllers/participations_controller.rb, line 79</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-ivar">@participation</span>.<span class="ruby-identifier">destroy</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
@@ -230,11 +229,10 @@
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/participations_controller.rb, line 25</span>
+            <pre><span class="ruby-comment"># File app/controllers/participations_controller.rb, line 24</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
   <span class="ruby-ivar">@challenge_select</span> = <span class="ruby-constant">Challenge</span>.<span class="ruby-identifier">all</span>
-  <span class="ruby-ivar">@user</span> = <span class="ruby-ivar">@current_user</span>
-  <span class="ruby-ivar">@user_select</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-ivar">@user_select</span> = <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">other_users</span>
   <span class="ruby-ivar">@participation</span> = <span class="ruby-constant">Participation</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -301,9 +299,8 @@
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File app/controllers/participations_controller.rb, line 17</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
-  <span class="ruby-ivar">@challenge_select</span> = <span class="ruby-constant">Challenge</span>.<span class="ruby-identifier">all</span>
-  <span class="ruby-ivar">@user</span> = <span class="ruby-ivar">@current_user</span>
-  <span class="ruby-ivar">@user_select</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-ivar">@challenge_select</span> = <span class="ruby-constant">Challenge</span>.<span class="ruby-identifier">get_alive_challenges</span>
+  <span class="ruby-ivar">@user_select</span> = <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">other_users</span>
   <span class="ruby-ivar">@participation</span> = <span class="ruby-constant">Participation</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -367,7 +364,7 @@
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/participations_controller.rb, line 63</span>
+            <pre><span class="ruby-comment"># File app/controllers/participations_controller.rb, line 60</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">participation_params</span>[<span class="ruby-value">:id</span>].<span class="ruby-identifier">nil?</span>

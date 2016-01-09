@@ -137,7 +137,7 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/feeds_controller.rb, line 30</span>
+            <pre><span class="ruby-comment"># File app/controllers/feeds_controller.rb, line 29</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-ivar">@feed</span> = <span class="ruby-constant">Feed</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">feed_params</span>)
 
@@ -180,7 +180,7 @@
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/feeds_controller.rb, line 60</span>
+            <pre><span class="ruby-comment"># File app/controllers/feeds_controller.rb, line 59</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-ivar">@feed</span>.<span class="ruby-identifier">destroy</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
@@ -217,7 +217,7 @@
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/feeds_controller.rb, line 25</span>
+            <pre><span class="ruby-comment"># File app/controllers/feeds_controller.rb, line 24</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -286,7 +286,6 @@
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
   <span class="ruby-ivar">@feed</span> = <span class="ruby-constant">Feed</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-ivar">@question_select</span> = <span class="ruby-constant">Question</span>.<span class="ruby-identifier">all</span>
-  <span class="ruby-ivar">@user</span> = <span class="ruby-identifier">current_user</span>
   <span class="ruby-ivar">@feeder_select</span> = <span class="ruby-constant">Feeder</span>.<span class="ruby-identifier">all</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -350,7 +349,7 @@
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/feeds_controller.rb, line 46</span>
+            <pre><span class="ruby-comment"># File app/controllers/feeds_controller.rb, line 45</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@feed</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">feed_params</span>)
