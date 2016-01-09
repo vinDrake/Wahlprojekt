@@ -11,7 +11,7 @@ class QuestionsController < ApplicationController
   # GET /questions/1
   # GET /questions/1.json
   def show
-   @tags = @question.tags # OPTIMIZE Das ist Mist und gehört ins Model
+  #  @tags = @question.tags # OPTIMIZE Das ist Mist und gehört ins Model DONE
   end
 
   # TODO Dokumentieren
