@@ -19,7 +19,7 @@ class ElementsController < ApplicationController
     if params.has_key?(:challenge_id)
      @challenge = Challenge.find(params[:challenge_id])
     end
-    @challenge_select = Challenge.all
+    @challenge_select = Challenge.get_alive_challenges
     @question_select = Question.all
   end
 

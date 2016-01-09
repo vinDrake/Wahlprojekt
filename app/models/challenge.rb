@@ -18,4 +18,19 @@ class Challenge < ActiveRecord::Base
     end
 
   end
+
+  # Class Methods
+  class << self
+
+    # Returns the alive Challenges
+    def get_alive_challenges
+      alive_challenges = Array.new
+      Challenge.all.each do |challenge|
+        alive_challenges << challenge if challenge.alive
+      end
+      return alive_challenges
+    end
+
+  end # End Class Methods
+
 end
