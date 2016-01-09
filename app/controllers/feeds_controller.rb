@@ -13,6 +13,8 @@ class FeedsController < ApplicationController
   def show
   end
 
+  # TODO Dokumentieren
+  # TODO Sollte Feed eine VIEW haben?
   # GET /feeds/new
   def new
     @feed = Feed.new

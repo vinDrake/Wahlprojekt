@@ -1,6 +1,6 @@
 class ParticipationsController < ApplicationController
   before_action :set_participation, only: [:show, :edit, :update, :destroy]
- # before_action :require_user, only: [:index, :show]
+  # before_action :require_user, only: [:index, :show]
 
   # GET /participations
   # GET /participations.json
@@ -13,6 +13,7 @@ class ParticipationsController < ApplicationController
   def show
   end
 
+  # TODO Dokumentieren
   # GET /participations/new
   def new
     @challenge_select = Challenge.get_alive_challenges
@@ -20,16 +21,18 @@ class ParticipationsController < ApplicationController
     @participation = Participation.new
   end
 
+
   # GET /participations/1/edit
   def edit
     @challenge_select = Challenge.all
     @user_select = @current_user.other_users
+    # TODO Was macht das hier? Das scheint mir ein Fehler zu sein
     @participation = Participation.new
   end
 
   # POST /participations
   # POST /participations.json
-  def create
+  def create # OPTIMIZE Hier ist mir viel zu viel Code. DAvon gehört bestimmt einiges in das Model
     #Scaffold generated
     @user_select = @current_user.other_users
     @challenge_select = Challenge.get_alive_challenges
@@ -95,6 +98,7 @@ class ParticipationsController < ApplicationController
       params.require(:participation).permit(:id, :user_id, :challenge_id, :complete, :succeeded, :strikes)
     end
 
+    # OPTIMIZE Hier kann bestimmt einiges in die Model
     # Anfang Check Complete und Fragen aus dem Feeder
     def check_complete
       if @participation.complete

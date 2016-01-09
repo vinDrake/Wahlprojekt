@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
- # before_action :require_user, only: [:index, :show]
+  # before_action :require_user, only: [:index, :show]
 
   # GET /messages
   # GET /messages.json
@@ -13,6 +13,7 @@ class MessagesController < ApplicationController
   def show
   end
 
+  # TODO Dokumentieren
   # GET /messages/new
   def new
     @user_select = @current_user.other_users
@@ -33,7 +34,7 @@ class MessagesController < ApplicationController
         format.html { redirect_to @message, notice: 'Message was successfully created.' }
         format.json { render :show, status: :created, location: @message }
       else
-        format.html { render :new }
+        format.html { render :new } # OPTIMIZE Einen notice wäre nett
         format.json { render json: @message.errors, status: :unprocessable_entity }
       end
     end

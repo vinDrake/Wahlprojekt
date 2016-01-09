@@ -1,6 +1,6 @@
 class RepleysController < ApplicationController
   before_action :set_repley, only: [:show, :edit, :update, :destroy]
- # before_action :require_user, only: [:index, :show, :new]
+  # before_action :require_user, only: [:index, :show, :new]
 
   # GET /repleys
   # GET /repleys.json
@@ -13,9 +13,10 @@ class RepleysController < ApplicationController
   def show
   end
 
+  # TODO Dokumentieren
   # GET /repleys/new
   def new
-    # TODO
+    # TODO Hier steht mir auch viel zu viel.
     @user_select = @current_user.other_users
     @question_select = Question.all
     @answer_select = Answer.all
@@ -41,7 +42,7 @@ class RepleysController < ApplicationController
 
   # POST /repleys
   # POST /repleys.json
-  def create
+  def create # OPTIMIZE Am besten die ganze Methode neu schreiben
     #Scaffold generated
     @repley = Repley.new(repley_params)
     @feed = @current_user.feeds.first
@@ -52,7 +53,7 @@ class RepleysController < ApplicationController
 #    @question = Question.find(params[:question_id])
     #  @repley = Repleys.create(repley_params)
 
-
+    # TODO Hier ist auch zu viel Code im Controller
     # Begin Points
     if @repley.answer.correct
       @repley.points = 1
@@ -71,7 +72,7 @@ class RepleysController < ApplicationController
       if @repley.save
         user_feeds = @current_user.feeds
         user_feeds.find_by(repley_params[:question]).destroy
-
+        # TODO Debug-Code raus
         # Begin Check if it was the last one of this Challenge
         logger.debug "Check, if it was a Challenge, qou are takeing part of"
         unless @feed.participation.nil?
