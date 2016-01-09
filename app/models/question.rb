@@ -14,6 +14,6 @@ class Question < ActiveRecord::Base
   # TODO Dokumentieren
 
   # TODO get_4_answers inklusive einer richtigen
+  # TODO untied_tags
 
-  
 end
