@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     logger.info "Create new User with this Params: "+params.to_s
-    @user = User.new(user_params)
+    @user = User.new(params)
     # puts "Debug Code Params:"
     # puts params
     # puts "Password:"
