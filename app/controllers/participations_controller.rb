@@ -39,7 +39,7 @@ class ParticipationsController < ApplicationController
     @participation = Participation.new(participation_params)
 
     #Ben generated
-    @challenge = Challenge.find(participation_params[:challenge_id])
+    # @challenge = Challenge.find(participation_params[:challenge_id])
     # @participation = @challenge.participation.create(participation_params)
 
     # Begin Set strikes
@@ -128,18 +128,18 @@ class ParticipationsController < ApplicationController
         end
       end
 
-      if @challenge.strict_order
+      if @participation.challenge.strict_order
 
-        question_count = @challenge.questions.count
+        question_count = @participation.challenge.questions.count
         order = question_count
-        @challenge.questions.each do |question|
-          feed = Feed.new(:feeder_id => @current_user.feeder.id, :question_id => question.id, :priority => base_priority+order+1, :challenge_id => @challenge.id, :participation_id => @participation.id)
+        @participation.challenge.questions.each do |question|
+          feed = Feed.new(:feeder_id => @current_user.feeder.id, :question_id => question.id, :priority => base_priority+order+1, :challenge_id => @participation.challenge.id, :participation_id => @participation.id)
           feed.save
           order -= 1
         end
       else
-        @challenge.questions.each do |question|
-          feed = Feed.new(:feeder_id => @current_user.feeder.id, :question_id => question.id, :priority => base_priority+1, :challenge_id => @challenge.id, :participation_id => @participation.id)
+        @participation.challenge.questions.each do |question|
+          feed = Feed.new(:feeder_id => @current_user.feeder.id, :question_id => question.id, :priority => base_priority+1, :challenge_id => @participation.challenge.id, :participation_id => @participation.id)
           feed.save
         end
       end
