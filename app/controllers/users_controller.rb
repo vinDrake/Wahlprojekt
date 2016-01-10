@@ -27,15 +27,15 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-    # puts "Debug Code Params:"
-    # puts params
-    # puts "Password:"
-    # puts params[:password]
-    # puts user_params
-    # puts user_params[:name]
-    # puts user_params[:email]
-    # puts user_params[:password]
-    # puts @user.to_s
+    puts "Debug Code Params:"
+    puts params
+    puts "Password:"
+    puts params[:password]
+    puts user_params
+    puts user_params[:name]
+    puts user_params[:email]
+    puts user_params[:password]
+    puts @user.to_s
 
     respond_to do |format|
       if @user.save
