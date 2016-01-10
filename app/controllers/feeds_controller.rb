@@ -24,6 +24,8 @@ class FeedsController < ApplicationController
 
   # GET /feeds/1/edit
   def edit
+    @question_select = Question.all
+    @feeder_select = Feeder.all
   end
 
   # POST /feeds
@@ -74,6 +76,6 @@ class FeedsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def feed_params
-      params.require(:feed).permit(:feeder_id, :question_id, :priority, :challenge_id, :participation_id)
+      params.require(:feed).permit(:id, :feeder_id, :question_id, :priority, :challenge_id, :participation_id)
     end
 end
