@@ -53,9 +53,9 @@ class Feeder < ActiveRecord::Base
   private
     def add_feed_to_feeder # OPTIMIZE Zwei fast identische Methoden sind nicht sehr hübsch
       question = Question.order("RANDOM()").first
-      feed = Feed.new(:feeder_id => self.id, :question_id => question.id, :priority => 0)
+      # feed = Feed.new(:feeder_id => self.id, :question_id => question.id, :priority => 0)
 
-      feed.save
+      # feed.save
     end
 
 end
