@@ -2,37 +2,37 @@
 
 <p>
   <strong>ID:</strong>
-  <%= @current_user.id %>
+  <%= @user.id %>
 </p>
 
 <p>
   <strong>Name:</strong>
-  <%= @current_user.name %>
+  <%= @user.name %>
 </p>
 
 <p>
   <strong>Points:</strong>
-  <%= @current_user_points %>
+  <%= @user_points %>
 </p>
 
 <p>
   <strong>Email:</strong>
-  <%= @current_user.email %>
+  <%= @user.email %>
 </p>
 
 <p>
   <strong>Groups:</strong>
-  <% @current_user.groups.each do |group| %>
+  <% @user.groups.each do |group| %>
     <%= group.name %><br>
   <% end %>
 </p>
 
 <p>
   <strong>Challenges:</strong>
-  <% @current_user.challenges.each do |challenge| %>
+  <% @user.challenges.each do |challenge| %>
     <%= challenge.name %><br>
   <% end %>
 </p>
 
-<%= link_to 'Edit', edit_user_path(@current_user) %> |
+<%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

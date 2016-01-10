@@ -13,11 +13,11 @@
 
   <div class="field">
     <%= f.label :sender_id %><br>
-    <%= f.select :sender_id, @current_user_select.map { |u| [u.name,u.id]} %>
+    <%= f.select :sender_id, @user_select.map { |u| [u.name,u.id]} %>
   </div>
   <div class="field">
     <%= f.label :receiver_id %><br>
-    <%= f.select :receiver_id, @current_user_select.map { |u| [u.name,u.id]} %>
+    <%= f.select :receiver_id, @user_select.map { |u| [u.name,u.id]} %>
   </div>
   <div class="field">
     <%= f.label :subject %><br>
