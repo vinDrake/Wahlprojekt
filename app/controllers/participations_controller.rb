@@ -37,18 +37,19 @@ class ParticipationsController < ApplicationController
     @user_select = @current_user.other_users
     @challenge_select = Challenge.get_alive_challenges
     @participation = Participation.new(participation_params)
+    # Begin Set strikes
+    @participation.strikes = 0
+    # End Set Strikes
+
 
     #Ben generated
     # @challenge = Challenge.find(participation_params[:challenge_id])
     # @participation = @challenge.participation.create(participation_params)
 
-    # Begin Set strikes
-    @participation.strikes = 0
-    # End Set Strikes
 
     respond_to do |format|
       if @participation.save
-        add_questions_to_feeder
+        # add_questions_to_feeder # Ersetzt durch after_create
         format.html { redirect_to @participation, notice: 'Participation was successfully created.' }
         format.json { render :show, status: :created, location: @participation }
       else
@@ -67,7 +68,7 @@ class ParticipationsController < ApplicationController
         logger.debug "Participation ID= "+participation_params[:id].to_s
       end
       if @participation.update(participation_params)
-        check_complete
+        # check_complete # Ersetzt durch after_update im Model
         format.html { redirect_to @participation, notice: 'Participation was successfully updated.' }
         format.json { render :show, status: :ok, location: @participation }
       else
@@ -98,51 +99,57 @@ class ParticipationsController < ApplicationController
       params.require(:participation).permit(:id, :user_id, :challenge_id, :complete, :succeeded, :strikes)
     end
 
+
+
+
+
+
+
     # OPTIMIZE Hier kann bestimmt einiges in die Model
     # Anfang Check Complete und Fragen aus dem Feeder
-    def check_complete
-      if @participation.complete
-        logger.debug "Check if Participation is complete!"
-        remove_questions_from_feeder
-      end
-    end
+    # def check_complete
+    #   if @participation.complete
+    #     logger.debug "Check if Participation is complete!"
+    #     remove_questions_from_feeder
+    #   end
+    # end
 
-    def remove_questions_from_feeder
-      logger.debug "Remove Questions from Feeder"
-      @current_user.feeds.each do |feed|
-        logger.debug "This is a Question in Feeder: "+feed.question.problem
-        if feed.challenge = @participation.challenge
-          logger.debug "Destroy Feed"
-          feed.destroy
-        end
-      end
-    end
+    # def remove_questions_from_feeder
+    #   logger.debug "Remove Questions from Feeder"
+    #   @current_user.feeds.each do |feed|
+    #     logger.debug "This is a Question in Feeder: "+feed.question.problem
+    #     if feed.challenge = @participation.challenge
+    #       logger.debug "Destroy Feed"
+    #       feed.destroy
+    #     end
+    #   end
+    # end
     # Ende Check Complete und Fragen aus dem Feeder
 
-    # Anfang Fragen in Feeder
-    def add_questions_to_feeder
-      base_priority = 0
-      @current_user.feeds.each do |feed|
-        if feed.priority > base_priority
-          base_priority = feed.priority
-        end
-      end
-
-      if @participation.challenge.strict_order
-
-        question_count = @participation.challenge.questions.count
-        order = question_count
-        @participation.challenge.questions.each do |question|
-          feed = Feed.new(:feeder_id => @current_user.feeder.id, :question_id => question.id, :priority => base_priority+order+1, :challenge_id => @participation.challenge.id, :participation_id => @participation.id)
-          feed.save
-          order -= 1
-        end
-      else
-        @participation.challenge.questions.each do |question|
-          feed = Feed.new(:feeder_id => @current_user.feeder.id, :question_id => question.id, :priority => base_priority+1, :challenge_id => @participation.challenge.id, :participation_id => @participation.id)
-          feed.save
-        end
-      end
-    end
-    # Ende Fragen in Feeder
+    # # Anfang Fragen in Feeder
+    # def add_questions_to_feeder
+    #   base_priority = 0
+    #   @current_user.feeds.each do |feed|
+    #     if feed.priority > base_priority
+    #       base_priority = feed.priority
+    #     end
+    #   end
+    #
+    #   if @participation.challenge.strict_order
+    #
+    #     question_count = @participation.challenge.questions.count
+    #     order = question_count
+    #     @participation.challenge.questions.each do |question|
+    #       feed = Feed.new(:feeder_id => @current_user.feeder.id, :question_id => question.id, :priority => base_priority+order+1, :challenge_id => @participation.challenge.id, :participation_id => @participation.id)
+    #       feed.save
+    #       order -= 1
+    #     end
+    #   else
+    #     @participation.challenge.questions.each do |question|
+    #       feed = Feed.new(:feeder_id => @current_user.feeder.id, :question_id => question.id, :priority => base_priority+1, :challenge_id => @participation.challenge.id, :participation_id => @participation.id)
+    #       feed.save
+    #     end
+    #   end
+    # end
+    # # Ende Fragen in Feeder
 end
