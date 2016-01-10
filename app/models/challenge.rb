@@ -1,9 +1,9 @@
 class Challenge < ActiveRecord::Base
-  has_many :participations
+  has_many :participations, dependent: :destroy
   has_many :users, through: :participations
-  has_many :elements
+  has_many :elements, dependent: :destroy
   has_many :questions, through: :elements
-  has_many :feeds
+  has_many :feeds, dependent: :destroy
 
   validates :name, :max_challenge_time, :latest_end, :strikes, presence: true
   validates :alive, :strict_order, inclusion: { in: [true, false] }
@@ -18,4 +18,32 @@ class Challenge < ActiveRecord::Base
     end
 
   end
+
+  def check_life_signs
+    unless self.alive
+      kill_participations
+    end
+  end
+
+  def kill_participations
+    self.participations.each do |participation|
+      participation.complete = true
+      participation.save
+    end
+  end
+
+  # Class Methods
+  class << self
+
+    # Returns the alive Challenges
+    def get_alive_challenges
+      alive_challenges = Array.new
+      Challenge.all.each do |challenge|
+        alive_challenges << challenge if challenge.alive
+      end
+      return alive_challenges
+    end
+
+  end # End Class Methods
+
 end

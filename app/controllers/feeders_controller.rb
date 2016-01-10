@@ -13,10 +13,11 @@ class FeedersController < ApplicationController
   def show
   end
 
+  # TODO Dokumentieren
   # GET /feeders/new
   def new
     @feeder = Feeder.new
-    @user_select = User.all
+    @user_select = @current_user.other_users
   end
 
   # GET /feeders/1/edit
@@ -38,7 +39,7 @@ class FeedersController < ApplicationController
         format.html { redirect_to @feeder, notice: 'Feeder was successfully created.' }
         format.json { render :show, status: :created, location: @feeder }
       else
-        format.html { render :new }
+        format.html { render :new } # OPTIMIZE Eine notice wäre nett
         format.json { render json: @feeder.errors, status: :unprocessable_entity }
       end
     end

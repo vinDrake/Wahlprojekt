@@ -1,10 +1,15 @@
 class Participation < ActiveRecord::Base
   belongs_to :user
   belongs_to :challenge
+  has_many :feeds
+
   validates :user, :challenge, :strikes, presence: true
   validates :strikes, numericality: { only_integer: true }
   validates :complete, :succeeded, inclusion: { in: [true, false] }
 
+
+  # TODO Dokumentieren
+  # OPTIMIZE
   after_find do |participation|
     logger.debug "Participation touched"
 
@@ -45,5 +50,59 @@ class Participation < ActiveRecord::Base
     end
 
   end
+
+  # Begin after_update
+  after_update do |participation|
+    if participation.complete
+      logger.debug "Check if Participation is complete!"
+      remove_questions_from_feeder
+    end
+  end
+  # End after_update
+
+  # Begin after_create
+  after_create do |participation|
+
+      # BasisPriorität im Feeder feststellen # OPTIMIZE Methode im Feeder schreiben
+      base_priority = 0
+      @current_user.feeds.each do |feed|
+        if feed.priority > base_priority
+          base_priority = feed.priority
+        end
+      end
+      # Ende BasisPriorität im Feeder feststellen
+
+      # Prüfen, ob die Challenge eine feste Ordnung hat
+      if participation.challenge.strict_order
+
+        # Anzahl der Fragen der Challenge festellen
+        question_count = participation.challenge.questions.count
+        order = question_count
+        # OPTIMIZE Das sollte auch mal hübsch gemacht werden
+        participation.challenge.questions.each do |question|
+          feed = Feed.new(:feeder_id => @current_user.feeder.id, :question_id => question.id, :priority => base_priority+order+1, :challenge_id => @participation.challenge.id, :participation_id => @participation.id)
+          feed.save
+          order -= 1
+        end
+      else
+        participation.challenge.questions.each do |question|
+          feed = Feed.new(:feeder_id => @current_user.feeder.id, :question_id => question.id, :priority => base_priority+1, :challenge_id => @participation.challenge.id, :participation_id => @participation.id)
+          feed.save
+        end
+      end
+  end
+  # End after_create
+
+  def remove_questions_from_feeder
+    logger.debug "Remove Questions from Feeder"
+    @current_user.feeds.each do |feed|
+      logger.debug "This is a Question in Feeder: "+feed.question.problem
+      if feed.challenge = participation.challenge
+        logger.debug "Destroy Feed"
+        feed.destroy
+      end
+    end
+  end
+
 
 end

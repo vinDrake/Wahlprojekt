@@ -1,6 +1,6 @@
 class ChallengesController < ApplicationController
   before_action :set_challenge, only: [:show, :edit, :update, :destroy]
- # before_action :require_user, only: [:index, :show]
+  # before_action :require_user, only: [:index, :show]
 
   # GET /challenges
   # GET /challenges.json
@@ -11,7 +11,7 @@ class ChallengesController < ApplicationController
   # GET /challenges/1
   # GET /challenges/1.json
   def show
-    @question_select = Question.all
+    @question_select = Question.all # OPTIMIZE Nur die Fragen, die noch nicht in der Challenge sinbd wären nett
   end
 
   # GET /challenges/new
@@ -33,7 +33,7 @@ class ChallengesController < ApplicationController
         format.html { redirect_to new_element_path(challenge_id: @challenge), notice: 'Challenge was successfully created.' }
         format.json { render :show, status: :created, location: @challenge }
       else
-        format.html { render :new }
+        format.html { render :new } # OPTIMIZE Eine notice wäre nett
         format.json { render json: @challenge.errors, status: :unprocessable_entity }
       end
     end
@@ -44,12 +44,14 @@ class ChallengesController < ApplicationController
   def update
     respond_to do |format|
       if @challenge.update(challenge_params)
-        unless @challenge.alive
-          @challenge.participations.each do |participation|
-            participation.complete = true
-            participation.save
-          end
-        end
+        @challenge.check_life_signs
+        # Replaced by check_life_signs
+        # unless @challenge.alive # OPTIMIZE Das gehört eher in das Model
+        #   @challenge.participations.each do |participation|
+        #     participation.complete = true
+        #     participation.save
+        #   end
+        # end
         format.html { redirect_to challenges_path, notice: 'Challenge was successfully updated.' }
         format.json { render :show, status: :ok, location: @challenge }
       else

@@ -16,6 +16,8 @@ class MembershipsController < ApplicationController
   # GET /memberships/new
   def new
     @membership = Membership.new
+    # TODO Trennen in BEitreten und jemanden hinzufügen/einladen
+    # TODO DOkumentieren
     @user_select = User.all
     @group_select = Group.all
   end

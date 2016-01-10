@@ -129,12 +129,12 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 5</span>
+            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 6</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_email</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:session</span>][<span class="ruby-value">:email</span>])
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@user</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">authenticate</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:session</span>][<span class="ruby-value">:password</span>])
     <span class="ruby-identifier">session</span>[<span class="ruby-value">:user_id</span>] = <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">id</span>
-    <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">user_path</span>(<span class="ruby-ivar">@user</span>)
+    <span class="ruby-identifier">redirect_to</span> <span class="ruby-string">&#39;/home&#39;</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">redirect_to</span> <span class="ruby-string">&#39;login&#39;</span>
   <span class="ruby-keyword">end</span>
@@ -168,7 +168,7 @@
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 15</span>
+            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 16</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-identifier">session</span>[<span class="ruby-value">:user_id</span>] = <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">redirect_to</span> <span class="ruby-string">&#39;/&#39;</span>
@@ -202,7 +202,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 2</span>
+            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 3</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
           </div>

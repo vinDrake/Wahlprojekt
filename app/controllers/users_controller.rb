@@ -9,9 +9,12 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  # TODO Dokumentieren
   # GET /users/1
   # GET /users/1.json
   def show
+    # OPTIMIZE deprechated @user.archieved_points can be called in view
+    @user_points = @user.achieved_points
   end
 
   # GET /users/new

@@ -13,13 +13,14 @@ class ElementsController < ApplicationController
   def show
   end
 
+  # TODO Dokumentieren
   # GET /elements/new
   def new
     @element = Element.new
     if params.has_key?(:challenge_id)
      @challenge = Challenge.find(params[:challenge_id])
     end
-    @challenge_select = Challenge.all
+    @challenge_select = Challenge.get_alive_challenges
     @question_select = Question.all
   end
 
@@ -37,7 +38,7 @@ class ElementsController < ApplicationController
         format.html { redirect_to new_element_path(challenge_id: @element.challenge), notice: 'Element was successfully created.' }
         format.json { render :show, status: :created, location: @element }
       else
-        format.html { render :new }
+        format.html { render :new } # OPTIMIZE Eine notice wöre nett
         format.json { render json: @element.errors, status: :unprocessable_entity }
       end
     end
