@@ -44,12 +44,14 @@ class ChallengesController < ApplicationController
   def update
     respond_to do |format|
       if @challenge.update(challenge_params)
-        unless @challenge.alive # OPTIMIZE Das gehört eher in das Model
-          @challenge.participations.each do |participation|
-            participation.complete = true
-            participation.save
-          end
-        end
+        @challenge.check_life_signs
+        # Replaced by check_life_signs
+        # unless @challenge.alive # OPTIMIZE Das gehört eher in das Model
+        #   @challenge.participations.each do |participation|
+        #     participation.complete = true
+        #     participation.save
+        #   end
+        # end
         format.html { redirect_to challenges_path, notice: 'Challenge was successfully updated.' }
         format.json { render :show, status: :ok, location: @challenge }
       else

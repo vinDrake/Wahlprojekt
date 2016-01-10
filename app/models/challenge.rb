@@ -19,6 +19,19 @@ class Challenge < ActiveRecord::Base
 
   end
 
+  def check_life_signs
+    unless self.alive
+      kill_participations
+    end
+  end
+
+  def kill_participations
+    self.participations.each do |participation|
+      participation.complete = true
+      participation.save
+    end
+  end
+
   # Class Methods
   class << self
 
