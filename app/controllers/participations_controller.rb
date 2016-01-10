@@ -26,8 +26,8 @@ class ParticipationsController < ApplicationController
   def edit
     @challenge_select = Challenge.all
     @user_select = @current_user.other_users
-    # TODO Was macht das hier? Das scheint mir ein Fehler zu sein
-    @participation = Participation.new
+    # TODO Was macht das hier? Das scheint mir ein Fehler zu sein. DONE!
+    # @participation = Participation.new
   end
 
   # POST /participations
