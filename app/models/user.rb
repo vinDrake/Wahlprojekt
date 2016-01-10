@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
 
   # TODO Dokumentieren
   # OPTIMIZE Code Aufräumen
-                          
+
 
   # Class Methods
   class << self

@@ -1,8 +1,8 @@
 class Feeder < ActiveRecord::Base
   belongs_to :user
-  has_many :feeds
+  has_many :feeds, dependent: :destroy
   has_many :questions, through: :feeds
-  has_many :selections
+  has_many :selections, dependent: :destroy
   has_many :tags, through: :selections
 
   validates :user, presence: true

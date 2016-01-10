@@ -1,9 +1,9 @@
 class Challenge < ActiveRecord::Base
-  has_many :participations
+  has_many :participations, dependent: :destroy
   has_many :users, through: :participations
-  has_many :elements
+  has_many :elements, dependent: :destroy
   has_many :questions, through: :elements
-  has_many :feeds
+  has_many :feeds, dependent: :destroy
 
   validates :name, :max_challenge_time, :latest_end, :strikes, presence: true
   validates :alive, :strict_order, inclusion: { in: [true, false] }
