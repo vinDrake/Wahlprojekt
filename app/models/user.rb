@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
-  # has_secure_password
-  # validates :name, :email, :password_digest, presence: true
-  # validates :name, format: { with: /\A[a-zA-Z0-9]+\z/,
-  #   message: "only allows letters and numbers" }, length: { in: 4..24 }
+  has_secure_password
+  validates :name, :email, :password_digest, presence: true
+  validates :name, format: { with: /\A[a-zA-Z0-9]+\z/,
+    message: "only allows letters and numbers" }, length: { in: 4..24 }
 
   after_create :add_feeder_to_user
 
