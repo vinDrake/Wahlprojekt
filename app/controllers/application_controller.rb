@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   # TODO Dokumentieren
   # TODO Der Code variert in den verscheidenen Branches und MUSS von Hand gemerged werden!!!
   def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    current_user ||= User.find(session[:user_id]) if session[:user_id]
       rescue ActiveRecord::RecordNotFound
       flash[:notice] = "Session Error"
       session[:user_id] = nil
