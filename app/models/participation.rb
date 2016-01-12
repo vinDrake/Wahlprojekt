@@ -65,7 +65,7 @@ class Participation < ActiveRecord::Base
 
       # BasisPriorität im Feeder feststellen # OPTIMIZE Methode im Feeder schreiben
       base_priority = 0
-      @current_user.feeds.each do |feed|
+      current_user.feeds.each do |feed|
         if feed.priority > base_priority
           base_priority = feed.priority
         end
@@ -80,13 +80,13 @@ class Participation < ActiveRecord::Base
         order = question_count
         # OPTIMIZE Das sollte auch mal hübsch gemacht werden
         participation.challenge.questions.each do |question|
-          feed = Feed.new(:feeder_id => @current_user.feeder.id, :question_id => question.id, :priority => base_priority+order+1, :challenge_id => @participation.challenge.id, :participation_id => @participation.id)
+          feed = Feed.new(:feeder_id => current_user.feeder.id, :question_id => question.id, :priority => base_priority+order+1, :challenge_id => @participation.challenge.id, :participation_id => @participation.id)
           feed.save
           order -= 1
         end
       else
         participation.challenge.questions.each do |question|
-          feed = Feed.new(:feeder_id => @current_user.feeder.id, :question_id => question.id, :priority => base_priority+1, :challenge_id => @participation.challenge.id, :participation_id => @participation.id)
+          feed = Feed.new(:feeder_id => current_user.feeder.id, :question_id => question.id, :priority => base_priority+1, :challenge_id => @participation.challenge.id, :participation_id => @participation.id)
           feed.save
         end
       end
@@ -95,7 +95,7 @@ class Participation < ActiveRecord::Base
 
   def remove_questions_from_feeder
     logger.debug "Remove Questions from Feeder"
-    @current_user.feeds.each do |feed|
+    current_user.feeds.each do |feed|
       logger.debug "This is a Question in Feeder: "+feed.question.problem
       if feed.challenge = participation.challenge
         logger.debug "Destroy Feed"

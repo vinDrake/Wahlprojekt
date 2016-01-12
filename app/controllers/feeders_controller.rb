@@ -17,7 +17,7 @@ class FeedersController < ApplicationController
   # GET /feeders/new
   def new
     @feeder = Feeder.new
-    @user_select = @current_user.other_users
+    @user_select = current_user.other_users
   end
 
   # GET /feeders/1/edit
