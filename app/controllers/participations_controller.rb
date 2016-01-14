@@ -17,7 +17,7 @@ class ParticipationsController < ApplicationController
   # GET /participations/new
   def new
     @challenge_select = Challenge.get_alive_challenges
-    @user_select = current_user.other_users
+    @user_select = User.all
     @participation = Participation.new
   end
 
@@ -25,7 +25,7 @@ class ParticipationsController < ApplicationController
   # GET /participations/1/edit
   def edit
     @challenge_select = Challenge.all
-    @user_select = current_user.other_users
+    @user_select = User.all
     # TODO Was macht das hier? Das scheint mir ein Fehler zu sein. DONE!
     # @participation = Participation.new
   end
@@ -34,7 +34,7 @@ class ParticipationsController < ApplicationController
   # POST /participations.json
   def create # OPTIMIZE Hier ist mir viel zu viel Code. DAvon gehört bestimmt einiges in das Model
     #Scaffold generated
-    @user_select = current_user.other_users
+    @user_select = User.all
     @challenge_select = Challenge.get_alive_challenges
     @participation = Participation.new(participation_params)
     # Begin Set strikes
