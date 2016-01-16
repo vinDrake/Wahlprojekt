@@ -7,4 +7,4 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-# Um die Daten aus der Datenbank hier einzufügen siehe: lib/tasks/export.rake
+# Um die Daten aus der Datenbank einzufügen siehe: lib/tasks/export.rake

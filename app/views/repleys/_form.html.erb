@@ -19,7 +19,7 @@
       <%= f.select :user_id, @user_select.map { |u| [u.name,u.id]} %>
     </div>
   <% else %>
-    <%= f.hidden_field :user_id, :value => @user.id %>
+    <%= f.hidden_field :user_id, :value => @current_user.id %>
   <% end %>
 
   <strong>Question:</strong>
