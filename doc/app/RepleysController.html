@@ -137,18 +137,74 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/repleys_controller.rb, line 30</span>
+            <pre><span class="ruby-comment"># File app/controllers/repleys_controller.rb, line 44</span>
   <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
     <span class="ruby-comment">#Scaffold generated</span>
     <span class="ruby-ivar">@repley</span> = <span class="ruby-constant">Repley</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">repley_params</span>)
-
+    <span class="ruby-ivar">@feed</span> = <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">feeds</span>.<span class="ruby-identifier">first</span>
     <span class="ruby-comment">#Ben generated</span>
+    <span class="ruby-comment"># if repley_params[:user_id].nil?</span>
+    <span class="ruby-comment">#   repley_params[:user_id] = current_user.id</span>
+    <span class="ruby-comment"># end</span>
 <span class="ruby-comment">#    @question = Question.find(params[:question_id])</span>
     <span class="ruby-comment">#  @repley = Repleys.create(repley_params)</span>
 
+
+    <span class="ruby-comment"># Begin Points</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@repley</span>.<span class="ruby-identifier">answer</span>.<span class="ruby-identifier">correct</span>
+      <span class="ruby-ivar">@repley</span>.<span class="ruby-identifier">points</span> = <span class="ruby-value">1</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@repley</span>.<span class="ruby-identifier">points</span> = <span class="ruby-value">0</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-comment"># End Points</span>
+
+    <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">feeds</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">1</span>
+      <span class="ruby-identifier">question</span> = <span class="ruby-constant">Question</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;RANDOM()&quot;</span>).<span class="ruby-identifier">first</span>
+      <span class="ruby-identifier">feed</span> = <span class="ruby-constant">Feed</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:feeder_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">feeder</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:question_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">question</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:priority</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
+      <span class="ruby-identifier">feed</span>.<span class="ruby-identifier">save</span>
+    <span class="ruby-keyword">end</span>
+
     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
       <span class="ruby-keyword">if</span> <span class="ruby-ivar">@repley</span>.<span class="ruby-identifier">save</span>
-        <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-ivar">@repley</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Repley was successfully created.&#39;</span> }
+        <span class="ruby-identifier">user_feeds</span> = <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">feeds</span>
+        <span class="ruby-identifier">user_feeds</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">repley_params</span>[<span class="ruby-value">:question</span>]).<span class="ruby-identifier">destroy</span>
+
+        <span class="ruby-comment"># Begin Check if it was the last one of this Challenge</span>
+        <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-string">&quot;Check, if it was a Challenge, qou are takeing part of&quot;</span>
+        <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@feed</span>.<span class="ruby-identifier">participation</span>.<span class="ruby-identifier">nil?</span>
+          <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-string">&quot;It was a Challenge-Question. Check, if it was the last Question of this Participation: &quot;</span><span class="ruby-operator">+</span><span class="ruby-ivar">@feed</span>.<span class="ruby-identifier">participation</span>.<span class="ruby-identifier">challenge</span>.<span class="ruby-identifier">to_s</span>
+          <span class="ruby-identifier">last</span> = <span class="ruby-keyword">true</span>
+          <span class="ruby-identifier">user_feeds</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">feed</span><span class="ruby-operator">|</span>
+            <span class="ruby-keyword">if</span> <span class="ruby-identifier">feed</span>.<span class="ruby-identifier">participation_id</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@feed</span>.<span class="ruby-identifier">participation_id</span>
+              <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-string">&quot;No, there was an other Question&quot;</span>
+              <span class="ruby-identifier">last</span> = <span class="ruby-keyword">false</span>
+              <span class="ruby-keyword">break</span>
+            <span class="ruby-keyword">end</span>
+          <span class="ruby-keyword">end</span>
+          <span class="ruby-keyword">if</span> <span class="ruby-identifier">last</span>
+            <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-string">&quot;It was the last Question&quot;</span>
+            <span class="ruby-identifier">participation</span> = <span class="ruby-ivar">@feed</span>.<span class="ruby-identifier">participation</span>
+            <span class="ruby-identifier">participation</span>.<span class="ruby-identifier">attributes</span> = { <span class="ruby-value">:complete</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">:succeeded</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span> }
+            <span class="ruby-keyword">if</span> <span class="ruby-identifier">participation</span>.<span class="ruby-identifier">save</span>
+              <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-string">&quot;This Participation is now complete and succeeded&quot;</span>
+            <span class="ruby-keyword">end</span>
+            <span class="ruby-comment"># participation.update(succeeded: true)</span>
+            <span class="ruby-comment"># logger.debug &quot;It is now succeeded&quot;</span>
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-string">&quot;No, it was no Challenge-Question&quot;</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-comment"># End Check if it was the last one of this Challenge</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-ivar">@repley</span>.<span class="ruby-identifier">answer</span>.<span class="ruby-identifier">correct</span>
+          <span class="ruby-identifier">note</span> = <span class="ruby-string">&#39;Repley was successfully created and the answer was correct.&#39;</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">note</span> = <span class="ruby-string">&#39;Repley was successfully created and the answer was wrong.&#39;</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">last</span>
+          <span class="ruby-identifier">note</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&#39; It also was the last Question of &quot;&#39;</span><span class="ruby-operator">+</span><span class="ruby-identifier">participation</span>.<span class="ruby-identifier">challenge</span>.<span class="ruby-identifier">name</span><span class="ruby-operator">+</span><span class="ruby-string">&#39;&quot;.&#39;</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-ivar">@repley</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">note</span> }
         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:created</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@repley</span> }
       <span class="ruby-keyword">else</span>
         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:new</span> }
@@ -185,7 +241,7 @@
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/repleys_controller.rb, line 65</span>
+            <pre><span class="ruby-comment"># File app/controllers/repleys_controller.rb, line 135</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-ivar">@repley</span>.<span class="ruby-identifier">destroy</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
@@ -222,7 +278,7 @@
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/repleys_controller.rb, line 25</span>
+            <pre><span class="ruby-comment"># File app/controllers/repleys_controller.rb, line 39</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -289,9 +345,23 @@
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File app/controllers/repleys_controller.rb, line 17</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
-  <span class="ruby-ivar">@user_select</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-comment"># TODO</span>
+  <span class="ruby-ivar">@user_select</span> = <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">other_users</span>
   <span class="ruby-ivar">@question_select</span> = <span class="ruby-constant">Question</span>.<span class="ruby-identifier">all</span>
   <span class="ruby-ivar">@answer_select</span> = <span class="ruby-constant">Answer</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@current_user</span>
+    <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">feeds</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">3</span>
+      <span class="ruby-identifier">question</span> = <span class="ruby-constant">Question</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;RANDOM()&quot;</span>).<span class="ruby-identifier">first</span>
+      <span class="ruby-identifier">feed</span> = <span class="ruby-constant">Feed</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:feeder_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">feeder</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:question_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">question</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:priority</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
+      <span class="ruby-identifier">feed</span>.<span class="ruby-identifier">save</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">feeds</span>
+
+      <span class="ruby-ivar">@feed</span> = <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">get_next_feed</span>
+      <span class="ruby-ivar">@question</span> = <span class="ruby-ivar">@feed</span>.<span class="ruby-identifier">question</span>
+
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
   <span class="ruby-ivar">@repley</span> = <span class="ruby-constant">Repley</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -355,7 +425,7 @@
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/repleys_controller.rb, line 51</span>
+            <pre><span class="ruby-comment"># File app/controllers/repleys_controller.rb, line 121</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@repley</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">repley_params</span>)

@@ -1,4 +1,7 @@
 class StatsController < ApplicationController
+
+  # TODO Dokumentieren
+  # TODO Ordentlich implementieren oder ganz raus nehmen
   def show
     @user = User.find(session[:user_id])
     @challenges = @user.challenges

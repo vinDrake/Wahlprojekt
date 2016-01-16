@@ -15,6 +15,7 @@
     <%= f.label :user %><br>
     <% unless @user.nil? %>
       <%= f.label :user, @user.name %>
+      <%= f.hidden_field :user_id, :value => @user.id %>
     <% else %>
       <%= f.select :user_id, @user_select.map { |u| [u.name,u.id]} %>
     <% end %>
@@ -33,7 +34,7 @@
   </div>
   <div class="field">
     <%= f.label :strikes %><br>
-    <%= f.number_field :strikes %>
+    Setzt der Controller
   </div>
   <div class="actions">
     <%= f.submit %>

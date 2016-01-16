@@ -290,7 +290,7 @@
             <pre><span class="ruby-comment"># File app/controllers/feeders_controller.rb, line 17</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
   <span class="ruby-ivar">@feeder</span> = <span class="ruby-constant">Feeder</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-ivar">@user_select</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-ivar">@user_select</span> = <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">other_users</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

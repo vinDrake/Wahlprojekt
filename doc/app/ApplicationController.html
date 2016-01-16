@@ -127,9 +127,13 @@
 
           
           <div class="method-source-code" id="current_user-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 8</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 10</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">current_user</span>
   <span class="ruby-ivar">@current_user</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">session</span>[<span class="ruby-value">:user_id</span>]) <span class="ruby-keyword">if</span> <span class="ruby-identifier">session</span>[<span class="ruby-value">:user_id</span>]
+    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">RecordNotFound</span>
+    <span class="ruby-identifier">flash</span>[<span class="ruby-value">:notice</span>] = <span class="ruby-string">&quot;Session Error&quot;</span>
+    <span class="ruby-identifier">session</span>[<span class="ruby-value">:user_id</span>] = <span class="ruby-keyword">nil</span>
+    <span class="ruby-identifier">redirect_to</span> <span class="ruby-string">&#39;/&#39;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -160,7 +164,7 @@
 
           
           <div class="method-source-code" id="require_user-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 11</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 17</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">require_user</span>
   <span class="ruby-identifier">redirect_to</span> <span class="ruby-string">&#39;/login&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">current_user</span>
 <span class="ruby-keyword">end</span></pre>

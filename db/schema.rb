@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151210102415) do
+ActiveRecord::Schema.define(version: 20160108082902) do
 
   create_table "answers", force: :cascade do |t|
     t.boolean  "correct"
@@ -54,11 +54,15 @@ ActiveRecord::Schema.define(version: 20151210102415) do
     t.integer  "priority"
     t.integer  "feeder_id"
     t.integer  "question_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "challenge_id"
+    t.integer  "participation_id"
   end
 
+  add_index "feeds", ["challenge_id"], name: "index_feeds_on_challenge_id"
   add_index "feeds", ["feeder_id"], name: "index_feeds_on_feeder_id"
+  add_index "feeds", ["participation_id"], name: "index_feeds_on_participation_id"
   add_index "feeds", ["question_id"], name: "index_feeds_on_question_id"
 
   create_table "groups", force: :cascade do |t|
@@ -114,6 +118,7 @@ ActiveRecord::Schema.define(version: 20151210102415) do
     t.integer  "answer_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "points"
   end
 
   add_index "repleys", ["answer_id"], name: "index_repleys_on_answer_id"

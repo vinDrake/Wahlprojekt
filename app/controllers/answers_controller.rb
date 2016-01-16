@@ -14,11 +14,12 @@ class AnswersController < ApplicationController
   def show
   end
 
+  # OPTIMIZE Hier wäre ein Helper sinnvoll
   # GET /answers/new
   def new
     @answer = Answer.new
     if params.has_key?(:question_id)
-     @question = Question.find(params[:question_id])
+    @question = Question.find(params[:question_id])
     end
     @question_select = Question.all
   end
@@ -27,6 +28,7 @@ class AnswersController < ApplicationController
   def edit
   end
 
+  # OPTIMIZE Hier wäre ein Helper sinnvoll (siehe new)
   # POST /answers
   # POST /answers.json
   def create
@@ -41,8 +43,9 @@ class AnswersController < ApplicationController
       if @answer.save
         # Wenn man eine Antwort erstellt und die Frage dazu noch keine 4 Antworten hat,
         # dann braucht die noch eine Antworten
+        # OPTIMIZE Das könnte eleganter sein.
         if @answer.question.answers.count < 4
-          format.html { redirect_to new_answer_path(question_id: @answer.question)}
+          format.html { redirect_to new_answer_path(question_id: @answer.question), notice: 'Answer was successfully created.'}
         else
           # Die alte Weiterleitung zu questions#show
           format.html { redirect_to @answer, notice: 'Answer was successfully created.' }
@@ -64,7 +67,7 @@ class AnswersController < ApplicationController
         format.html { redirect_to @answer, notice: 'Answer was successfully updated.' }
         format.json { render :show, status: :ok, location: @answer }
       else
-        format.html { render :edit }
+        format.html { render :edit } # OPTIMIZE Eine notice wäre nett
         format.json { render json: @answer.errors, status: :unprocessable_entity }
       end
     end
