@@ -18,8 +18,14 @@ class Feeder < ActiveRecord::Base
     return self.feeds.order(priority: :desc).first
   end
 
-  # TODO remove_feeds(participation)
-
+  # Dokumentieren
+  def remove_feeds(participation)
+    # Gehe durch jeden Feed
+    self.feeds.each do |feed|
+      # Teste ob der Feed zur übergebenen Participation gehört und zerstöre ihn ggf.
+      feed.destroy if feed.participation == participation
+    end
+  end
 
 
   # OPTIMIZE Hübscher und sinnvoller sollte das schon sein

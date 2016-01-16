@@ -17,18 +17,18 @@ class RepleysController < ApplicationController
   # GET /repleys/new
   def new
     # TODO Hier steht mir auch viel zu viel.
-    @user_select = @current_user.other_users
+    @user_select = User.all
     @question_select = Question.all
     @answer_select = Answer.all
-    if @current_user
-      unless @current_user.feeds.size >= 3
+    if current_user
+      unless current_user.feeds.size >= 3
         question = Question.order("RANDOM()").first
-        feed = Feed.new(:feeder_id => @current_user.feeder.id, :question_id => question.id, :priority => 0)
+        feed = Feed.new(:feeder_id => current_user.feeder.id, :question_id => question.id, :priority => 0)
         feed.save
       end
-      if @current_user.feeds
+      if current_user.feeds
 
-        @feed = @current_user.get_next_feed
+        @feed = current_user.get_next_feed
         @question = @feed.question
 
       end
@@ -45,7 +45,7 @@ class RepleysController < ApplicationController
   def create # OPTIMIZE Am besten die ganze Methode neu schreiben
     #Scaffold generated
     @repley = Repley.new(repley_params)
-    @feed = @current_user.feeds.first
+    @feed = current_user.feeds.first
     #Ben generated
     # if repley_params[:user_id].nil?
     #   repley_params[:user_id] = current_user.id
@@ -62,15 +62,15 @@ class RepleysController < ApplicationController
     end
     # End Points
 
-    unless @current_user.feeds.size >= 1
+    unless current_user.feeds.size >= 1
       question = Question.order("RANDOM()").first
-      feed = Feed.new(:feeder_id => @current_user.feeder.id, :question_id => question.id, :priority => 0)
+      feed = Feed.new(:feeder_id => current_user.feeder.id, :question_id => question.id, :priority => 0)
       feed.save
     end
 
     respond_to do |format|
       if @repley.save
-        user_feeds = @current_user.feeds
+        user_feeds = current_user.feeds
         user_feeds.find_by(repley_params[:question]).destroy
         # TODO Debug-Code raus
         # Begin Check if it was the last one of this Challenge

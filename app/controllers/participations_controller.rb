@@ -17,7 +17,7 @@ class ParticipationsController < ApplicationController
   # GET /participations/new
   def new
     @challenge_select = Challenge.get_alive_challenges
-    @user_select = @current_user.other_users
+    @user_select = User.all
     @participation = Participation.new
   end
 
@@ -25,7 +25,7 @@ class ParticipationsController < ApplicationController
   # GET /participations/1/edit
   def edit
     @challenge_select = Challenge.all
-    @user_select = @current_user.other_users
+    @user_select = User.all
     # TODO Was macht das hier? Das scheint mir ein Fehler zu sein. DONE!
     # @participation = Participation.new
   end
@@ -34,7 +34,7 @@ class ParticipationsController < ApplicationController
   # POST /participations.json
   def create # OPTIMIZE Hier ist mir viel zu viel Code. DAvon gehört bestimmt einiges in das Model
     #Scaffold generated
-    @user_select = @current_user.other_users
+    @user_select = User.all
     @challenge_select = Challenge.get_alive_challenges
     @participation = Participation.new(participation_params)
     # Begin Set strikes
@@ -116,7 +116,7 @@ class ParticipationsController < ApplicationController
 
     # def remove_questions_from_feeder
     #   logger.debug "Remove Questions from Feeder"
-    #   @current_user.feeds.each do |feed|
+    #   current_user.feeds.each do |feed|
     #     logger.debug "This is a Question in Feeder: "+feed.question.problem
     #     if feed.challenge = @participation.challenge
     #       logger.debug "Destroy Feed"
@@ -129,7 +129,7 @@ class ParticipationsController < ApplicationController
     # # Anfang Fragen in Feeder
     # def add_questions_to_feeder
     #   base_priority = 0
-    #   @current_user.feeds.each do |feed|
+    #   current_user.feeds.each do |feed|
     #     if feed.priority > base_priority
     #       base_priority = feed.priority
     #     end
@@ -140,13 +140,13 @@ class ParticipationsController < ApplicationController
     #     question_count = @participation.challenge.questions.count
     #     order = question_count
     #     @participation.challenge.questions.each do |question|
-    #       feed = Feed.new(:feeder_id => @current_user.feeder.id, :question_id => question.id, :priority => base_priority+order+1, :challenge_id => @participation.challenge.id, :participation_id => @participation.id)
+    #       feed = Feed.new(:feeder_id => current_user.feeder.id, :question_id => question.id, :priority => base_priority+order+1, :challenge_id => @participation.challenge.id, :participation_id => @participation.id)
     #       feed.save
     #       order -= 1
     #     end
     #   else
     #     @participation.challenge.questions.each do |question|
-    #       feed = Feed.new(:feeder_id => @current_user.feeder.id, :question_id => question.id, :priority => base_priority+1, :challenge_id => @participation.challenge.id, :participation_id => @participation.id)
+    #       feed = Feed.new(:feeder_id => current_user.feeder.id, :question_id => question.id, :priority => base_priority+1, :challenge_id => @participation.challenge.id, :participation_id => @participation.id)
     #       feed.save
     #     end
     #   end
