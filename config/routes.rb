@@ -7,12 +7,17 @@ Rails.application.routes.draw do
   # root 'welcome#index'
   root 'users#index'
 
+  # def handle_options_request
+  #   head(:ok) if request.request_method == "OPTIONS"
+  # end
+  #
+  # match '*path', :controller => 'application', :action => 'handle_options_request', :constraints => {:method => 'OPTIONS'}
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
   get 'signup' => 'users#new'
   get 'login' => 'sessions#new'
-  post 'login' => 'sessions#create'
+  post 'login' => 'sessions#create'#, via: [:options]
   delete 'logout' => 'sessions#destroy'
 
   get 'home' => 'repleys#new'
@@ -39,6 +44,7 @@ Rails.application.routes.draw do
   resources :questions
   resources :ties
   # resources :stats
+  resources :sessions
 
 
   # Example resource route with options:
