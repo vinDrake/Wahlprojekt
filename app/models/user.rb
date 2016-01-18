@@ -43,6 +43,13 @@ class User < ActiveRecord::Base
   end
   # End of Class Methods
 
+  #
+  def all_messages
+    messages = Array.new
+    messages.concat( self.received_messages )
+    messages.concat( self.sended_messages )
+    return messages
+  end
 
   # Returns an Array containing the other Users.
   def other_users
@@ -68,7 +75,7 @@ class User < ActiveRecord::Base
     return points
   end
 
-  
+
   private
     def add_feeder_to_user
       self.feeder = Feeder.new(:user_id => self.id)

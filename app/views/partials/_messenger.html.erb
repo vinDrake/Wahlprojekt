@@ -7,15 +7,19 @@
       </a>
     </div>
 
-    <% unless @user.nil? %>
-      <!-- <#%= render :partial => "messages/message" , :collection => @user.received_messages %> -->
-      <% @user.received_messages.each do |m| %>
-        <strong><%= m.subject %></strong>
+    <!-- <#% unless @user.nil? %> -->
+    <strong>Inbox:</strong>
+      <%= render partial: "messages/shortmessage" , collection: current_user.received_messages, as: :message %>
+      <!-- <#%= render(current_user.received_messages) || "There are no Messages." %> -->
+      <!-- <#%= render current_user.sended_messages %> -->
+
+      <!-- <#% @user.received_messages.each do |m| %>
+        <strong><#%= m.subject %></strong>
         <br>
-        <%= m.content %>
+        <#%= m.content %>
         <br>
-      <% end %>
-    <% end %>
+      <#% end %> -->
+    <!-- <#% end %> -->
   </div>
 
   <div id="aufmachen">
@@ -25,5 +29,5 @@
       </a>
     </div>
   </div>
-  
+
 </div>

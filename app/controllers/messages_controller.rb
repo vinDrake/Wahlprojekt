@@ -5,7 +5,7 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
   def index
-    @messages = Message.all
+    @messages = current_user.all_messages
   end
 
   # GET /messages/1
@@ -18,12 +18,18 @@ class MessagesController < ApplicationController
   def new
     @sender = current_user
     @user_select = User.all
+    if params.has_key?(:receiver_id)
+    @receiver = User.find(params[:receiver_id])
+    end
     @receiver_select = current_user.other_users
     @message = Message.new
   end
 
   # GET /messages/1/edit
   def edit
+    # @sender = current_user
+    @user_select = User.all
+    @receiver_select = User.all#current_user.other_users
   end
 
   # POST /messages

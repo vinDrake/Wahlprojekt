@@ -15,18 +15,16 @@
     <%= f.label :sender_id %><br>
     <% if @sender.nil? %>
       <%= f.select :sender_id, @user_select.map { |u| [u.name,u.id]} %>
-
     <% else %>
       <%= f.label :sender_id, @sender.name %>
       <%= f.hidden_field :sender_id, :value => @sender.id %>
     <% end %>
   </div>
-  
+
   <div class="field">
     <%= f.label :receiver_id %><br>
     <% if @receiver.nil? %>
       <%= f.select :receiver_id, @receiver_select.map { |u| [u.name,u.id]} %>
-
     <% else %>
       <%= f.label :receiver_id, @receiver.name %>
       <%= f.hidden_field :receiver_id, :value => @receiver.id %>
