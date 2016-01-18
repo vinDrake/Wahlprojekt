@@ -19,15 +19,16 @@
       <li><%= link_to "Challenges", challenges_path %></li>
       <li><%= link_to "Challenge beitreten", new_participation_path(user: current_user) %></li>
       <li><%= link_to "Zu Challenge hinzufügen", new_participation_path %></li>
-      <li><%= link_to "Frage hinzufügen", new_element_path %></li>
     </ul>
   </li>
   <li>
     <a href="#">Community</a>
     <ul>
       <li><%= link_to "Nachrichten", messages_path %></li>
-      <li><%= link_to "Gruppen", groups_path %></li>
-      <li><%= link_to "Gruppe beitreten", new_membership_path %></li>
+      <li><%= link_to "Neue Nachricht", new_message_path %></li>
+      <li><%= link_to "Alle Gruppen", groups_path %></li>
+      <li><%= link_to "Gruppe beitreten", new_membership_path(user: current_user) %></li>
+      <li><%= link_to "Zu Gruppe hinzufügen", new_membership_path %></li>
     </ul>
   </li>
   <li>
@@ -35,9 +36,7 @@
     <ul>
       <li><%= link_to "Fragen", questions_path %></li>
       <li><%= link_to "Neue Frage", new_question_path %></li>
-      <li><%= link_to "Neue Antwort", new_answer_path %></li>
       <li><%= link_to "Neues Tag", new_tag_path %></li>
-      <li><%= link_to "Frage taggen", new_ty_path %></li>
     </ul>
   </li>
   <li>
