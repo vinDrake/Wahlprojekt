@@ -12,8 +12,14 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.select :user_id, @user_select.map { |u| [u.name,u.id]} %>
+    <%= f.label :user %><br>
+    <% if @user.nil? %>
+      <%= f.select :user_id, @user_select.map { |u| [u.name,u.id]} %>
+
+    <% else %>
+      <%= f.label :user, @user.name %>
+      <%= f.hidden_field :user_id, :value => @user.id %>
+    <% end %>
   </div>
   <div class="field">
     <%= f.label :group_id %><br>
