@@ -17,7 +17,10 @@ class ParticipationsController < ApplicationController
   # GET /participations/new
   def new
     @challenge_select = Challenge.get_alive_challenges
-    @user_select = User.all
+    if params.has_key?(:user)
+      @user = User.find(params[:user])
+    end
+    @user_select = current_user.other_users
     @participation = Participation.new
   end
 

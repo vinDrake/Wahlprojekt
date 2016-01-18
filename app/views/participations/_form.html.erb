@@ -13,11 +13,12 @@
 
   <div class="field">
     <%= f.label :user %><br>
-    <% unless @user.nil? %>
+    <% if @user.nil? %>
+      <%= f.select :user_id, @user_select.map { |u| [u.name,u.id]} %>
+
+    <% else %>
       <%= f.label :user, @user.name %>
       <%= f.hidden_field :user_id, :value => @user.id %>
-    <% else %>
-      <%= f.select :user_id, @user_select.map { |u| [u.name,u.id]} %>
     <% end %>
   </div>
   <div class="field">

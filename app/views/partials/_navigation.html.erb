@@ -17,7 +17,8 @@
     <a href="#">Spielen</a>
     <ul>
       <li><%= link_to "Challenges", challenges_path %></li>
-      <li><%= link_to "Challenge beitreten", new_participation_path %></li>
+      <li><%= link_to "Challenge beitreten", new_participation_path(user: current_user) %></li>
+      <li><%= link_to "Zu Challenge hinzufügen", new_participation_path %></li>
       <li><%= link_to "Frage hinzufügen", new_element_path %></li>
     </ul>
   </li>
