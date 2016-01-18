@@ -16,7 +16,9 @@ class MessagesController < ApplicationController
   # TODO Dokumentieren
   # GET /messages/new
   def new
-    @user_select = current_user.other_users
+    @sender = current_user
+    @user_select = User.all
+    @receiver_select = current_user.other_users
     @message = Message.new
   end
 
