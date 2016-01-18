@@ -20,7 +20,10 @@ class RepleysController < ApplicationController
     @user_select = User.all
     @question_select = Question.all
     @answer_select = Answer.all
+    @user = current_user
     if current_user
+
+      # TODO Feeder füttern?!?!?1
       unless current_user.feeds.size >= 3
         question = Question.order("RANDOM()").first
         feed = Feed.new(:feeder_id => current_user.feeder.id, :question_id => question.id, :priority => 0)
