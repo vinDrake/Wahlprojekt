@@ -9,6 +9,8 @@ class Feeder < ActiveRecord::Base
 
   after_create :add_feed_to_feeder
 
+  
+
   # TODO Dokumentieren
   # OPTIMIZE Code aufräumen
 
