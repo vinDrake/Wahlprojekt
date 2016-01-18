@@ -73,6 +73,7 @@ class RepleysController < ApplicationController
 
     respond_to do |format|
       if @repley.save
+        # flash[:succees] = 'New Repley Created'
         user_feeds = current_user.feeds
         user_feeds.find_by(repley_params[:question]).destroy
         # TODO Debug-Code raus
