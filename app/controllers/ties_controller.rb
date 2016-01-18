@@ -19,6 +19,9 @@ class TiesController < ApplicationController
     def new
       @tie = Tie.new
       @tag_select = Tag.all # OPTIMIZE Nur in Frage kommenden Tags anzeigen
+      if params.has_key?(:question_id)
+      @question = Question.find(params[:question_id])
+      end
       @question_select = Question.all # OPTIMIZE Nur in Frgae kommende Fragen anzeigen
     end
 
