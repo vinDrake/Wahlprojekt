@@ -18,10 +18,7 @@ class MembershipsController < ApplicationController
     @membership = Membership.new
     # TODO Trennen in BEitreten und jemanden hinzufügen/einladen
     # TODO DOkumentieren
-    if params.has_key?(:user)
-      @user = User.find(params[:user])
-    end
-    @user_select = current_user.other_users
+    @user_select = User.all
     @group_select = Group.all
   end
 
