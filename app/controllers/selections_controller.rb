@@ -5,7 +5,7 @@ class SelectionsController < ApplicationController
   # GET /selections
   # GET /selections.json
   def index
-    @selections = Selection.all
+    @selections = Selection.where(feeder: current_user.feeder)
   end
 
   # GET /selections/1
