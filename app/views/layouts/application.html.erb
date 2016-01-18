@@ -10,25 +10,11 @@
 
   <%= render "partials/navigation" %>
 
-<!-- Messenger Slider -->
-<% if current_user %>
-    <div id="messages">
-      <div  id="button"  >
-        <a href="#" onclick="toggle_chat('messages');">
-          <%= image_tag "x.svg" %>
-        </a>
-      </div>
-        <%= render "partials/messenger" %>
-      </div>
-      <div id="aufmachen">
-        <div id="button" >
-          <a href="#" onclick="toggle_chat('2');">
-            <%= image_tag "x.svg" %>
-          </a>
-        </div>
-      </div>
-    <% end %>
-<!-- Messenger Slider -->
+  <!-- Messenger Slider -->
+  <% if current_user %>
+    <%= render "partials/messenger" %>
+  <% end %>
+  <!-- Messenger Slider -->
 
 <div align="center">
 

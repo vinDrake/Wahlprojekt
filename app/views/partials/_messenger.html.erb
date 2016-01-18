@@ -1,10 +1,29 @@
-<h1>Messeges</h1>
-<% unless @user.nil? %>
-<!-- <#%= render :partial => "messages/message" , :collection => @user.received_messages %> -->
-  <% @user.received_messages.each do |m| %>
-    <strong><%= m.subject %></strong>
-    <br>
-    <%= m.content %>
-    <br>
-  <% end %>
-<% end %>
+<div id="links">
+  <div id="messages">
+
+    <div  id="button"  >
+      <a href="#" onclick="toggle_chat('messages');">
+        <%= image_tag "x.svg" %>
+      </a>
+    </div>
+
+    <% unless @user.nil? %>
+      <!-- <#%= render :partial => "messages/message" , :collection => @user.received_messages %> -->
+      <% @user.received_messages.each do |m| %>
+        <strong><%= m.subject %></strong>
+        <br>
+        <%= m.content %>
+        <br>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div id="aufmachen">
+    <div id="button" >
+      <a href="#" onclick="toggle_chat('2');">
+        <%= image_tag "x.svg" %>
+      </a>
+    </div>
+  </div>
+  
+</div>
