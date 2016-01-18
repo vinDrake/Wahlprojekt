@@ -14,32 +14,34 @@
 <% if current_user %>
     <div id="messages">
       <div  id="button"  >
-        <!-- <a href="javascript:void(0)" onclick="toggle_chat('messages');"> -->
         <a href="#" onclick="toggle_chat('messages');">
           <%= image_tag "x.svg" %>
         </a>
       </div>
-      <!-- Versuch Messenger  -->
         <%= render "partials/messenger" %>
-      <!-- Versuch Messenger -->
       </div>
       <div id="aufmachen">
         <div id="button" >
-          <!-- <a href="javascript:void(0)" onclick="toggle_chat('2');"></a> -->
           <a href="#" onclick="toggle_chat('2');">
             <%= image_tag "x.svg" %>
           </a>
         </div>
-
-    </div>
+      </div>
     <% end %>
 <!-- Messenger Slider -->
 
 <div align="center">
 
+  <!-- Anfang Pop-Up -->
+  <%= render "partials/popup" %>
+
+  <!-- Ende Pop-Up -->
+
   <%= image_tag "Logo.png" %>
 
   <%= yield %>
-  </div>
+
+</div>
+
 </body>
 </html>
