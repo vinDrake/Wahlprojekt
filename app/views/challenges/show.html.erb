@@ -12,7 +12,7 @@
 
 <p>
   <strong>Max Challenge Time:</strong>
-  <%= @challenge.max_challenge_time %>
+  <%= @challenge.max_challenge_time %> ( 0 = Egal )
 </p>
 
 <p>
@@ -27,20 +27,23 @@
 
 <p>
   <strong>Strikes:</strong>
-  <%= @challenge.strikes %>
+  <%= @challenge.strikes %> ( 0 = Egal )
 </p>
 
-<strong>Questions:</strong>
+<p>
+<strong>Questions:</strong><br>
 <% @challenge.elements.each do |e| %>
   <%= e.question.problem %><br>
-<% end %><br>
-
-
-<strong>Users:</strong>
-<% @challenge.participations.each do |p| %>
-  <%= link_to p.user.name, user_path(p.user) %> <%= p.complete %><br>
 <% end %>
-<br>
+</p>
+
+<p>
+<strong>Users:</strong><br>
+<% @challenge.participations.each do |p| %>
+  <%= link_to p.user.name, user_path(p.user) %>(Is complete: <%= p.complete %>)<br>
+<% end %>
+</p>
 
 <%= link_to 'Edit', edit_challenge_path(@challenge) %> |
+<%= link_to 'Add Questions', new_element_path(challenge_id: @challenge) %> |
 <%= link_to 'Back', challenges_path %>
