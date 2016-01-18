@@ -38,9 +38,23 @@
 </p>
 
 <p>
-<strong>Users:</strong><br>
-<% @challenge.participations.each do |p| %>
+<strong>Active Users:</strong><br>
+<% @challenge.get_active_users.each do |p| %>
   <%= link_to p.user.name, user_path(p.user) %>(Is complete: <%= p.complete %>)<br>
+<% end %>
+</p>
+
+<p>
+<strong>Complete Users:</strong><br>
+<% @challenge.get_complete_users.each do |p| %>
+  <%= link_to p.user.name, user_path(p.user) %><br>
+<% end %>
+</p>
+
+<p>
+<strong>Succeeded Users:</strong><br>
+<% @challenge.get_succeeded_users.each do |p| %>
+  <%= link_to p.user.name, user_path(p.user) %><br>
 <% end %>
 </p>
 

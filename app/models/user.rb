@@ -39,7 +39,11 @@ class User < ActiveRecord::Base
       end
       return highscore_user
     end
+
   end
+  # End of Class Methods
+
+
   # Returns an Array containing the other Users.
   def other_users
     others = Array.new
@@ -63,6 +67,8 @@ class User < ActiveRecord::Base
     end
     return points
   end
+
+  
   private
     def add_feeder_to_user
       self.feeder = Feeder.new(:user_id => self.id)
