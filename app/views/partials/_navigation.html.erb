@@ -51,6 +51,7 @@
     <a href="#"><%= current_user.name %></a>
     <ul>
       <li><%= link_to current_user.email, user_path(current_user) %></li>
+      <li><%= link_to "History", repleys_path %></li>
       <li><%= link_to "Log out", logout_path, method: "delete" %></li>
     </ul>
   </li>
