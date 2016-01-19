@@ -1,0 +1,9 @@
+  <strong>Question:</strong>
+  <div class="field">
+    <%= @question.problem %><br>
+  </div>
+
+  <strong>Answers:</strong>
+  <div class="field">
+    <%= render partial: "answers/button", collection: @question.answers, as: :answer %>
+  </div>
