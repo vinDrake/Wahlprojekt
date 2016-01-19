@@ -9,7 +9,6 @@
 
     <!-- <#% unless @user.nil? %> -->
     <strong>Inbox:</strong>
-      <%= render partial: "messages/shortmessage" , collection: current_user.received_messages, as: :message %>
       <%= render partial: "messages/message" , collection: current_user.received_messages, as: :message , spacer_template: "partials/ruler" %>
       <!-- <#%= render(current_user.received_messages) || "There are no Messages." %> -->
       <!-- <#%= render current_user.sended_messages %> -->
