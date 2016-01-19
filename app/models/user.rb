@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :challenges, through: :participations
   has_one :feeder, dependent: :destroy
   has_many :feeds, through: :feeder
+  has_many :selections, through: :feeder
   has_many :memberships, dependent: :destroy
   has_many :groups, through: :memberships
 

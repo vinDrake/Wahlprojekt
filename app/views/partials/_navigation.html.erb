@@ -47,9 +47,8 @@
     <ul>
       <li><%= link_to "Selections", selections_path %></li>
       <li><%= link_to "New Selection", new_selection_path %></li>
-
-      <li>Benachrichtigungen</li>
-      <li><%= link_to "Pop", ties_path, :class => "submit_button", :onclick => 'toggle_visibility("popupBoxOnePosition")'  %></li>
+      <li><%= link_to "Feeder", 'javascript:void(0)', :class => "submit_button", :onclick => 'toggle_visibility("popupBoxFivePosition")'  %></li>
+      <li><%= link_to "Notivication", 'javascript:void(0)', :class => "submit_button", :onclick => 'toggle_visibility("popupBoxOnePosition")'  %></li>
       <li>Sound</li>
     </ul>
   </li>
