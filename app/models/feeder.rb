@@ -9,7 +9,7 @@ class Feeder < ActiveRecord::Base
 
   after_create :add_feed_to_feeder
 
-  
+
 
   # TODO Dokumentieren
   # OPTIMIZE Code aufräumen
@@ -18,6 +18,12 @@ class Feeder < ActiveRecord::Base
   def get_next_feed
     # Sorts Feeds by Priority and returns the first one.
     return self.feeds.order(priority: :desc).first
+  end
+
+  # Returns next Feeds Question ID.
+  def get_next_question_id
+    # Sorts Feeds by Priority and returns the first one.
+    return self.feeds.order(priority: :desc).first.question.id
   end
 
   # Dokumentieren
