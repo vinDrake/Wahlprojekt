@@ -5,7 +5,7 @@ class Participation < ActiveRecord::Base
 
   validates :user, :challenge, :strikes, presence: true
   validates :strikes, numericality: { only_integer: true }
-  validates :complete, :succeeded, inclusion: { in: [true, false] }
+  # validates :complete, :succeeded, inclusion: { in: [true, false] }
 
 
   # TODO Dokumentieren

@@ -44,6 +44,13 @@ class ParticipationsController < ApplicationController
     @participation.strikes = 0
     # End Set Strikes
 
+    # Begin Set complete
+    @participation.complete = false
+    # End Set complete
+
+    # Begin Set succeeded
+    @participation.succeeded = false
+    # End Set succeeded
 
     #Ben generated
     # @challenge = Challenge.find(participation_params[:challenge_id])
