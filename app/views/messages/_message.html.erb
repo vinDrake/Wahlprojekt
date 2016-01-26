@@ -1,12 +1,16 @@
-<p>
-  <strong>Sender:</strong>
-  <%= message.sender.name %>
-</p>
+<% unless message.sender == current_user %>
+  <p>
+    <strong>Sender:</strong>
+    <%= message.sender.name %>
+  </p>
+<% end %>
 
-<p>
-  <strong>Receiver:</strong>
-  <%= message.receiver.name %>
-</p>
+<% unless message.receiver == current_user %>
+  <p>
+    <strong>Receiver:</strong>
+    <%= message.receiver.name %>
+  </p>
+<% end %>
 
 <p>
   <strong>Subject:</strong>
