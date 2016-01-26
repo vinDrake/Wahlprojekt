@@ -149,6 +149,6 @@ class RepleysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def repley_params
-      params.require(:repley).permit(:correct, :question_id, :user_id, :answer_id)
+      params.permit(:correct, :question_id, :user_id, :answer_id)
     end
 end
