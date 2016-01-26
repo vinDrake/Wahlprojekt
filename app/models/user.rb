@@ -64,6 +64,13 @@ class User < ActiveRecord::Base
   def get_next_feed
     return self.feeder.get_next_feed
   end
+
+  # Returns Number of answerd Questions.
+  def question_count
+    #
+    return self.repleys.size
+  end
+
   # Returns the achieved Points.
   def achieved_points
     #
@@ -75,7 +82,6 @@ class User < ActiveRecord::Base
     end
     return points
   end
-
 
   private
     def add_feeder_to_user
