@@ -52,6 +52,16 @@ class User < ActiveRecord::Base
     return messages
   end
 
+    #
+    def incoming_messages
+      return self.received_messages.order(created_at: :desc)
+    end
+
+    #
+    def leaving_messages
+      return self.sended_messages.order(created_at: :desc)
+    end
+
   # Returns an Array containing the other Users.
   def other_users
     others = Array.new
