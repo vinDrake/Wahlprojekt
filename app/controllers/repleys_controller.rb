@@ -63,15 +63,15 @@ class RepleysController < ApplicationController
     end
     # End Points
 
-    unless current_user.feeds.size >= 1
+    unless @user.feeds.size >= 1
       question = Question.order("RANDOM()").first
-      feed = Feed.new(:feeder_id => current_user.feeder.id, :question_id => question.id, :priority => 0)
+      feed = Feed.new(:feeder_id => @user.feeder.id, :question_id => question.id, :priority => 0)
       feed.save
     end
 
     respond_to do |format|
       if @repley.save
-        user_feeds = current_user.feeds
+        user_feeds = @user.feeds
         user_feeds.find_by(repley_params[:question]).destroy
         # TODO Debug-Code raus
         # Begin Check if it was the last one of this Challenge
