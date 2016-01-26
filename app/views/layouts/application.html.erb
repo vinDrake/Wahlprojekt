@@ -19,8 +19,10 @@
 <div align="center">
 
   <!-- Anfang Pop-Up -->
+  <% if current_user %>
   <%= render "popups/feederpopup" %>
   <%= render "popups/notificationpopup" %>
+  <% end %>
 
 
   <!-- Ende Pop-Up -->
