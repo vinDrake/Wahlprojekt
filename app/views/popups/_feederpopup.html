@@ -9,6 +9,8 @@
 
       <%= render partial: "selections/selection", collection: current_user.selections %>
 
+      <%= link_to 'New Selection', new_selection_path %>
+      
        <form>
          Bestehende Tags aus dem Feed entfernen:
          <select name="Kategorie" size="1" >
