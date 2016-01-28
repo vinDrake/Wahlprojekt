@@ -8,37 +8,37 @@
 </head>
 <body>
 
-  <%= render "partials/navigation" %>
-
-  <!-- Messenger Slider -->
-  <% if current_user %>
-    <%= render "partials/messenger" %>
-  <% end %>
-  <!-- Messenger Slider -->
-
-<div id="mitte" align="center">
-  <div style="display:table-cell; vertical-align:middle">
-    <%= image_tag "Logo.png",  id: "main_logo" %>
+  <div id="oben" >
+    <%= render "partials/navigation" %>
   </div>
 
+  <div id="links" >
+    <!-- Messenger Slider -->
+    <% if current_user %>
+      <%= render "partials/messenger" %>
+    <% end %>
+    <!-- Messenger Slider -->
+  </div>
 
-  <!-- Anfang Pop-Up -->
-  <% if current_user %>
-  <%= render "popups/feederpopup" %>
-  <%= render "popups/notificationpopup" %>
-  <% end %>
+  <div id="mitte" align="center">
 
+    <div style="display:table-cell; vertical-align:middle">
+      <%= image_tag "Logo.png",  id: "main_logo" %>
+      
+      <div id="haupt">
+        <%= yield %>
+      </div>
 
-  <!-- Ende Pop-Up -->
+    </div>
 
+    <!-- Anfang Pop-Up -->
+    <% if current_user %>
+    <%= render "popups/feederpopup" %>
+    <%= render "popups/notificationpopup" %>
+    <% end %>
+    <!-- Ende Pop-Up -->
 
-  <!-- <% flash.each do |key, value| %> -->
-    <!-- <div class="alert alert-<%= key %>"><%= value %></div> -->
-  <!-- <% end %> -->
-
-  <%= yield %>
-
-</div>
+  </div>
 
 </body>
 </html>

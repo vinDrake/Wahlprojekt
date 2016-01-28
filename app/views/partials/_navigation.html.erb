@@ -1,70 +1,68 @@
+<div id="navi">
+  <ul id="navigation">
+    <li>
+      <% if current_user %>
+        <%= link_to "Startseite", '/home' , class: 'first_level'%>
+      <% else %>
+        <%= link_to "Startseite", 'login' , class: 'first_level' %>
+      <% end %>
+    </li>
 
 
-
-
-<ul id="navigation">
-  <li>
     <% if current_user %>
-      <%= link_to "Startseite", '/home' , class: 'first_level'%>
+    <li>
+      <a href="#" class="first_level">Spielen</a>
+      <ul>
+        <li><%= link_to "Challenges", challenges_path %></li>
+        <li><%= link_to "Challenge beitreten", new_participation_path(user: current_user) %></li>
+        <li><%= link_to "Zu Challenge hinzufügen", new_participation_path %></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#" class="first_level">Community</a>
+      <ul>
+        <li><%= link_to "Nachrichten", messages_path %></li>
+        <li><%= link_to "Neue Nachricht", new_message_path %></li>
+        <li><%= link_to "Alle Gruppen", groups_path %></li>
+        <li><%= link_to "Neue Gruppe", new_group_path %></li>
+        <li><%= link_to "Gruppe beitreten", new_membership_path(user: current_user) %></li>
+        <li><%= link_to "Zu Gruppe hinzufügen", new_membership_path %></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#" class="first_level">Fragen</a>
+      <ul>
+        <li><%= link_to "Fragen", questions_path %></li>
+        <li><%= link_to "Neue Frage", new_question_path %></li>
+        <li><%= link_to "Alle Tags", tags_path %></li>
+        <li><%= link_to "Neues Tag", new_tag_path %></li>
+        <li><%= link_to "Neues Pop Tag", 'javascript:void(0)', :class => "submit_button", :onclick => 'toggle_visibility("new_tag_pop_up")'  %></li>
+
+      </ul>
+    </li>
+    <li>
+      <a href="#" class="first_level">Einstellungen</a>
+      <ul>
+        <li><%= link_to "Selections", selections_path %></li>
+        <li><%= link_to "New Selection", new_selection_path %></li>
+        <li><%= link_to "Feeder", 'javascript:void(0)', :class => "submit_button", :onclick => 'toggle_visibility("popupBoxFivePosition")'  %></li>
+        <!-- <li><%= link_to "Notivication", 'javascript:void(0)', :class => "submit_button", :onclick => 'toggle_visibility("popupBoxOnePosition")'  %></li> -->
+        <!-- <li>Sound</li> -->
+      </ul>
+    </li>
+    <li>
+      <a href="#" class="first_level"><%= current_user.name %></a>
+      <ul>
+        <li><%= link_to current_user.email, user_path(current_user) %></li>
+        <li><%= link_to "History", repleys_path %></li>
+        <li><%= link_to "Log out", logout_path, method: "delete" %></li>
+      </ul>
+    </li>
     <% else %>
-      <%= link_to "Startseite", 'login' , class: 'first_level' %>
+
+      <li><%= link_to "Login", 'login' %></a></li>
+      <li><%= link_to "Signup", 'signup' %></a></li>
+
     <% end %>
-  </li>
-
-
-  <% if current_user %>
-  <li>
-    <a href="#">Spielen</a>
-    <ul>
-      <li><%= link_to "Challenges", challenges_path , class: 'second_level' %></li>
-      <li><%= link_to "Challenge beitreten", new_participation_path(user: current_user) %></li>
-      <li><%= link_to "Zu Challenge hinzufügen", new_participation_path %></li>
-    </ul>
-  </li>
-  <li>
-    <a href="#">Community</a>
-    <ul>
-      <li><%= link_to "Nachrichten", messages_path %></li>
-      <li><%= link_to "Neue Nachricht", new_message_path %></li>
-      <li><%= link_to "Alle Gruppen", groups_path %></li>
-      <li><%= link_to "Neue Gruppe", new_group_path %></li>
-      <li><%= link_to "Gruppe beitreten", new_membership_path(user: current_user) %></li>
-      <li><%= link_to "Zu Gruppe hinzufügen", new_membership_path %></li>
-    </ul>
-  </li>
-  <li>
-    <a href="#">Fragen</a>
-    <ul>
-      <li><%= link_to "Fragen", questions_path %></li>
-      <li><%= link_to "Neue Frage", new_question_path %></li>
-      <li><%= link_to "Alle Tags", tags_path %></li>
-      <li><%= link_to "Neues Tag", new_tag_path %></li>
-      <li><%= link_to "Neues Pop Tag", 'javascript:void(0)', :class => "submit_button", :onclick => 'toggle_visibility("new_tag_pop_up")'  %></li>
-
-    </ul>
-  </li>
-  <li>
-    <a href="#">Einstellungen</a>
-    <ul>
-      <li><%= link_to "Selections", selections_path %></li>
-      <li><%= link_to "New Selection", new_selection_path %></li>
-      <li><%= link_to "Feeder", 'javascript:void(0)', :class => "submit_button", :onclick => 'toggle_visibility("popupBoxFivePosition")'  %></li>
-      <!-- <li><%= link_to "Notivication", 'javascript:void(0)', :class => "submit_button", :onclick => 'toggle_visibility("popupBoxOnePosition")'  %></li> -->
-      <!-- <li>Sound</li> -->
-    </ul>
-  </li>
-  <li>
-    <a href="#"><%= current_user.name %></a>
-    <ul>
-      <li><%= link_to current_user.email, user_path(current_user) %></li>
-      <li><%= link_to "History", repleys_path %></li>
-      <li><%= link_to "Log out", logout_path, method: "delete" %></li>
-    </ul>
-  </li>
-  <% else %>
-
-    <li><%= link_to "Login", 'login' %></a></li>
-    <li><%= link_to "Signup", 'signup' %></a></li>
-
-  <% end %>
-</ul>
+  </ul>
+</div>
