@@ -16,7 +16,11 @@
   <% end %>
   <!-- Messenger Slider -->
 
-<div align="center">
+<div id="mitte" align="center">
+  <div style="display:table-cell; vertical-align:middle">
+    <%= image_tag "Logo.png" %>
+  </div>
+
 
   <!-- Anfang Pop-Up -->
   <% if current_user %>
@@ -27,7 +31,6 @@
 
   <!-- Ende Pop-Up -->
 
-  <%= image_tag "Logo.png" %>
 
   <!-- <% flash.each do |key, value| %> -->
     <!-- <div class="alert alert-<%= key %>"><%= value %></div> -->

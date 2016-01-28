@@ -1,9 +1,11 @@
-  <strong>Question:</strong>
-  <div class="field">
-    <%= @question.problem %><br>
+  <!-- <strong>Question:</strong> -->
+  <div class="field" id="frage">
+    <p><%= @question.problem %></p>
   </div>
 
-  <strong>Answers:</strong>
-  <div class="field">
-    <%= render partial: "answers/button", collection: @question.answers.order("RANDOM()"), as: :answer %>
+  <!-- <strong>Answers:</strong> -->
+  <div class="field" id="answer_buttons" >
+    <ul>
+      <%= render partial: "answers/button", collection: @question.answers.order("RANDOM()"), as: :answer %>
+    </ul>
   </div>
