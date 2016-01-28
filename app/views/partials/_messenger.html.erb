@@ -1,11 +1,11 @@
 <div id="links">
   <div id="messages">
 
-    <div  id="button"  >
-      <a href="#" onclick="toggle_chat('messages');">
-        <%= image_tag "x.svg" %>
-      </a>
-    </div>
+    <!-- <div  id="button"  > -->
+      <%= link_to (image_tag "x.svg"), 'javascript:void(0)', :onclick => 'toggle_chat("messages")', id: "button"  %>
+      <!-- <a href="#" onclick="toggle_chat('messages');"> -->
+      <!-- </a> -->
+    <!-- </div> -->
 
     <!-- <#% unless @user.nil? %> -->
     <div id="text">
@@ -40,10 +40,11 @@
   </div>
 
   <div id="aufmachen">
-    <div id="button" >
-      <a href="#" onclick="toggle_chat('2');">
+    <!-- <div id="button" > -->
+      <%= link_to (image_tag "x.svg"), 'javascript:void(0)', :onclick => 'toggle_chat("2")', id: "button"  %>
+      <!-- <a href="#" onclick="toggle_chat('2');">
         <%= image_tag "x.svg" %>
-      </a>
-    </div>
+      </a> -->
+    <!-- </div> -->
   </div>
 </div>
