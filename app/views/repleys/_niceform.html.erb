@@ -5,5 +5,5 @@
 
   <strong>Answers:</strong>
   <div class="field">
-    <%= render partial: "answers/button", collection: @question.answers, as: :answer %>
+    <%= render partial: "answers/button", collection: @question.answers.order("RANDOM()"), as: :answer %>
   </div>
