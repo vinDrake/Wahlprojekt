@@ -85,7 +85,10 @@ challenge_list = [
 
 ]
 challenge_list.each do |challenge|
-  Challenge.create( name: challenge[0] , alive: challenge[1] , max_challenge_time: challenge[2] , latest_end: challenge[3] , strict_order: challenge[4] , strikes: challenge[5]  )
+  c = Challenge.create( name: challenge[0] , alive: challenge[1] , max_challenge_time: challenge[2] , latest_end: challenge[3] , strict_order: challenge[4] , strikes: challenge[5]  )
+  3.times do
+    Element.create(challenge: c , question: Question.all.order("RANDOM()").first)
+  end
 end
 
 # Um die Daten aus der Datenbank einzufügen siehe: lib/tasks/export.rake
