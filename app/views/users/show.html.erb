@@ -28,9 +28,16 @@
 </p>
 
 <p>
-  <strong>Challenges:</strong>
-  <% @user.challenges.each do |challenge| %>
-    <%= challenge.name %><br>
+  <strong>Active Challenges:</strong><br>
+  <% @user.active_participations.each do |participation| %>
+    <%= participation.challenge.name %><br>
+  <% end %>
+</p>
+
+<p>
+  <strong>Succeeded Challenges:</strong><br>
+  <% @user.succeeded_participations.each do |participation| %>
+    <%= participation.challenge.name %><br>
   <% end %>
 </p>
 

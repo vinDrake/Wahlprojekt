@@ -94,6 +94,14 @@ class User < ActiveRecord::Base
     return points
   end
 
+  def succeeded_participations
+    return self.participations.where( succeeded: true )
+  end
+
+  def active_participations
+    return self.participations.where( complete: false )
+  end
+
   private
     def add_feeder_to_user
       self.feeder = Feeder.new(:user_id => self.id)
