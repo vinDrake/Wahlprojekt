@@ -27,6 +27,17 @@ class Feeder < ActiveRecord::Base
     end
   end
 
+  # Dokumentieren
+  def remove_prio_zero_feeds
+    unless self.feeds.where( priority: 0 ).size >= self.feeds.size
+      # Gehe durch jeden Feed
+      self.feeds.each do |feed|
+        # Teste ob der Feed Priorität 0 hat und zerstöre ihn ggf.
+        feed.destroy if feed.priority == 0
+      end
+    end
+  end
+
 
   # OPTIMIZE Hübscher und sinnvoller sollte das schon sein
   # TODO Dokumentation

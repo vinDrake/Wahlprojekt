@@ -93,6 +93,8 @@ class Participation < ActiveRecord::Base
           feed.save
         end
       end
+      # TODO Remove Feeds with Prio 0
+      participation.user.feeder.remove_prio_zero_feeds
   end
   # End after_create
 
