@@ -71,12 +71,17 @@ end
 
 challenge_list = [
 
-  [ "First Challenge" , true , 0 , DateTime.now , false , 0 ],
-  [ "Dead Challenge" , false , 0 , DateTime.now , false , 0 ],
-  [ "Ordered Challenge" , true , 0 , DateTime.now , true , 0 ],
-  [ "Past Challenge" , true , 0 , DateTime.new(2015, 12 , 15 , 12 , 0 , 0 ) , false , 0 ],
-  [ "Alive Challenge" , true , 0 , DateTime.new(2016, 12 , 15 , 12 , 0 , 0 ) , false , 0 ],
-  [ "Next Year Challenge" , true , 0 , DateTime.now.change( year: 2017 ) , false , 0 ]
+  [ "Dead Challenge" , false , 0 , DateTime.now.next_year , false , 0 ],
+  [ "60 Minute Challenge" , false , 3600 , DateTime.now.next_year , false , 0 ],
+  [ "'3 Strikes and your out' Challenge" , false , 0 , DateTime.now.next_year , false , 3 ],
+  [ "Ordered Challenge" , true , 0 , DateTime.now.next_year , true , 0 ],
+  [ "Past Challenge" , true , 0 , DateTime.now.last_month , false , 0 ],
+  [ "Tomorrow Challenge" , true , 0 , DateTime.now.tomorrow , false , 0 ],
+  [ "Alive Challenge" , true , 0 , DateTime.now.next_quarter , false , 0 ],
+  [ "Next Week Challenge" , true , 0 , DateTime.now.next_week , false , 0 ],
+  [ "Next Month Challenge" , true , 0 , DateTime.now.next_month , false , 0 ],
+  [ "Next Quarter Challenge" , true , 0 , DateTime.now.next_quarter , false , 0 ],
+  [ "Next Year Challenge" , true , 0 , DateTime.now.next_year , false , 0 ]
 
 ]
 challenge_list.each do |challenge|
