@@ -47,12 +47,12 @@ question_list = [
 
 ]
 
-question_list.each_with_index do |question , index|
-  Question.create( id: index , problem: question[0] )
-  Answer.create( correct: true, answer_body: question[1], question_id: index )
-  Answer.create( correct: false, answer_body: question[2], question_id: index )
-  Answer.create( correct: false, answer_body: question[3], question_id: index )
-  Answer.create( correct: false, answer_body: question[4], question_id: index )
+question_list.each do |question|
+  q = Question.create( problem: question[0] )
+  Answer.create( correct: true, answer_body: question[1], question: q )
+  Answer.create( correct: false, answer_body: question[2], question: q )
+  Answer.create( correct: false, answer_body: question[3], question: q )
+  Answer.create( correct: false, answer_body: question[4], question: q )
 end
 
 tag_list = [
@@ -62,10 +62,10 @@ tag_list = [
 
 ]
 
-tag_list.each_with_index do |tag , index|
-  Tag.create( id: index , name: tag[0])
+tag_list.each do |tag|
+  t = Tag.create( name: tag[0])
   tag[1].each do |question|
-    Tie.create( tag_id: index , question_id: question )
+    Tie.create( tag: t , question_id: question )
   end
 end
 
