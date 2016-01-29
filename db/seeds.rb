@@ -69,4 +69,18 @@ tag_list.each do |tag|
   end
 end
 
+challenge_list = [
+
+  [ "First Challenge" , true , 0 , DateTime.now , false , 0 ],
+  [ "Dead Challenge" , false , 0 , DateTime.now , false , 0 ],
+  [ "Ordered Challenge" , true , 0 , DateTime.now , true , 0 ],
+  [ "Past Challenge" , true , 0 , DateTime.new(2015, 12 , 15 , 12 , 0 , 0 ) , false , 0 ],
+  [ "Alive Challenge" , true , 0 , DateTime.new(2016, 12 , 15 , 12 , 0 , 0 ) , false , 0 ],
+  [ "Next Year Challenge" , true , 0 , DateTime.now.change( year: 2017 ) , false , 0 ]
+
+]
+challenge_list.each do |challenge|
+  Challenge.create( name: challenge[0] , alive: challenge[1] , max_challenge_time: challenge[2] , latest_end: challenge[3] , strict_order: challenge[4] , strikes: challenge[5]  )
+end
+
 # Um die Daten aus der Datenbank einzufügen siehe: lib/tasks/export.rake
