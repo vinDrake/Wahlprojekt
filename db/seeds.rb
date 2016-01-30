@@ -46,7 +46,7 @@ question_list = [
   [  "Wer ist Spiderman?" , "Peter Parker" , "Bruce Wayne" , "Tony Stark" , "Alfred der Butler" ],
   [  "Wie viele Länder hat Europa? (Hinweis: nicht die EU!)" , "47" , "45" , "42" , "51" ],
   [  "Nach welcher Stadt ist die erste deutsche Republik benannt?" , "Weimar" , "Bonn" , "Berlin" , "Frankfurt" ],
-  [  "Wie viele Punkte muss ein Tischtennisspieler erzielen, damit ein Satz gewonnen ist?</" , "11" , "21" , "13" , "18" ],
+  [  "Wie viele Punkte muss ein Tischtennisspieler erzielen, damit ein Satz gewonnen ist?" , "11" , "21" , "13" , "18" ],
   [  "Wie nannte man den Vorläufer des Bundesministeriums für Verteidigung?" , "Amt Blank" , "Organisation Gehlen" , "Gauck-Behörde" , "Hartz-Kommision" ],
   [  "Was gibt es wirklich?" , "Menschenfressertomaten" , "Diebesradieschen" , "Kopfgeldzitronen" , "Mafiakarotten" ],
   [  "Welche ist die kleinste in Mitteleuropa beheimatete Maus?" , "Zwergmaus" , "Spitzmaus" , "Haselmaus" , "Zwergfledermaus" ],
