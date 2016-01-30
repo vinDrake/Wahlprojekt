@@ -10,9 +10,10 @@ class Selection < ActiveRecord::Base
   # Begin after_create
   after_create do |selection|
 
-      # TODO Remove Feeds with Prio 0
+      # Remove Feeds with Prio 0
       selection.user.feeder.remove_prio_zero_feeds
-      selection.user.feeder.add_feed
+      # Add new Feeds
+      # selection.user.feeder.add_feed # Wird in remove_prio_zero_feeds gemacht
 
   end
   # End after_create
