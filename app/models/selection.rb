@@ -7,5 +7,16 @@ class Selection < ActiveRecord::Base
 
   # TODO Dokumentieren
 
-  
+  # Begin after_create
+  after_create do |selection|
+
+      # TODO Remove Feeds with Prio 0
+      selection.user.feeder.remove_prio_zero_feeds
+      selection.user.feeder.add_feed
+
+  end
+  # End after_create
+
+
+
 end
