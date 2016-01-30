@@ -102,6 +102,15 @@ class User < ActiveRecord::Base
     return self.participations.where( complete: false )
   end
 
+  def untied_tags
+    tags = Array.new
+    tags.concat( Tag.all )
+    self.selections.each do |selection|
+      tags.delete(selection.tag)
+    end
+    return tags
+  end
+
   private
     def add_feeder_to_user
       self.feeder = Feeder.new(:user_id => self.id)

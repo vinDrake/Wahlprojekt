@@ -16,8 +16,13 @@ class SelectionsController < ApplicationController
   # GET /selections/new
   def new
     @selection = Selection.new
-    @tag_select = Tag.all
-    @feeder_select = Feeder.all
+    if current_user.nil?
+      @tag_select = Tag.all
+      @feeder_select = Feeder.all
+    else
+      @tag_select = current_user.untied_tags
+      @feeder = current_user.feeder
+    end
   end
 
   # GET /selections/1/edit
@@ -31,7 +36,7 @@ class SelectionsController < ApplicationController
 
     respond_to do |format|
       if @selection.save
-        format.html { redirect_to @selection, notice: 'Selection was successfully created.' }
+        format.html { redirect_to selections_url, notice: 'Selection was successfully created.' }
         format.json { render :show, status: :created, location: @selection }
       else
         format.html { render :new }
@@ -45,7 +50,7 @@ class SelectionsController < ApplicationController
   def update
     respond_to do |format|
       if @selection.update(selection_params)
-        format.html { redirect_to @selection, notice: 'Selection was successfully updated.' }
+        format.html { redirect_to selections_url, notice: 'Selection was successfully updated.' }
         format.json { render :show, status: :ok, location: @selection }
       else
         format.html { render :edit }

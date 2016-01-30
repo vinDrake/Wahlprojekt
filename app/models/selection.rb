@@ -18,6 +18,15 @@ class Selection < ActiveRecord::Base
   end
   # End after_create
 
+  # Begin after_destroy
+  after_destroy do |selection|
+
+      # Remove Feeds with Prio 0 and add new Feeds
+      selection.user.feeder.remove_prio_zero_feeds
+
+  end
+  # End after_destroy
+
 
 
 end
