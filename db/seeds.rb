@@ -39,6 +39,7 @@
 
 # Ein bisschen besser
 
+
 question_list = [
 
   [  "Wer ist Batman?" , "Bruce Wayne" , "Alfred der Butler" , "Peter Parker" , "Tony Stark" ],
@@ -130,5 +131,10 @@ challenge_list.each do |challenge|
     Element.create(challenge: c , question: Question.all.order("RANDOM()").first)
   end
 end
+
+
+
+User.create(name: "Benjamin" , email: "ben@mail.de" , password: "password")
+
 
 # Um die Daten aus der Datenbank einzufügen siehe: lib/tasks/export.rake
