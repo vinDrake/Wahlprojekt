@@ -92,7 +92,13 @@ end
 tag_list = [
 
   [ "Filme" , [ 1 , 2 , 3 ] ],
-  [ "Comics" , [ 1 , 2 , 3 ] ]
+  [ "Comics" , [ 1 , 2 , 3 ] ],
+  [ "Astronomie" , [ 4 ] ],
+  [ "Geografie" , [ 16 , 17 , 18 ] ],
+  [ "Geschichte" , [ 26 , 27 , 28 ] ],
+  [ "Ernährung" , [ 20 , 34 ] ],
+  [ "Biologie" , [ 9 , 24 ] ]
+#  [ "tag" , [ 1 , 2 , 3 ] ]
 
 ]
 
