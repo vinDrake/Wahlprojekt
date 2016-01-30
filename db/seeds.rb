@@ -43,7 +43,41 @@ question_list = [
 
   [  "Wer ist Batman?" , "Bruce Wayne" , "Alfred der Butler" , "Peter Parker" , "Tony Stark" ],
   [  "Wer ist Iron Man?" , "Tony Stark" , "Bruce Wayne" , "Peter Parker" , "Alfred der Butler" ],
-  [  "Wer ist Spiderman?" , "Peter Parker" , "Bruce Wayne" , "Tony Stark" , "Alfred der Butler" ]
+  [  "Wer ist Spiderman?" , "Peter Parker" , "Bruce Wayne" , "Tony Stark" , "Alfred der Butler" ],
+  [  "Wie viele Länder hat Europa? (Hinweis: nicht die EU!)" , "47" , "45" , "42" , "51" ],
+  [  "Nach welcher Stadt ist die erste deutsche Republik benannt?" , "Weimar" , "Bonn" , "Berlin" , "Frankfurt" ],
+  [  "Wie viele Punkte muss ein Tischtennisspieler erzielen, damit ein Satz gewonnen ist?</" , "11" , "21" , "13" , "18" ],
+  [  "Wie nannte man den Vorläufer des Bundesministeriums für Verteidigung?" , "Amt Blank" , "Organisation Gehlen" , "Gauck-Behörde" , "Hartz-Kommision" ],
+  [  "Was gibt es wirklich?" , "Menschenfressertomaten" , "Diebesradieschen" , "Kopfgeldzitronen" , "Mafiakarotten" ],
+  [  "Welche ist die kleinste in Mitteleuropa beheimatete Maus?" , "Zwergmaus" , "Spitzmaus" , "Haselmaus" , "Zwergfledermaus" ],
+  [  "Wie heißt der Hund von Obelix?" , "Idefix" , "Netflix" , "Odalix" , "Knuffix" ],
+  [  "Für welche Kategorie gibt es keinen Nobelpreis?" , "Mathematik" , "Chemie" , "Physik" , "Wirtschaftswissenschaften" ],
+  [  "Wie viele Quadratmeter sind ein Hektar?" , "10.000" , "1.000" , "100.000" , "100" ],
+  [  "Welcher Planet ist der Sonne am nächsten?" , "Merkur" , "Venus" , "Jupiter" , "Neptun" ],
+  [  "Wann wurde die Berliner Mauer abgerissen?" , "1989" , "1990" , "1991" , "1988" ],
+  [  "Wann wurde Sedna entdeckt?" , "2003" , "2005" , "1998" , "2007" ],
+  [  "Wie heißt der höchste Berg Deutschlands?" , "Zugspitze" , "Mount Everest" , "Matterhorn" , "Watzmann" ],
+  [  "Wie hoch ist der höchste Berg der Erde?" , "8840m" , "8920m" , "8790" , "8810" ],
+  [  "Wie viele Länder grenzen an die Schweiz?" , "5" , "4" , "6" , "7" ],
+  [  "Mit welcher Filmrolle ist Pierre Brice berühmt geworden?" , "Winnetou" , "Titanic" , "Casablanca" , "Frühstück bei Tiffany" ],
+  [  "Was enthält mehr Eisen?" , "Schokolade" , "Spinat" , "Rindfleisch" , "Milch" ],
+  [  "Welche Tierhaut wurde früher als Schleifpapier benutzt?" , "Haifischhaut" , "Bieberhaut" , "Drachenhaut" , "Krokodilhaut" ],
+  [  "Wer schrieb das Kinderbuch „Pippi Langstrumpf“?" , "Astrid Lindgren" , "Michael Ende" , "Joanne K. Rowling" , "Erich Kästner" ],
+  [  "Wer war der Begründer der Psychoanalyse?" , "Sigmund Freud" , "Epikur" , "Immanuel Kant" , "Niccolò Machiavelli" ],
+  [  "Welches Medikament gewinnt man aus Schimmelpilz?" , "Penicillin" , "Aspirin" , "Paracetamol" , "Morphin" ],
+  [  "Welcher Stil wurde Picasso zugeordnet?" , "Surrealismus" , "Realismus" , "Expressionismus" , "Pop Art" ],
+  [  "In welchem Jahr begann die Französische Revolution?" , "1789" , "1879" , "1978" , "1897" ],
+  [  "Welcher König von Frankreich hatte den Beinamen “Sonnenkönig“?" , "Ludwig XIV" , "Karl VI" , "Napoleon" , "Franz II" ],
+  [  "Von welchem Land trennte sich Norwegen 1905?" , "Schweden" , "Finnland" , "Lettland" , "Litauen" ],
+  [  "Wie viel Spieler gibt es beim Rugby?" , "30" , "20" , "22" , "34" ],
+  [  "Wann wurde der Tonfilm erfunden?" , "1928" , "1941" , "1905" , "1898" ],
+  [  "Wer führte bei den Römern das Schaltjahr ein?" , "Caesar" , "Nero" , "Augustus" , "Remus" ],
+  [  "Was verbirgt sich hinter der Bezeichnung „Pizza Connection“?" , "Heroinhändlerring" , "Lieferdienst" , "Spielfilm" , "Drogenkartell" ],
+  [  "Welches Landtier kann am schnellsten laufen?" , "Gepard" , "Rennmaus" , "Windhund" , "Gazelle" ],
+  [  "Welche Frucht hat pro 100 Gramm den größten Nährwert?" , "Avocado" , "Litschi" , "Banane" , "Zitrone" ],
+  [  "Wie lang ist ein Tag auf dem Jupiter?" , "9 Stunden 50 Minuten" , "12 Stunden 30 Minuten" , "18 Stunden 40 Minuten" , "26 Stunden 10 Minuten" ]
+  # [  "frage?" , "richtig" , "falsch" , "falsch" , "falsch" ],
+
 
 ]
 
