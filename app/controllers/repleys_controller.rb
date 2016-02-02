@@ -118,7 +118,7 @@ class RepleysController < ApplicationController
           note += ' It also was the last Question of "'+participation.challenge.name+'".'
         end
 
-        format.html { redirect_to '/home', notice: note }
+        format.html { redirect_to @repley, notice: note }
         format.json { render :show, status: :created, location: @repley }
       else
         format.html { render :new }
