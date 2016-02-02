@@ -67,9 +67,10 @@ class RepleysController < ApplicationController
     # End Points
 
     unless current_user.feeds.size >= 1
-      question = Question.order("RANDOM()").first
-      feed = Feed.new(:feeder_id => current_user.feeder.id, :question_id => question.id, :priority => 0)
-      feed.save
+      # question = Question.get_possible_questions.sample
+      # feed = Feed.new(:feeder_id => current_user.feeder.id, :question_id => question.id, :priority => 0)
+      # feed.save
+      current_user.feeder.add_feed
     end
 
     respond_to do |format|
