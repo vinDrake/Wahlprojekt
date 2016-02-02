@@ -5,7 +5,7 @@ class RepleysController < ApplicationController
   # GET /repleys
   # GET /repleys.json
   def index
-    @repleys = Repley.where(user: current_user)
+    @repleys = Repley.all
   end
 
   # GET /repleys/1
