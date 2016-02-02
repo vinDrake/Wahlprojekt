@@ -107,7 +107,7 @@ class RepleysController < ApplicationController
         if @repley.answer.correct
           note = 'Repley was successfully created and the answer was correct. You got '+@repley.points.to_s+' Point.'
         else
-          note = 'Repley was successfully created and the answer was wrong.'
+          note = 'Repley was successfully created and the answer was wrong. Thr correct Answer is: "'+@repley.question.correct_answer.answer_body+'".'
         end
         if last
           note += ' It also was the last Question of "'+participation.challenge.name+'".'
