@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :require_user, only: [:index, :show]
+  ## before_action :require_user, only: [:index, :show]
+  skip_before_action :require_user, only: [:new, :create]
 
   # GET /users
   # GET /users.json
@@ -8,9 +9,12 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  # TODO Dokumentieren
   # GET /users/1
   # GET /users/1.json
   def show
+    # OPTIMIZE deprechated @user.archieved_points can be called in view
+    @user_points = @user.achieved_points
   end
 
   # GET /users/new

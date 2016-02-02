@@ -1,6 +1,6 @@
 class FeedsController < ApplicationController
   before_action :set_feed, only: [:show, :edit, :update, :destroy]
-  before_action :require_user, only: [:index, :show]
+ # before_action :require_user, only: [:index, :show]
 
   # GET /feeds
   # GET /feeds.json
@@ -13,6 +13,8 @@ class FeedsController < ApplicationController
   def show
   end
 
+  # TODO Dokumentieren
+  # TODO Sollte Feed eine VIEW haben?
   # GET /feeds/new
   def new
     @feed = Feed.new
@@ -22,6 +24,8 @@ class FeedsController < ApplicationController
 
   # GET /feeds/1/edit
   def edit
+    @question_select = Question.all
+    @feeder_select = Feeder.all
   end
 
   # POST /feeds
@@ -72,6 +76,6 @@ class FeedsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def feed_params
-      params.require(:feed).permit(:feeder_id, :question_id, :priority)
+      params.require(:feed).permit(:id, :feeder_id, :question_id, :priority, :challenge_id, :participation_id)
     end
 end

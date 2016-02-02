@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
-  before_action :require_user, only: [:index, :show]
+  # before_action :require_user, only: [:index, :show]
 
   # GET /questions
   # GET /questions.json
@@ -11,12 +11,13 @@ class QuestionsController < ApplicationController
   # GET /questions/1
   # GET /questions/1.json
   def show
-   @tags = @question.tags
+  #  @tags = @question.tags # OPTIMIZE Das ist Mist und gehört ins Model DONE
   end
 
+  # TODO Dokumentieren
   # GET /questions/new
   def new
-    @tag_select = Tag.all
+    @tag_select = Tag.all # OPTIMIZE Nur Tags übergeben, die die Frage noch nicht hat.
     @question = Question.new
   end
 
@@ -31,10 +32,14 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.save
-        format.html { redirect_to @question, notice: 'Question was successfully created.' }
+        # Wenn man eine Frage erstellt, dann braucht die auch Antworten
+        format.html { redirect_to new_answer_path(question_id: @question)}
+        # Die alte Weiterleitung zu questions#show
+        # format.html { redirect_to @question, notice: 'Question was successfully created.' }
+        # Die JSON-Version gibt nach wie vor das gleiche zurück
         format.json { render :show, status: :created, location: @question }
       else
-        format.html { render :new }
+        format.html { render :new } # OPTIMIZE Eine notice wäre nett
         format.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end

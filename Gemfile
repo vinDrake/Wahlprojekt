@@ -5,6 +5,8 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.4'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
+# # Use pg as the database for Active Record
+# gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -32,7 +34,12 @@ gem 'bcrypt', '~> 3.1.7'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-group :development, :test do
+group :production do
+  # Needed for Heroku
+  gem 'rails_12factor'
+end
+
+group :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
  # gem 'byebug'
 end
@@ -43,4 +50,4 @@ group :development do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-#gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+  gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

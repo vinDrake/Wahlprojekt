@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-  root 'users#index'
+  root 'repleys#new'
 
 
   # Example of regular route:
@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
+
+  get 'home' => 'repleys#new'
 
 
   # Example of named route that can be invoked with purchase_url(id: product.id)

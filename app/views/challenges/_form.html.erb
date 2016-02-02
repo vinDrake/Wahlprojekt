@@ -17,7 +17,23 @@
   </div>
   <div class="field">
     <%= f.label :alive %><br>
-    <%= f.check_box :alive %>
+    <%= f.check_box :alive , checked: true %>
+  </div>
+  <div class="field">
+    <%= f.label :max_challenge_time %> 0 = nicht gesetzt <br>
+    <%= f.number_field :max_challenge_time , value: 0 %>
+  </div>
+  <div class="field">
+    <%= f.label :latest_end %><br>
+    <%= f.datetime_select :latest_end , default: DateTime.now.next_month %>
+  </div>
+  <div class="field">
+    <%= f.label :strict_order %><br>
+    <%= f.check_box :strict_order %>
+  </div>
+  <div class="field">
+    <%= f.label :strikes %> 0 = nicht gesetzt <br>
+    <%= f.number_field :strikes , value: 0 %>
   </div>
   <div class="actions">
     <%= f.submit %>

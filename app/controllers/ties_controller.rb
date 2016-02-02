@@ -1,7 +1,7 @@
 class TiesController < ApplicationController
 
     before_action :set_tie, only: [:show, :edit, :update, :destroy]
-    before_action :require_user, only: [:index, :show]
+   # before_action :require_user, only: [:index, :show]
 
     # GET /ties
     # GET /ties.json
@@ -14,11 +14,15 @@ class TiesController < ApplicationController
     def show
     end
 
+    # TODO Dokumentieren
     # GET /ties/new
     def new
       @tie = Tie.new
-      @tag_select = Tag.all
-      @question_select = Question.all
+      @tag_select = Tag.all # OPTIMIZE Nur in Frage kommenden Tags anzeigen
+      if params.has_key?(:question_id)
+      @question = Question.find(params[:question_id])
+      end
+      @question_select = Question.all # OPTIMIZE Nur in Frgae kommende Fragen anzeigen
     end
 
     # GET /ties/1/edit
@@ -35,7 +39,7 @@ class TiesController < ApplicationController
           format.html { redirect_to @tie, notice: 'Tie was successfully created.' }
           format.json { render :show, status: :created, location: @tie }
         else
-          format.html { render :new }
+          format.html { render :new } # OPTIMIZE Einen notice wäre nett
           format.json { render json: @tie.errors, status: :unprocessable_entity }
         end
       end

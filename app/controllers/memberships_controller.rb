@@ -1,6 +1,6 @@
 class MembershipsController < ApplicationController
   before_action :set_membership, only: [:show, :edit, :update, :destroy]
-  before_action :require_user, only: [:index, :show]
+ # before_action :require_user, only: [:index, :show]
 
   # GET /memberships
   # GET /memberships.json
@@ -16,6 +16,8 @@ class MembershipsController < ApplicationController
   # GET /memberships/new
   def new
     @membership = Membership.new
+    # TODO Trennen in BEitreten und jemanden hinzufügen/einladen
+    # TODO DOkumentieren
     @user_select = User.all
     @group_select = Group.all
   end

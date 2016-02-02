@@ -1,5 +1,5 @@
 <h1>New Message</h1>
 
-<%= render 'form' %>
+<%= render partial: 'form', object: @message, as: :message %>
 
 <%= link_to 'Back', messages_path %>

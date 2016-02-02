@@ -1,0 +1,6 @@
+<p>
+  <strong><%= message.sender.name %>: </strong>
+  <%= message.subject %><br>
+  <%= message.content %><br>
+  <%= link_to "Antworten", new_message_path(receiver_id: message.sender) %>
+</p>

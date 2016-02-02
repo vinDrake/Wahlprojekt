@@ -1,11 +1,13 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
-  before_action :require_user, only: [:index, :show]
+  # before_action :require_user, only: [:index, :show]
 
   # GET /messages
   # GET /messages.json
   def index
-    @messages = Message.all
+    @all_messages = current_user.all_messages
+    @incoming_messages = current_user.incoming_messages
+    @leaving_messages = current_user.leaving_messages
   end
 
   # GET /messages/1
@@ -13,14 +15,23 @@ class MessagesController < ApplicationController
   def show
   end
 
+  # TODO Dokumentieren
   # GET /messages/new
   def new
+    @sender = current_user
     @user_select = User.all
+    if params.has_key?(:receiver_id)
+    @receiver = User.find(params[:receiver_id])
+    end
+    @receiver_select = current_user.other_users
     @message = Message.new
   end
 
   # GET /messages/1/edit
   def edit
+    # @sender = current_user
+    @user_select = User.all
+    @receiver_select = User.all#current_user.other_users
   end
 
   # POST /messages
@@ -33,7 +44,7 @@ class MessagesController < ApplicationController
         format.html { redirect_to @message, notice: 'Message was successfully created.' }
         format.json { render :show, status: :created, location: @message }
       else
-        format.html { render :new }
+        format.html { render :new } # OPTIMIZE Einen notice wäre nett
         format.json { render json: @message.errors, status: :unprocessable_entity }
       end
     end

@@ -1,0 +1,26 @@
+<% unless message.sender == current_user %>
+  <p>
+    <strong>Sender:</strong>
+    <%= message.sender.name %>
+  </p>
+<% end %>
+
+<% unless message.receiver == current_user %>
+  <p>
+    <strong>Receiver:</strong>
+    <%= message.receiver.name %>
+  </p>
+<% end %>
+
+<p>
+  <strong>Subject:</strong>
+  <%= message.subject %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= message.content %>
+</p>
+<p>
+  <%= link_to "Antworten", new_message_path(receiver_id: message.sender) %>
+</p>

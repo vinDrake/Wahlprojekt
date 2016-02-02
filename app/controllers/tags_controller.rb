@@ -1,6 +1,6 @@
 class TagsController < ApplicationController
   before_action :set_tag, only: [:show, :edit, :update, :destroy]
-  before_action :require_user, only: [:index, :show]
+ # before_action :require_user, only: [:index, :show]
 
   # GET /tags
   # GET /tags.json
@@ -32,7 +32,7 @@ class TagsController < ApplicationController
         format.html { redirect_to @tag, notice: 'Tag was successfully created.' }
         format.json { render :show, status: :created, location: @tag }
       else
-        format.html { render :new }
+        format.html { render :new } # OPTIMIZE Eine notice wäre nett
         format.json { render json: @tag.errors, status: :unprocessable_entity }
       end
     end

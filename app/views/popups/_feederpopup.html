@@ -1,0 +1,50 @@
+<div id="popupBoxFivePosition">
+  <div class="popupBoxWrapper">
+    <div id="schliess">
+      <a href="javascript:void(0)" onclick="toggle_visibility('popupBoxFivePosition');">
+        <%= image_tag "Ps-x-button.png" %></a>
+    </div>
+    <div class="feedbea">
+      <h1>Feed bearbeiten</h1>
+
+      <%= render partial: "selections/selection", collection: current_user.selections %>
+
+      <%= link_to 'New Selection', new_selection_path %>
+
+       <!-- <form>
+         Bestehende Tags aus dem Feed entfernen:
+         <select name="Kategorie" size="1" >
+           <option>Mathe</option>
+           <option>Hunde</option>
+           <option>Sport</option>
+         </select>
+         <button type="submit">Entfernen</button>
+         </br>
+
+
+         Neue Tags hinzufügen:
+         <select name="Kategorie" size="1" >
+           <option>Baum</option>
+           <option>Maus Katze</option>
+           <option>Sport</option>
+         </select>
+         <button type="button">Hinzufügen</button>
+         </br>
+
+
+         </br>
+
+         Benachrichtigungen erlauben:
+         <select name="Lernmodus" size="1">
+           <option>Aktivieren</option>
+           <option>Deaktivieren</option>
+
+
+         </select>
+         <button type="submit">Bestätigen</button>
+       </form>
+ -->
+
+    </div>
+  </div>
+</div>
