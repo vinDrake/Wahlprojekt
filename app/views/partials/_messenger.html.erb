@@ -1,10 +1,48 @@
-<h1>Messeges</h1>
-<% unless @user.nil? %>
-<!-- <#%= render :partial => "messages/message" , :collection => @user.received_messages %> -->
-  <% @user.received_messages.each do |m| %>
-    <strong><%= m.subject %></strong>
-    <br>
-    <%= m.content %>
-    <br>
-  <% end %>
-<% end %>
+  <div id="messages">
+
+    <!-- <div  id="button"  > -->
+      <%= link_to (image_tag "x.svg"), 'javascript:void(0)', :onclick => 'toggle_chat("messages")', id: "button"  %>
+      <!-- <a href="#" onclick="toggle_chat('messages');"> -->
+      <!-- </a> -->
+    <!-- </div> -->
+
+    <!-- <#% unless @user.nil? %> -->
+    <div id="text">
+
+      <strong>Inbox:</strong>
+        <%= render partial: "messages/message" , collection: current_user.incoming_messages, as: :message , spacer_template: "partials/ruler" %>
+        <!-- <#%= render(current_user.received_messages) || "There are no Messages." %> -->
+        <!-- <#%= render current_user.sended_messages %> -->
+
+        <!-- <#% @user.received_messages.each do |m| %>
+          <strong><#%= m.subject %></strong>
+          <br>
+          <#%= m.content %>
+          <br>
+        <#% end %> -->
+      <!-- <#% end %> -->
+
+      <!-- <%= form_tag("/messages", method: "post") do %> -->
+        <!-- <%= label_tag(:message, :sender_id) %> -->
+        <!-- <%= text_field_tag(:message, :sender_id) %> -->
+        <!-- <%= label_tag(:message, :receiver_id) %> -->
+        <!-- <%= text_field_tag(:message, :receiver_id) %> -->
+        <!-- <%= label_tag(:message, :subject) %> -->
+        <!-- <%= text_field_tag(:message, :subject) %> -->
+        <!-- <%= label_tag(:message, :content) %> -->
+        <!-- <%= text_field_tag(:message, :content) %> -->
+  <!--  -->
+        <!-- <%= submit_tag("Senden") %> -->
+      <!-- <% end %> -->
+    </div>
+
+  </div>
+
+  <div id="aufmachen">
+    <!-- <div id="button" > -->
+      <%= link_to (image_tag "x.svg"), 'javascript:void(0)', :onclick => 'toggle_chat("2")', id: "button"  %>
+      <!-- <a href="#" onclick="toggle_chat('2');">
+        <%= image_tag "x.svg" %>
+      </a> -->
+    <!-- </div> -->
+  </div>

@@ -35,6 +35,20 @@ class Feeder < ActiveRecord::Base
     end
   end
 
+  # Dokumentieren
+  def remove_prio_zero_feeds
+    # unless self.feeds.where( priority: 0 ).size >= self.feeds.size
+      # Gehe durch jeden Feed
+      self.feeds.each do |feed|
+        # Teste ob der Feed Priorität 0 hat und zerstöre ihn ggf.
+        feed.destroy if feed.priority == 0
+      end
+    # end
+    if self.feeds.size <= 0
+      self.add_feed
+    end
+  end
+
 
   # OPTIMIZE Hübscher und sinnvoller sollte das schon sein
   # TODO Dokumentation
@@ -44,32 +58,50 @@ class Feeder < ActiveRecord::Base
 
   # OPTIMIZE Das lässt sich bestimmt mit einem "einfachen" Aufruf viel eleganter lösen.
   def add_selection_feed_to_feeder
-    # Go through questions in random order
-    Question.order("RANDOM()").each do |question|
-      # Go through tags of the question
-      question.tags.each do |question_tag|
-        # Compare tags with selections
-        self.tags.each do |selection_tag|
-          if question_tag == selection_tag
-            feed = Feed.new(:feeder_id => self.id, :question_id => question.id, :priority => 0)
-            feed.save
-            return
-          end
+
+    #
+    if self.selections.size > 0 # Wenn es mindestens eine Selection gibt
+      self.selections.each do |selection| # Prüfe für jede
+        if Tie.where(tag: selection.tag).size > 0 # ob es ein mindestens ein tie dazu gibt
+          tie = Tie.where(tag: selection.tag).order("RANDOM()").first # wähle ggf. eins davon zufällig aus
+          feed = Feed.new(:feeder_id => self.id, :question_id => tie.question.id, :priority => 0)
+          feed.save # und mache einen Feed daraus.
         end
       end
     end
-    # When no matching questions is found, take a random one
-    question = Question.order("RANDOM()").first
-    feed = Feed.new(:feeder_id => self.id, :question_id => question.id, :priority => 0)
-    feed.save
+    #
+
+    # # Go through questions in random order
+    # Question.order("RANDOM()").each do |question|
+    #   # Go through tags of the question
+    #   question.tags.each do |question_tag|
+    #     # Compare tags with selections
+    #     self.tags.each do |selection_tag|
+    #       if question_tag == selection_tag
+    #         feed = Feed.new(:feeder_id => self.id, :question_id => question.id, :priority => 0)
+    #         feed.save
+    #         return
+    #       end
+    #     end
+    #   end
+    # end
+
+
+    # When no matching questions is found an Feeder is empty, take a random one
+    if self.feeds.size <= 0
+      question = Question.order("RANDOM()").first
+      feed = Feed.new(:feeder_id => self.id, :question_id => question.id, :priority => 0)
+      feed.save
+    end
   end
 
   private
     def add_feed_to_feeder # OPTIMIZE Zwei fast identische Methoden sind nicht sehr hübsch
-      question = Question.order("RANDOM()").first
+      # question = Question.order("RANDOM()").first
       # feed = Feed.new(:feeder_id => self.id, :question_id => question.id, :priority => 0)
 
       # feed.save
+      self.add_feed
     end
 
 end

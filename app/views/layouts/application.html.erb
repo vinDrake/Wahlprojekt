@@ -8,38 +8,38 @@
 </head>
 <body>
 
-  <%= render "partials/navigation" %>
+  <div id="oben" >
+    <%= render "partials/navigation" %>
+  </div>
 
-<!-- Messenger Slider -->
-<% if current_user %>
-    <div id="messages">
-      <div  id="button"  >
-        <!-- <a href="javascript:void(0)" onclick="toggle_chat('messages');"> -->
-        <a href="#" onclick="toggle_chat('messages');">
-          <%= image_tag "x.svg" %>
-        </a>
+  <div id="links" >
+    <!-- Messenger Slider -->
+    <% if current_user %>
+      <%= render "partials/messenger" %>
+    <% end %>
+    <!-- Messenger Slider -->
+  </div>
+
+  <div id="mitte" align="center">
+
+    <div style="display:table-cell; vertical-align:middle">
+      <%= image_tag "Logo.png",  id: "main_logo" %>
+      <p id="notice"><%= notice %></p>
+
+      <div id="haupt">
+        <%= yield %>
       </div>
-      <!-- Versuch Messenger  -->
-        <%= render "partials/messenger" %>
-      <!-- Versuch Messenger -->
-      </div>
-      <div id="aufmachen">
-        <div id="button" >
-          <!-- <a href="javascript:void(0)" onclick="toggle_chat('2');"></a> -->
-          <a href="#" onclick="toggle_chat('2');">
-            <%= image_tag "x.svg" %>
-          </a>
-        </div>
 
     </div>
+
+    <!-- Anfang Pop-Up -->
+    <% if current_user %>
+    <%= render "popups/feederpopup" %>
+    <%= render "popups/notificationpopup" %>
     <% end %>
-<!-- Messenger Slider -->
+    <!-- Ende Pop-Up -->
 
-<div align="center">
-
-  <%= image_tag "Logo.png" %>
-
-  <%= yield %>
   </div>
+
 </body>
 </html>
