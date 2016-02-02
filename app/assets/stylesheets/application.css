@@ -147,7 +147,7 @@
    padding: 15px;
    height:auto;
    display: block;
-   line-height = 1;
+   line-height: 1;
    border-radius: 7px;
 
  }
@@ -168,7 +168,7 @@
    padding: 15px;
    height:auto;
    display: block;
-   line-height = 1;
+   line-height: 1;
    border-radius: 7px;
 
  }
@@ -223,7 +223,7 @@
   /*padding: 15px;*/
   /*height:auto;*/
   /*display: block;*/
-  /*line-height = 1;*/
+  /*line-height: 1;*/
   /*border-radius: 7px;*/
 
    /*color: #000;*/
@@ -270,7 +270,7 @@
   /*padding: 15px;*/
   /*height:auto;*/
   /*display: block;*/
-  line-height = 1;
+  line-height: 1;
   border-radius: 7px;
 
    /*color: #000;*/
