@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-  root 'users#index'
+  root 'repleys#new'
 
   # def handle_options_request
   #   head(:ok) if request.request_method == "OPTIONS"
