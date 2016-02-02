@@ -75,12 +75,7 @@ class RepleysController < ApplicationController
 
     respond_to do |format|
       if @repley.save
-# <<<<<<< HEAD
         user_feeds = @user.feeds
-# =======
-        # flash[:succees] = 'New Repley Created'
-        # user_feeds = current_user.feeds
-# >>>>>>> refs/remotes/origin/Deploy-Branch
         user_feeds.find_by(repley_params[:question]).destroy
         # TODO Debug-Code raus
         # Begin Check if it was the last one of this Challenge
