@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
 
+  validates :name, uniqueness: true
   validates :name, :email, :password_digest, presence: true
   validates :name, format: { with: /\A[a-zA-Z0-9]+\z/,
     message: "only allows letters and numbers" }, length: { in: 4..24 }
@@ -13,6 +14,7 @@ class User < ActiveRecord::Base
   has_many :challenges, through: :participations
   has_one :feeder, dependent: :destroy
   has_many :feeds, through: :feeder
+  has_many :selections, through: :feeder
   has_many :memberships, dependent: :destroy
   has_many :groups, through: :memberships
 
@@ -39,7 +41,28 @@ class User < ActiveRecord::Base
       end
       return highscore_user
     end
+
   end
+  # End of Class Methods
+
+  #
+  def all_messages
+    messages = Array.new
+    messages.concat( self.received_messages )
+    messages.concat( self.sended_messages )
+    return messages
+  end
+
+    #
+    def incoming_messages
+      return self.received_messages.order(created_at: :desc)
+    end
+
+    #
+    def leaving_messages
+      return self.sended_messages.order(created_at: :desc)
+    end
+
   # Returns an Array containing the other Users.
   def other_users
     others = Array.new
@@ -52,6 +75,13 @@ class User < ActiveRecord::Base
   def get_next_feed
     return self.feeder.get_next_feed
   end
+
+  # Returns Number of answerd Questions.
+  def question_count
+    #
+    return self.repleys.size
+  end
+
   # Returns the achieved Points.
   def achieved_points
     #
@@ -63,6 +93,24 @@ class User < ActiveRecord::Base
     end
     return points
   end
+
+  def succeeded_participations
+    return self.participations.where( succeeded: true )
+  end
+
+  def active_participations
+    return self.participations.where( complete: false )
+  end
+
+  def untied_tags
+    tags = Array.new
+    tags.concat( Tag.all )
+    self.selections.each do |selection|
+      tags.delete(selection.tag)
+    end
+    return tags
+  end
+
   private
     def add_feeder_to_user
       self.feeder = Feeder.new(:user_id => self.id)

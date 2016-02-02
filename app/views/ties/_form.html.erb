@@ -16,10 +16,16 @@
     <%= f.label :tag %><br>
     <%= f.select :tag_id, @tag_select.map { |t| [t.name,t.id]} %>
   </div>
+
   <strong>Question:</strong>
   <div class="field">
     <%= f.label :question %><br>
-    <%= f.select :question_id, @question_select.map { |q| [q.problem,q.id]} %>
+    <% unless @question.nil? %>
+      <%= f.hidden_field :question_id, :value => @question.id %>
+      <%= @question.problem %>
+    <% else %>
+      <%= f.select :question_id, @question_select.map { |q| [q.problem,q.id]} %>
+    <% end %>
   </div>
   <div class="actions">
     <%= f.submit %>

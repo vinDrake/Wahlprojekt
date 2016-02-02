@@ -19,12 +19,29 @@ class Challenge < ActiveRecord::Base
 
   end
 
+  # Checks, if Challenge is alive and sets Participations complete, if not
   def check_life_signs
     unless self.alive
       kill_participations
     end
   end
 
+  # Returns active User in this Challenge
+  def get_active_users
+    return Participation.where({ challenge: self, complete: false })
+  end
+
+  # Returns complete User in this Challenge
+  def get_complete_users
+    return Participation.where({ challenge: self, complete: true })
+  end
+
+  # Returns complete User in this Challenge
+  def get_succeeded_users
+    return Participation.where({ challenge: self, succeeded: true })
+  end
+
+  # Sets all Participations from this Challenge complete
   def kill_participations
     self.participations.each do |participation|
       participation.complete = true

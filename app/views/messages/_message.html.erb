@@ -1,20 +1,26 @@
----
-<p>
-  <strong>Sender:</strong>
-  <%= @message.sender.name %>
-</p>
+<% unless message.sender == current_user %>
+  <p>
+    <strong>Sender:</strong>
+    <%= message.sender.name %>
+  </p>
+<% end %>
 
-<p>
-  <strong>Receiver:</strong>
-  <%= @message.receiver.name %>
-</p>
+<% unless message.receiver == current_user %>
+  <p>
+    <strong>Receiver:</strong>
+    <%= message.receiver.name %>
+  </p>
+<% end %>
 
 <p>
   <strong>Subject:</strong>
-  <%= @message.subject %>
+  <%= message.subject %>
 </p>
 
 <p>
   <strong>Content:</strong>
-  <%= @message.content %>
+  <%= message.content %>
+</p>
+<p>
+  <%= link_to "Antworten", new_message_path(receiver_id: message.sender) %>
 </p>

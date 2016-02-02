@@ -5,7 +5,7 @@ class RepleysController < ApplicationController
   # GET /repleys
   # GET /repleys.json
   def index
-    @repleys = Repley.all
+    @repleys = Repley.where(user: current_user)
   end
 
   # GET /repleys/1
@@ -20,11 +20,15 @@ class RepleysController < ApplicationController
     @user_select = User.all
     @question_select = Question.all
     @answer_select = Answer.all
+    @user = current_user
     if current_user
-      unless current_user.feeds.size >= 3
-        question = Question.order("RANDOM()").first
-        feed = Feed.new(:feeder_id => current_user.feeder.id, :question_id => question.id, :priority => 0)
-        feed.save
+
+      # TODO Feeder füttern?!?!?1
+      if current_user.feeds.size <= 0
+        @user.feeder.add_feed
+        # question = Question.order("RANDOM()").first
+        # feed = Feed.new(:feeder_id => current_user.feeder.id, :question_id => question.id, :priority => 0)
+        # feed.save
       end
       if current_user.feeds
 
@@ -70,6 +74,7 @@ class RepleysController < ApplicationController
 
     respond_to do |format|
       if @repley.save
+        # flash[:succees] = 'New Repley Created'
         user_feeds = current_user.feeds
         user_feeds.find_by(repley_params[:question]).destroy
         # TODO Debug-Code raus
@@ -100,7 +105,7 @@ class RepleysController < ApplicationController
         end
         # End Check if it was the last one of this Challenge
         if @repley.answer.correct
-          note = 'Repley was successfully created and the answer was correct.'
+          note = 'Repley was successfully created and the answer was correct. You got '+@repley.points.to_s+' Point.'
         else
           note = 'Repley was successfully created and the answer was wrong.'
         end
@@ -108,7 +113,7 @@ class RepleysController < ApplicationController
           note += ' It also was the last Question of "'+participation.challenge.name+'".'
         end
 
-        format.html { redirect_to @repley, notice: note }
+        format.html { redirect_to '/home', notice: note }
         format.json { render :show, status: :created, location: @repley }
       else
         format.html { render :new }

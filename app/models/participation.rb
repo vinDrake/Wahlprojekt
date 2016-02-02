@@ -5,7 +5,7 @@ class Participation < ActiveRecord::Base
 
   validates :user, :challenge, :strikes, presence: true
   validates :strikes, numericality: { only_integer: true }
-  validates :complete, :succeeded, inclusion: { in: [true, false] }
+  # validates :complete, :succeeded, inclusion: { in: [true, false] }
 
 
   # TODO Dokumentieren
@@ -93,6 +93,8 @@ class Participation < ActiveRecord::Base
           feed.save
         end
       end
+      # TODO Remove Feeds with Prio 0
+      participation.user.feeder.remove_prio_zero_feeds
   end
   # End after_create
 

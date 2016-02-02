@@ -13,18 +13,19 @@
 
   <div class="field">
     <%= f.label :user %><br>
-    <% unless @user.nil? %>
+    <% if @user.nil? %>
+      <%= f.select :user_id, @user_select.map { |u| [u.name,u.id]} %>
+
+    <% else %>
       <%= f.label :user, @user.name %>
       <%= f.hidden_field :user_id, :value => @user.id %>
-    <% else %>
-      <%= f.select :user_id, @user_select.map { |u| [u.name,u.id]} %>
     <% end %>
   </div>
   <div class="field">
     <%= f.label :challenge %><br>
     <%= f.select :challenge_id, @challenge_select.map {|c| [c.name,c.id]} %>
   </div>
-  <div class="field">
+  <!-- <div class="field">
     <%= f.label :complete %><br>
     <%= f.check_box :complete %>
   </div>
@@ -35,7 +36,7 @@
   <div class="field">
     <%= f.label :strikes %><br>
     Setzt der Controller
-  </div>
+  </div> -->
   <div class="actions">
     <%= f.submit %>
   </div>

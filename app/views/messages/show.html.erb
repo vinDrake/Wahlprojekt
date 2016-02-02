@@ -1,6 +1,6 @@
-<p id="notice"><%= notice %></p>
 
-<%= render "message" %>
 
-<%= link_to 'Edit', edit_message_path(@message) %> |
+<%= render partial: "message", object: @message, as: :message %>
+
+<!-- <%= link_to 'Edit', edit_message_path(@message) %> | -->
 <%= link_to 'Back', messages_path %>
