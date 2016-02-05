@@ -20,6 +20,12 @@ class Feeder < ActiveRecord::Base
     return self.feeds.order(priority: :desc).first
   end
 
+  # Returns next Feeds Question ID.
+  def get_next_question_id
+    # Sorts Feeds by Priority and returns the first one.
+    return get_next_feed.question.id
+  end
+
   # Returns next Feed with Priority 0 .
   def get_next_prio_0_feed
     if self.feeds.where( priority: 0 ).size <= 0
@@ -30,11 +36,11 @@ class Feeder < ActiveRecord::Base
     return prio_0_feeds.order("RANDOM()").first
   end
 
-  # Returns next Feeds Question ID.
-  def get_next_question_id
-    # Sorts Feeds by Priority and returns the first one.
-    return self.feeds.order(priority: :desc).first.question.id
+  # Returns next Feed with Priority 0 .
+  def get_next_prio_0_question_id
+    return get_next_prio_0_feed.question.id
   end
+
 
   # Dokumentieren
   def remove_feeds(participation)
