@@ -20,6 +20,16 @@ class Feeder < ActiveRecord::Base
     return self.feeds.order(priority: :desc).first
   end
 
+  # Returns next Feed with Priority 0 .
+  def get_next_prio_0_feed
+    if self.feeds.where( priority: 0 ).size <= 0
+      self.add_feed
+    end
+    # Takes Feeds Priority 0 and returns the first one.
+    prio_0_feeds = self.feeds.where( priority: 0 )
+    return prio_0_feeds.order("RANDOM()").first
+  end
+
   # Returns next Feeds Question ID.
   def get_next_question_id
     # Sorts Feeds by Priority and returns the first one.
