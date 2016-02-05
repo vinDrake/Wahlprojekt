@@ -1,7 +1,7 @@
 class Participation < ActiveRecord::Base
   belongs_to :user
   belongs_to :challenge
-  has_many :feeds
+  has_many :feeds, dependent: :destroy
 
   validates :user, :challenge, :strikes, presence: true
   validates :strikes, numericality: { only_integer: true }
