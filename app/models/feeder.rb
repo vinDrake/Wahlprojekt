@@ -32,8 +32,7 @@ class Feeder < ActiveRecord::Base
       self.add_feed
     end
     # Takes Feeds Priority 0 and returns the first one.
-    prio_0_feeds = self.feeds.where( priority: 0 )
-    return prio_0_feeds.order("RANDOM()").first
+    return self.feeds.where( priority: 0 ).order("RANDOM()").first
   end
 
   # Returns next Feed with Priority 0 .
