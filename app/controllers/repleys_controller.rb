@@ -82,7 +82,7 @@ class RepleysController < ApplicationController
         user_feeds = @user.feeds
         user_feeds.find_by(repley_params[:question]).destroy
 
-        # TODO Braucht die App größtenteils nicht. Außer das Attribute setzen. Das kann aber auch das Model
+        # TODO Braucht die App größtenteils nicht.
         # Begin Check if it was the last one of this Challenge
         unless @feed.participation.nil?
           last = true
@@ -92,6 +92,7 @@ class RepleysController < ApplicationController
               break
             end
           end
+          # TODO  Außer das Attribute setzen. Das kann aber auch das Model
           if last
             participation = @feed.participation
             participation.attributes = { :complete => true, :succeeded => true }

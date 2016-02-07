@@ -9,7 +9,7 @@ class Participation < ActiveRecord::Base
 
 
   # TODO Dokumentieren
-  # OPTIMIZE
+  # TODO Das ist viel zu inperformant
   after_find do |participation|
     logger.debug "Participation touched"
 
@@ -53,6 +53,7 @@ class Participation < ActiveRecord::Base
 
   # Begin after_update
   after_update do |participation|
+    # TODO In extra Methode auslagern
     if participation.complete
       logger.debug "Check if Participation is complete!"
       # Replaced with nicer method
@@ -66,7 +67,7 @@ class Participation < ActiveRecord::Base
   # Begin after_create
   after_create do |participation|
 
-      # BasisPriorität im Feeder feststellen # OPTIMIZE Methode im Feeder schreiben
+      # BasisPriorität im Feeder feststellen. Methode im Feeder schreiben
       base_priority = 0
       participation.user.feeds.each do |feed|
         if feed.priority > base_priority
@@ -98,16 +99,18 @@ class Participation < ActiveRecord::Base
   end
   # End after_create
 
-  def remove_questions_from_feeder
-    logger.debug "Remove Questions from Feeder"
-    current_user.feeds.each do |feed|
-      logger.debug "This is a Question in Feeder: "+feed.question.problem
-      if feed.challenge = participation.challenge
-        logger.debug "Destroy Feed"
-        feed.destroy
-      end
-    end
-  end
+
+  # # Wird nicht aufgerufen
+  # def remove_questions_from_feeder
+  #   logger.debug "Remove Questions from Feeder"
+  #   current_user.feeds.each do |feed|
+  #     logger.debug "This is a Question in Feeder: "+feed.question.problem
+  #     if feed.challenge = participation.challenge
+  #       logger.debug "Destroy Feed"
+  #       feed.destroy
+  #     end
+  #   end
+  # end
 
 
 end

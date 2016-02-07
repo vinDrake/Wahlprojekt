@@ -9,7 +9,9 @@ class Feeder < ActiveRecord::Base
 
   after_create :add_feed_to_feeder
 
+  # TODO get_base_priority
 
+  # TODO remove_participation_feeds
 
   # TODO Dokumentieren
   # OPTIMIZE Code aufräumen
@@ -41,7 +43,8 @@ class Feeder < ActiveRecord::Base
   end
 
 
-  # Dokumentieren
+  # TODO Dokumentieren
+  # OPTIMIZE Das geht einfacher
   def remove_feeds(participation)
     # Gehe durch jeden Feed
     self.feeds.each do |feed|
