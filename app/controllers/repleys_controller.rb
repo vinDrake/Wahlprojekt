@@ -53,8 +53,12 @@ class RepleysController < ApplicationController
   def create # OPTIMIZE Am besten die ganze Methode neu schreiben
     #Scaffold generated
     @repley = Repley.new(repley_params)
-    # @user = User.find(repley_params[:user_id])
-    @user = current_user
+    unless current_user.nil?
+      @user = current_user
+    else
+      @user = User.find(repley_params[:user_id])
+    end
+
     @feed = @user.feeds.first
     #Ben generated
     # if repley_params[:user_id].nil?
