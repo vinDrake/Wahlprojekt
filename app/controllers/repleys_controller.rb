@@ -30,9 +30,6 @@ class RepleysController < ApplicationController
       # TODO Feeder füttern?!?!?1
       if current_user.feeds.size <= 0
         @user.feeder.add_feed
-        # question = Question.order("RANDOM()").first
-        # feed = Feed.new(:feeder_id => current_user.feeder.id, :question_id => question.id, :priority => 0)
-        # feed.save
       end
       if current_user.feeds
 
@@ -60,12 +57,6 @@ class RepleysController < ApplicationController
     end
 
     @feed = @user.feeds.first
-    #Ben generated
-    # if repley_params[:user_id].nil?
-    #   repley_params[:user_id] = current_user.id
-    # end
-#    @question = Question.find(params[:question_id])
-    #  @repley = Repleys.create(repley_params)
 
     # TODO Hier ist auch zu viel Code im Controller
     # Begin Points
@@ -86,31 +77,22 @@ class RepleysController < ApplicationController
       if @repley.save
         user_feeds = @user.feeds
         user_feeds.find_by(repley_params[:question]).destroy
-        # TODO Debug-Code raus
         # Begin Check if it was the last one of this Challenge
-        logger.debug "Check, if it was a Challenge, qou are takeing part of"
         unless @feed.participation.nil?
-          logger.debug "It was a Challenge-Question. Check, if it was the last Question of this Participation: "+@feed.participation.challenge.to_s
           last = true
           user_feeds.each do |feed|
             if feed.participation_id == @feed.participation_id
-              logger.debug "No, there was an other Question"
               last = false
               break
             end
           end
           if last
-            logger.debug "It was the last Question"
             participation = @feed.participation
             participation.attributes = { :complete => true, :succeeded => true }
             if participation.save
               logger.debug "This Participation is now complete and succeeded"
             end
-            # participation.update(succeeded: true)
-            # logger.debug "It is now succeeded"
           end
-        else
-          logger.debug "No, it was no Challenge-Question"
         end
         # End Check if it was the last one of this Challenge
         if @repley.answer.correct
