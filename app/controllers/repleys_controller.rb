@@ -50,12 +50,14 @@ class RepleysController < ApplicationController
   def create # OPTIMIZE Am besten die ganze Methode neu schreiben
     #Scaffold generated
     @repley = Repley.new(repley_params)
+    # Irgendwo den User her bekommen
     unless current_user.nil?
       @user = current_user
     else
       @user = User.find(repley_params[:user_id])
     end
 
+    # Feed holen
     @feed = @user.feeds.first
 
     # TODO Hier ist auch zu viel Code im Controller
@@ -67,6 +69,7 @@ class RepleysController < ApplicationController
     end
     # End Points
 
+    # TODO ersetzen
     unless @user.feeds.size >= 1
       question = Question.order("RANDOM()").first
       feed = Feed.new(:feeder_id => @user.feeder.id, :question_id => question.id, :priority => 0)
@@ -75,8 +78,11 @@ class RepleysController < ApplicationController
 
     respond_to do |format|
       if @repley.save
+        # TODO Den beantworteten Feed zerstören -> Kann das Model machen
         user_feeds = @user.feeds
         user_feeds.find_by(repley_params[:question]).destroy
+
+        # TODO Braucht die App größtenteils nicht. Außer das Attribute setzen. Das kann aber auch das Model
         # Begin Check if it was the last one of this Challenge
         unless @feed.participation.nil?
           last = true

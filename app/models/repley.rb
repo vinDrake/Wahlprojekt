@@ -9,5 +9,5 @@ class Repley < ActiveRecord::Base
 
   # TODO check_correct
 
-  
+
 end
