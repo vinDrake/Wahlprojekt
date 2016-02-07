@@ -94,15 +94,16 @@ class RepleysController < ApplicationController
             end
           end
         end
-        # End Check if it was the last one of this Challenge
-        if @repley.answer.correct
-          note = 'Repley was successfully created and the answer was correct. You got '+@repley.points.to_s+' Point.'
-        else
-          note = 'Repley was successfully created and the answer was wrong.'
-        end
-        if last
-          note += ' It also was the last Question of "'+participation.challenge.name+'".'
-        end
+
+        # # End Check if it was the last one of this Challenge
+        # if @repley.answer.correct
+        #   note = 'Repley was successfully created and the answer was correct. You got '+@repley.points.to_s+' Point.'
+        # else
+        #   note = 'Repley was successfully created and the answer was wrong.'
+        # end
+        # if last
+        #   note += ' It also was the last Question of "'+participation.challenge.name+'".'
+        # end
 
         format.html { redirect_to @repley, notice: note }
         format.json { render :show, status: :created, location: @repley }
