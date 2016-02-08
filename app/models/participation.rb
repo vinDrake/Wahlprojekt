@@ -7,13 +7,16 @@ class Participation < ActiveRecord::Base
   validates :strikes, numericality: { only_integer: true }
   # validates :complete, :succeeded, inclusion: { in: [true, false] }
 
+  after_find :check_participation
+  after_create :add_challenge_feeds
+  after_update :check_complete
 
   # TODO Dokumentieren
-  # OPTIMIZE
-  after_find do |participation|
+  # OPTIMIZE Statt after_find lieber einen job schreiben
+  def check_participation
     # logger.debug "Participation touched"
 
-
+    # Check strikes
     # logger.debug "Check if strikes set and out"
     if self.challenge.strikes > 0
       # logger.debug "This Challenge( "+self.challenge.name+" ) allows "+self.challenge.strikes.to_s+" strikes."
@@ -28,6 +31,7 @@ class Participation < ActiveRecord::Base
       # logger.debug "No Strikes set"
     end
 
+    # Check challenge.alive
     # logger.debug "Check if Challeng is still alive"
     if self.challenge.alive
       # logger.debug "This Challeng is still alive."
@@ -36,7 +40,7 @@ class Participation < ActiveRecord::Base
       self.complete = true
     end
 
-    # logger.debug "Check if max_challenge_time is set and over"
+    # Check if max_challenge_time is set and over
     if self.challenge.max_challenge_time > 0
       # logger.debug "Max Challenge Time is set"
       if (self.created_at + self.challenge.max_challenge_time) > DateTime.now
@@ -51,28 +55,22 @@ class Participation < ActiveRecord::Base
 
   end
 
-  # Begin after_update
-  after_update do |participation|
-    if participation.complete
-      logger.debug "Check if Participation is complete!"
-      # Replaced with nicer method
-      # remove_questions_from_feeder
-      self.user.feeder.remove_feeds(self)
-
-    end
+  # Removes Participation-Feeds, when complete
+  def check_complete
+      self.user.feeder.remove_feeds(self) if participation.complete
   end
   # End after_update
 
-  # Begin after_create
-  after_create do |participation|
+  # Add the challenges feeds to feeder
+  def add_challenge_feeds
 
       # BasisPriorität im Feeder feststellen # OPTIMIZE Methode im Feeder schreiben
-      base_priority = 0
-      participation.user.feeds.each do |feed|
-        if feed.priority > base_priority
-          base_priority = feed.priority
-        end
-      end
+      base_priority = self.user.feeder.get_base_priority #0
+      # participation.user.feeds.each do |feed|
+        # if feed.priority > base_priority
+          # base_priority = feed.priority
+        # end
+      # end
       # Ende BasisPriorität im Feeder feststellen
 
       # Prüfen, ob die Challenge eine feste Ordnung hat
@@ -93,21 +91,23 @@ class Participation < ActiveRecord::Base
           feed.save
         end
       end
-      # TODO Remove Feeds with Prio 0
+      # TODO Remove Feeds with Prio 0.
+      # OPTIMIZE Warum mache ich das????
       participation.user.feeder.remove_prio_zero_feeds
   end
   # End after_create
 
-  def remove_questions_from_feeder
-    logger.debug "Remove Questions from Feeder"
-    current_user.feeds.each do |feed|
-      logger.debug "This is a Question in Feeder: "+feed.question.problem
-      if feed.challenge = participation.challenge
-        logger.debug "Destroy Feed"
-        feed.destroy
-      end
-    end
-  end
+  # deprechated
+  # def remove_questions_from_feeder
+  #   # logger.debug "Remove Questions from Feeder"
+  #   current_user.feeds.each do |feed|
+  #     # logger.debug "This is a Question in Feeder: "+feed.question.problem
+  #     if feed.challenge = participation.challenge
+  #       # logger.debug "Destroy Feed"
+  #       feed.destroy
+  #     end
+  #   end
+  # end
 
 
 end
