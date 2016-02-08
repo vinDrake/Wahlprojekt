@@ -7,11 +7,7 @@ class Feeder < ActiveRecord::Base
 
   validates :user, presence: true
 
-  after_create :add_feed_to_feeder
-
-  # TODO get_base_priority
-
-  # TODO remove_participation_feeds
+  after_create :add_feed
 
   # TODO Dokumentieren
   # OPTIMIZE Code aufräumen
@@ -22,34 +18,17 @@ class Feeder < ActiveRecord::Base
     return self.feeds.order(priority: :desc).first
   end
 
-  # Returns next Feeds Question ID.
-  def get_next_question_id
-    # Sorts Feeds by Priority and returns the first one.
-    return get_next_feed.question.id
+  # Returns the highes Priority
+  def get_base_priority
+    return self.feeds.order(priority: :desc).first.priority
   end
 
-  # Returns next Feed with Priority 0 .
-  def get_next_prio_0_feed
-    if self.feeds.where( priority: 0 ).size <= 0
-      self.add_feed
-    end
-    # Takes Feeds Priority 0 and returns the first one.
-    return self.feeds.where( priority: 0 ).order("RANDOM()").first
-  end
-
-  # Returns next Feed with Priority 0 .
-  def get_next_prio_0_question_id
-    return get_next_prio_0_feed.question.id
-  end
-
-
-  # TODO Dokumentieren
-  # OPTIMIZE Das geht einfacher
+  # Dokumentieren
   def remove_feeds(participation)
     # Gehe durch jeden Feed
-    self.feeds.each do |feed|
+    self.feeds.where(participation: participation).each do |feed|
       # Teste ob der Feed zur übergebenen Participation gehört und zerstöre ihn ggf.
-      feed.destroy if feed.participation == participation
+      feed.destroy # if feed.participation == participation
     end
   end
 
@@ -57,14 +36,14 @@ class Feeder < ActiveRecord::Base
   def remove_prio_zero_feeds
     # unless self.feeds.where( priority: 0 ).size >= self.feeds.size
       # Gehe durch jeden Feed
-      self.feeds.each do |feed|
+      self.feeds.where(priority: 0).each do |feed|
         # Teste ob der Feed Priorität 0 hat und zerstöre ihn ggf.
-        feed.destroy if feed.priority == 0
+        feed.destroy # if feed.priority == 0
       end
     # end
-    if self.feeds.size <= 0
+    # if self.feeds.size <= 0
       self.add_feed
-    end
+    # end
   end
 
 
@@ -105,7 +84,7 @@ class Feeder < ActiveRecord::Base
     # end
 
 
-    # When no matching questions is found an Feeder is empty, take a random one
+    # When no matching questions is found and Feeder is empty, take a random one
     if self.feeds.where( priority: 0 ).size <= 0
       question = Question.order("RANDOM()").first
       feed = Feed.new(:feeder_id => self.id, :question_id => question.id, :priority => 0)
@@ -114,6 +93,7 @@ class Feeder < ActiveRecord::Base
   end
 
   private
+  # deprechated
     def add_feed_to_feeder # OPTIMIZE Zwei fast identische Methoden sind nicht sehr hübsch
       # question = Question.order("RANDOM()").first
       # feed = Feed.new(:feeder_id => self.id, :question_id => question.id, :priority => 0)

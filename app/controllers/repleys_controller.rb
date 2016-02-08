@@ -1,15 +1,12 @@
 class RepleysController < ApplicationController
   before_action :set_repley, only: [:show, :edit, :update, :destroy]
+  before_action :check_feeder, only: [:new, :create]
   # before_action :require_user, only: [:index, :show, :new]
 
   # GET /repleys
   # GET /repleys.json
   def index
-    unless current_user.nil?
-      @repleys = current_user.repleys
-    else
-      @repleys = Repley.all
-    end
+    @repleys = Repley.where(user: current_user)
   end
 
   # GET /repleys/1
@@ -27,10 +24,13 @@ class RepleysController < ApplicationController
     @user = current_user
     if current_user
 
-      # TODO Feeder füttern?!?!?1
-      if current_user.feeds.size <= 0
-        @user.feeder.add_feed
-      end
+      # # Doen with Callback
+      # if current_user.feeds.size <= 0
+      #   @user.feeder.add_feed
+      #   # question = Question.order("RANDOM()").first
+      #   # feed = Feed.new(:feeder_id => current_user.feeder.id, :question_id => question.id, :priority => 0)
+      #   # feed.save
+      # end
       if current_user.feeds
 
         @feed = current_user.get_next_feed
@@ -50,15 +50,13 @@ class RepleysController < ApplicationController
   def create # OPTIMIZE Am besten die ganze Methode neu schreiben
     #Scaffold generated
     @repley = Repley.new(repley_params)
-    # Irgendwo den User her bekommen
-    unless current_user.nil?
-      @user = current_user
-    else
-      @user = User.find(repley_params[:user_id])
-    end
-
-    # Feed holen
-    @feed = @user.feeds.first
+    @feed = current_user.feeds.first
+    #Ben generated
+    # if repley_params[:user_id].nil?
+    #   repley_params[:user_id] = current_user.id
+    # end
+#    @question = Question.find(params[:question_id])
+    #  @repley = Repleys.create(repley_params)
 
     # TODO Hier ist auch zu viel Code im Controller
     # Begin Points
@@ -69,50 +67,57 @@ class RepleysController < ApplicationController
     end
     # End Points
 
-    # TODO ersetzen
-    unless @user.feeds.size >= 1
-      question = Question.order("RANDOM()").first
-      feed = Feed.new(:feeder_id => @user.feeder.id, :question_id => question.id, :priority => 0)
-      feed.save
-    end
+    # Done in Callback
+    # unless current_user.feeds.size >= 1
+    #   # question = Question.get_possible_questions.sample
+    #   # feed = Feed.new(:feeder_id => current_user.feeder.id, :question_id => question.id, :priority => 0)
+    #   # feed.save
+    #   current_user.feeder.add_feed
+    # end
 
     respond_to do |format|
       if @repley.save
-        # TODO Den beantworteten Feed zerstören -> Kann das Model machen
-        user_feeds = @user.feeds
-        user_feeds.find_by(repley_params[:question]).destroy
-
-        # TODO Braucht die App größtenteils nicht.
+        # flash[:succees] = 'New Repley Created'
+        user_feeds = current_user.feeds
+        # Macht das Model
+        # user_feeds.find_by(repley_params[:question]).destroy
+        # TODO Debug-Code raus
         # Begin Check if it was the last one of this Challenge
+        # logger.debug "Check, if it was a Challenge, qou are takeing part of"
         unless @feed.participation.nil?
+          # logger.debug "It was a Challenge-Question. Check, if it was the last Question of this Participation: "+@feed.participation.challenge.to_s
           last = true
           user_feeds.each do |feed|
             if feed.participation_id == @feed.participation_id
+              # logger.debug "No, there was an other Question"
               last = false
               break
             end
           end
-          # TODO  Außer das Attribute setzen. Das kann aber auch das Model
           if last
+            # logger.debug "It was the last Question"
             participation = @feed.participation
             participation.attributes = { :complete => true, :succeeded => true }
             if participation.save
-              logger.debug "This Participation is now complete and succeeded"
+              # logger.debug "This Participation is now complete and succeeded"
             end
+            # participation.update(succeeded: true)
+            # logger.debug "It is now succeeded"
           end
+        else
+          # logger.debug "No, it was no Challenge-Question"
+        end
+        # End Check if it was the last one of this Challenge
+        if @repley.answer.correct
+          note = 'Repley was successfully created and the answer was correct. You got '+@repley.points.to_s+' Point.'
+        else
+          note = 'Repley was successfully created and the answer was wrong. Thr correct Answer is: "'+@repley.question.correct_answer.answer_body+'".'
+        end
+        if last
+          note += ' It also was the last Question of "'+participation.challenge.name+'".'
         end
 
-        # # End Check if it was the last one of this Challenge
-        # if @repley.answer.correct
-        #   note = 'Repley was successfully created and the answer was correct. You got '+@repley.points.to_s+' Point.'
-        # else
-        #   note = 'Repley was successfully created and the answer was wrong.'
-        # end
-        # if last
-        #   note += ' It also was the last Question of "'+participation.challenge.name+'".'
-        # end
-
-        format.html { redirect_to @repley, notice: note }
+        format.html { redirect_to '/home', notice: note }
         format.json { render :show, status: :created, location: @repley }
       else
         format.html { render :new }
@@ -151,8 +156,16 @@ class RepleysController < ApplicationController
       @repley = Repley.find(params[:id])
     end
 
+    # Check Feeder
+    def check_feeder
+      # Get User and check for feeds
+      if current_user.feeds.size <= 0
+        current_user.feeder.add_feed
+      end
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def repley_params
-      params.permit(:correct, :question_id, :user_id, :answer_id)
+      params.require(:repley).permit(:correct, :question_id, :user_id, :answer_id)
     end
 end

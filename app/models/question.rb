@@ -16,4 +16,8 @@ class Question < ActiveRecord::Base
   # TODO get_4_answers inklusive einer richtigen
   # TODO untied_tags
 
+  def correct_answer
+    return self.answers.where(correct: true).first
+  end
+
 end

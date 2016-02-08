@@ -1,20 +1,11 @@
 class FeedersController < ApplicationController
   before_action :set_feeder, only: [:show, :edit, :update, :destroy]
-  # before_action :check_feeder, only: [:show, :index, :edit]
-
  # before_action :require_user, only: [:index, :show]
 
   # GET /feeders
   # GET /feeders.json
   def index
     @feeders = Feeder.all
-    @feeders.each do |feeder|
-      if feeder.feeds.size <= 5
-        2.times do
-          feeder.add_feed
-        end
-      end
-    end
   end
 
   # GET /feeders/1
@@ -84,15 +75,6 @@ class FeedersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_feeder
       @feeder = Feeder.find(params[:id])
-      check_feeder
-    end
-
-    def check_feeder
-      if @feeder.feeds.size <= 5
-        2.times do
-          @feeder.add_feed
-        end
-      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
