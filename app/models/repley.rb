@@ -5,9 +5,16 @@ class Repley < ActiveRecord::Base
 
   validates :user, :question, :answer, :points, presence: true
 
+  after_create :restock
+
   # TODO Dokumentieren
 
   # TODO check_correct
 
-  
+  private
+
+    def restock
+      self.user.feeder.add_feed
+    end
+
 end

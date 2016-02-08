@@ -80,7 +80,7 @@ class Feeder < ActiveRecord::Base
 
 
     # When no matching questions is found an Feeder is empty, take a random one
-    if self.feeds.size <= 0
+    if self.feeds.where( priority: 0 ).size <= 0
       question = Question.order("RANDOM()").first
       feed = Feed.new(:feeder_id => self.id, :question_id => question.id, :priority => 0)
       feed.save
