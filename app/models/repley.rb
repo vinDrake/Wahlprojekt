@@ -6,6 +6,7 @@ class Repley < ActiveRecord::Base
   validates :user, :question, :answer, :points, presence: true
 
   after_create :restock
+  after_create :clean_up
 
   # TODO Dokumentieren
 
@@ -17,4 +18,7 @@ class Repley < ActiveRecord::Base
       self.user.feeder.add_feed
     end
 
+    def clean_up
+      self.user.feeds.find_by(self.question).destroy
+    end
 end
