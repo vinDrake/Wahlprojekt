@@ -92,6 +92,7 @@ end
 
 tag_list = [
 
+  [ "-" , [  ] ],
   [ "Filme" , [ 1 , 2 , 3 ] ],
   [ "Comics" , [ 1 , 2 , 3 ] ],
   [ "Astronomie" , [ 4 ] ],
