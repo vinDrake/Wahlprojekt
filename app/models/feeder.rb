@@ -18,6 +18,11 @@ class Feeder < ActiveRecord::Base
     return self.feeds.order(priority: :desc).first
   end
 
+  # Returns the highes Priority
+  def get_base_priority
+    return self.feeds.order(priority: :desc).first.priority
+  end
+
   # Dokumentieren
   def remove_feeds(participation)
     # Gehe durch jeden Feed
