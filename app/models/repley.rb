@@ -19,6 +19,6 @@ class Repley < ActiveRecord::Base
     end
 
     def clean_up
-      self.user.feeds.find_by(self.question).destroy
+      self.user.feeds.find_by(question: self.question).destroy unless self.user.feeds.find_by(question: self.question).nil?
     end
 end
