@@ -18,6 +18,26 @@ class Feeder < ActiveRecord::Base
     return self.feeds.order(priority: :desc).first
   end
 
+  # Returns next Feeds Question ID.
+  def get_next_question_id
+    # Sorts Feeds by Priority and returns the first one.
+    return get_next_feed.question.id
+  end
+
+  # Returns next Feed with Priority 0 .
+  def get_next_prio_0_feed
+    if self.feeds.where( priority: 0 ).size <= 0
+      self.add_feed
+    end
+    # Takes Feeds Priority 0 and returns the first one.
+    return self.feeds.where( priority: 0 ).order("RANDOM()").first
+  end
+
+  # Returns next Feed with Priority 0 .
+  def get_next_prio_0_question_id
+    return get_next_prio_0_feed.question.id
+  end
+
   # Returns the highes Priority
   def get_base_priority
     return self.feeds.order(priority: :desc).first.priority
@@ -84,7 +104,7 @@ class Feeder < ActiveRecord::Base
     # end
 
 
-    # When no matching questions is found and Feeder is empty, take a random one
+    # When no matching questions is found and the Feeder is empty, take a random one
     if self.feeds.where( priority: 0 ).size <= 0
       question = Question.order("RANDOM()").first
       feed = Feed.new(:feeder_id => self.id, :question_id => question.id, :priority => 0)

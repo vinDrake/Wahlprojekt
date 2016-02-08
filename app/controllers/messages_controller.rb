@@ -5,9 +5,12 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
   def index
-    @all_messages = current_user.all_messages
-    @incoming_messages = current_user.incoming_messages
-    @leaving_messages = current_user.leaving_messages
+    @messages = Message.all
+    unless current_user.nil?
+      @all_messages = current_user.all_messages
+      @incoming_messages = current_user.incoming_messages
+      @leaving_messages = current_user.leaving_messages
+    end
   end
 
   # GET /messages/1

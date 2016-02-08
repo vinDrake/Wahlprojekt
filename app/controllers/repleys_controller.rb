@@ -6,7 +6,11 @@ class RepleysController < ApplicationController
   # GET /repleys
   # GET /repleys.json
   def index
-    @repleys = Repley.where(user: current_user)
+    unless current_user.nil?
+      @repleys = current_user.repleys
+    else
+      @repleys = Repley.all
+    end
   end
 
   # GET /repleys/1
@@ -50,7 +54,15 @@ class RepleysController < ApplicationController
   def create # OPTIMIZE Am besten die ganze Methode neu schreiben
     #Scaffold generated
     @repley = Repley.new(repley_params)
-    @feed = current_user.feeds.first
+    # Irgendwo den User her bekommen
+    unless current_user.nil?
+      @user = current_user
+    else
+      @user = User.find(repley_params[:user_id])
+    end
+
+    # Feed holen
+    @feed = @user.feeds.first
     #Ben generated
     # if repley_params[:user_id].nil?
     #   repley_params[:user_id] = current_user.id
@@ -78,7 +90,7 @@ class RepleysController < ApplicationController
     respond_to do |format|
       if @repley.save
         # flash[:succees] = 'New Repley Created'
-        user_feeds = current_user.feeds
+        user_feeds = @user.feeds
         # Macht das Model
         # user_feeds.find_by(repley_params[:question]).destroy
         # TODO Debug-Code raus
@@ -166,6 +178,7 @@ class RepleysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def repley_params
-      params.require(:repley).permit(:correct, :question_id, :user_id, :answer_id)
+      params.permit(:correct, :question_id, :user_id, :answer_id)
+      # params.require(:repley).permit(:correct, :question_id, :user_id, :answer_id)
     end
 end

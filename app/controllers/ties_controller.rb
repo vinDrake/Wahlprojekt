@@ -77,7 +77,10 @@ class TiesController < ApplicationController
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def tie_params
-        params.require(:tie).permit(:question_id, :tag_id)
+        # Code code: params.require(:tie).permit(:question_id, :tag_id)
+        # Begin bad Code
+        params.permit(:question_id, :tag_id)
+        # End bad Code
       end
 
 
