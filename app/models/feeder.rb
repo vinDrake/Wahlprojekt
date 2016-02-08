@@ -26,9 +26,9 @@ class Feeder < ActiveRecord::Base
   # Dokumentieren
   def remove_feeds(participation)
     # Gehe durch jeden Feed
-    self.feeds.each do |feed|
+    self.feeds.where(participation: participation).each do |feed|
       # Teste ob der Feed zur übergebenen Participation gehört und zerstöre ihn ggf.
-      feed.destroy if feed.participation == participation
+      feed.destroy # if feed.participation == participation
     end
   end
 
@@ -84,7 +84,7 @@ class Feeder < ActiveRecord::Base
     # end
 
 
-    # When no matching questions is found an Feeder is empty, take a random one
+    # When no matching questions is found and Feeder is empty, take a random one
     if self.feeds.where( priority: 0 ).size <= 0
       question = Question.order("RANDOM()").first
       feed = Feed.new(:feeder_id => self.id, :question_id => question.id, :priority => 0)
