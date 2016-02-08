@@ -1,5 +1,6 @@
 class RepleysController < ApplicationController
   before_action :set_repley, only: [:show, :edit, :update, :destroy]
+  before_action :check_feeder, only: [:new, :create]
   # before_action :require_user, only: [:index, :show, :new]
 
   # GET /repleys
@@ -23,13 +24,13 @@ class RepleysController < ApplicationController
     @user = current_user
     if current_user
 
-      # TODO Feeder füttern?!?!?1
-      if current_user.feeds.size <= 0
-        @user.feeder.add_feed
-        # question = Question.order("RANDOM()").first
-        # feed = Feed.new(:feeder_id => current_user.feeder.id, :question_id => question.id, :priority => 0)
-        # feed.save
-      end
+      # # Doen with Callback
+      # if current_user.feeds.size <= 0
+      #   @user.feeder.add_feed
+      #   # question = Question.order("RANDOM()").first
+      #   # feed = Feed.new(:feeder_id => current_user.feeder.id, :question_id => question.id, :priority => 0)
+      #   # feed.save
+      # end
       if current_user.feeds
 
         @feed = current_user.get_next_feed
@@ -66,43 +67,45 @@ class RepleysController < ApplicationController
     end
     # End Points
 
-    unless current_user.feeds.size >= 1
-      # question = Question.get_possible_questions.sample
-      # feed = Feed.new(:feeder_id => current_user.feeder.id, :question_id => question.id, :priority => 0)
-      # feed.save
-      current_user.feeder.add_feed
-    end
+    # Done in Callback
+    # unless current_user.feeds.size >= 1
+    #   # question = Question.get_possible_questions.sample
+    #   # feed = Feed.new(:feeder_id => current_user.feeder.id, :question_id => question.id, :priority => 0)
+    #   # feed.save
+    #   current_user.feeder.add_feed
+    # end
 
     respond_to do |format|
       if @repley.save
         # flash[:succees] = 'New Repley Created'
         user_feeds = current_user.feeds
-        user_feeds.find_by(repley_params[:question]).destroy
+        # Macht das Model
+        # user_feeds.find_by(repley_params[:question]).destroy
         # TODO Debug-Code raus
         # Begin Check if it was the last one of this Challenge
-        logger.debug "Check, if it was a Challenge, qou are takeing part of"
+        # logger.debug "Check, if it was a Challenge, qou are takeing part of"
         unless @feed.participation.nil?
-          logger.debug "It was a Challenge-Question. Check, if it was the last Question of this Participation: "+@feed.participation.challenge.to_s
+          # logger.debug "It was a Challenge-Question. Check, if it was the last Question of this Participation: "+@feed.participation.challenge.to_s
           last = true
           user_feeds.each do |feed|
             if feed.participation_id == @feed.participation_id
-              logger.debug "No, there was an other Question"
+              # logger.debug "No, there was an other Question"
               last = false
               break
             end
           end
           if last
-            logger.debug "It was the last Question"
+            # logger.debug "It was the last Question"
             participation = @feed.participation
             participation.attributes = { :complete => true, :succeeded => true }
             if participation.save
-              logger.debug "This Participation is now complete and succeeded"
+              # logger.debug "This Participation is now complete and succeeded"
             end
             # participation.update(succeeded: true)
             # logger.debug "It is now succeeded"
           end
         else
-          logger.debug "No, it was no Challenge-Question"
+          # logger.debug "No, it was no Challenge-Question"
         end
         # End Check if it was the last one of this Challenge
         if @repley.answer.correct
@@ -151,6 +154,14 @@ class RepleysController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_repley
       @repley = Repley.find(params[:id])
+    end
+
+    # Check Feeder
+    def check_feeder
+      # Get User and check for feeds
+      if current_user.feeds.size <= 0
+        current_user.feeder.add_feed
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
