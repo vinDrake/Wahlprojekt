@@ -23,13 +23,18 @@
 #
 
 default: &default
-  adapter: sqlite3
+  adapter: postgresql
+  encoding: utf-8
+  # adapter: sqlite3
   pool: 5
-  timeout: 5000
+  # timeout: 5000
 
 development:
   <<: *default
-  database: db/development.sqlite3
+  # database: db/development.sqlite3
+  database: my_database_development
+  pool: 5
+  timeout: 5000
 
 test:
   adapter: postgresql
