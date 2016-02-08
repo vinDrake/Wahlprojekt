@@ -11,17 +11,19 @@
 
   <tbody>
     <tr>
-      <td>User</td>
+      <!-- <td>User</td> -->
       <td>Question</td>
       <td>Given Answer</td>
+      <td>Correct Answer</td>
       <td>Points</td>
 
     </tr>
     <% @repleys.each do |repley| %>
       <tr>
-        <td><%= repley.user.name %></td>
+        <!-- <td><%= repley.user.name %></td> -->
         <td><%= repley.question.problem %></td>
         <td><%= repley.answer.answer_body %></td>
+        <td><%= repley.question.correct_answer.answer_body if repley.points == 0 %></td>
         <td><%= repley.points %></td>
         <td><%= link_to 'Show', repley %></td>
         <!-- <td><%= link_to 'Edit', edit_repley_path(repley) %></td> -->

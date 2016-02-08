@@ -1,0 +1,128 @@
+            Prefix Verb   URI Pattern                        Controller#Action
+            
+              root GET    /                                  repleys#new
+            signup GET    /signup(.:format)                  users#new
+             login GET    /login(.:format)                   sessions#new
+                   POST   /login(.:format)                   sessions#create
+            logout DELETE /logout(.:format)                  sessions#destroy
+              home GET    /home(.:format)                    repleys#new
+       memberships GET    /memberships(.:format)             memberships#index
+                   POST   /memberships(.:format)             memberships#create
+    new_membership GET    /memberships/new(.:format)         memberships#new
+   edit_membership GET    /memberships/:id/edit(.:format)    memberships#edit
+        membership GET    /memberships/:id(.:format)         memberships#show
+                   PATCH  /memberships/:id(.:format)         memberships#update
+                   PUT    /memberships/:id(.:format)         memberships#update
+                   DELETE /memberships/:id(.:format)         memberships#destroy
+            groups GET    /groups(.:format)                  groups#index
+                   POST   /groups(.:format)                  groups#create
+         new_group GET    /groups/new(.:format)              groups#new
+        edit_group GET    /groups/:id/edit(.:format)         groups#edit
+             group GET    /groups/:id(.:format)              groups#show
+                   PATCH  /groups/:id(.:format)              groups#update
+                   PUT    /groups/:id(.:format)              groups#update
+                   DELETE /groups/:id(.:format)              groups#destroy
+           repleys GET    /repleys(.:format)                 repleys#index
+                   POST   /repleys(.:format)                 repleys#create
+        new_repley GET    /repleys/new(.:format)             repleys#new
+       edit_repley GET    /repleys/:id/edit(.:format)        repleys#edit
+            repley GET    /repleys/:id(.:format)             repleys#show
+                   PATCH  /repleys/:id(.:format)             repleys#update
+                   PUT    /repleys/:id(.:format)             repleys#update
+                   DELETE /repleys/:id(.:format)             repleys#destroy
+             feeds GET    /feeds(.:format)                   feeds#index
+                   POST   /feeds(.:format)                   feeds#create
+          new_feed GET    /feeds/new(.:format)               feeds#new
+         edit_feed GET    /feeds/:id/edit(.:format)          feeds#edit
+              feed GET    /feeds/:id(.:format)               feeds#show
+                   PATCH  /feeds/:id(.:format)               feeds#update
+                   PUT    /feeds/:id(.:format)               feeds#update
+                   DELETE /feeds/:id(.:format)               feeds#destroy
+           feeders GET    /feeders(.:format)                 feeders#index
+                   POST   /feeders(.:format)                 feeders#create
+        new_feeder GET    /feeders/new(.:format)             feeders#new
+       edit_feeder GET    /feeders/:id/edit(.:format)        feeders#edit
+            feeder GET    /feeders/:id(.:format)             feeders#show
+                   PATCH  /feeders/:id(.:format)             feeders#update
+                   PUT    /feeders/:id(.:format)             feeders#update
+                   DELETE /feeders/:id(.:format)             feeders#destroy
+          elements GET    /elements(.:format)                elements#index
+                   POST   /elements(.:format)                elements#create
+       new_element GET    /elements/new(.:format)            elements#new
+      edit_element GET    /elements/:id/edit(.:format)       elements#edit
+           element GET    /elements/:id(.:format)            elements#show
+                   PATCH  /elements/:id(.:format)            elements#update
+                   PUT    /elements/:id(.:format)            elements#update
+                   DELETE /elements/:id(.:format)            elements#destroy
+        selections GET    /selections(.:format)              selections#index
+                   POST   /selections(.:format)              selections#create
+     new_selection GET    /selections/new(.:format)          selections#new
+    edit_selection GET    /selections/:id/edit(.:format)     selections#edit
+         selection GET    /selections/:id(.:format)          selections#show
+                   PATCH  /selections/:id(.:format)          selections#update
+                   PUT    /selections/:id(.:format)          selections#update
+                   DELETE /selections/:id(.:format)          selections#destroy
+              tags GET    /tags(.:format)                    tags#index
+                   POST   /tags(.:format)                    tags#create
+           new_tag GET    /tags/new(.:format)                tags#new
+          edit_tag GET    /tags/:id/edit(.:format)           tags#edit
+               tag GET    /tags/:id(.:format)                tags#show
+                   PATCH  /tags/:id(.:format)                tags#update
+                   PUT    /tags/:id(.:format)                tags#update
+                   DELETE /tags/:id(.:format)                tags#destroy
+    participations GET    /participations(.:format)          participations#index
+                   POST   /participations(.:format)          participations#create
+ new_participation GET    /participations/new(.:format)      participations#new
+edit_participation GET    /participations/:id/edit(.:format) participations#edit
+     participation GET    /participations/:id(.:format)      participations#show
+                   PATCH  /participations/:id(.:format)      participations#update
+                   PUT    /participations/:id(.:format)      participations#update
+                   DELETE /participations/:id(.:format)      participations#destroy
+             users GET    /users(.:format)                   users#index
+                   POST   /users(.:format)                   users#create
+          new_user GET    /users/new(.:format)               users#new
+         edit_user GET    /users/:id/edit(.:format)          users#edit
+              user GET    /users/:id(.:format)               users#show
+                   PATCH  /users/:id(.:format)               users#update
+                   PUT    /users/:id(.:format)               users#update
+                   DELETE /users/:id(.:format)               users#destroy
+          messages GET    /messages(.:format)                messages#index
+                   POST   /messages(.:format)                messages#create
+       new_message GET    /messages/new(.:format)            messages#new
+      edit_message GET    /messages/:id/edit(.:format)       messages#edit
+           message GET    /messages/:id(.:format)            messages#show
+                   PATCH  /messages/:id(.:format)            messages#update
+                   PUT    /messages/:id(.:format)            messages#update
+                   DELETE /messages/:id(.:format)            messages#destroy
+           answers GET    /answers(.:format)                 answers#index
+                   POST   /answers(.:format)                 answers#create
+        new_answer GET    /answers/new(.:format)             answers#new
+       edit_answer GET    /answers/:id/edit(.:format)        answers#edit
+            answer GET    /answers/:id(.:format)             answers#show
+                   PATCH  /answers/:id(.:format)             answers#update
+                   PUT    /answers/:id(.:format)             answers#update
+                   DELETE /answers/:id(.:format)             answers#destroy
+        challenges GET    /challenges(.:format)              challenges#index
+                   POST   /challenges(.:format)              challenges#create
+     new_challenge GET    /challenges/new(.:format)          challenges#new
+    edit_challenge GET    /challenges/:id/edit(.:format)     challenges#edit
+         challenge GET    /challenges/:id(.:format)          challenges#show
+                   PATCH  /challenges/:id(.:format)          challenges#update
+                   PUT    /challenges/:id(.:format)          challenges#update
+                   DELETE /challenges/:id(.:format)          challenges#destroy
+         questions GET    /questions(.:format)               questions#index
+                   POST   /questions(.:format)               questions#create
+      new_question GET    /questions/new(.:format)           questions#new
+     edit_question GET    /questions/:id/edit(.:format)      questions#edit
+          question GET    /questions/:id(.:format)           questions#show
+                   PATCH  /questions/:id(.:format)           questions#update
+                   PUT    /questions/:id(.:format)           questions#update
+                   DELETE /questions/:id(.:format)           questions#destroy
+              ties GET    /ties(.:format)                    ties#index
+                   POST   /ties(.:format)                    ties#create
+            new_ty GET    /ties/new(.:format)                ties#new
+           edit_ty GET    /ties/:id/edit(.:format)           ties#edit
+                ty GET    /ties/:id(.:format)                ties#show
+                   PATCH  /ties/:id(.:format)                ties#update
+                   PUT    /ties/:id(.:format)                ties#update
+                   DELETE /ties/:id(.:format)                ties#destroy
