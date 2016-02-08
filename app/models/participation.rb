@@ -57,7 +57,7 @@ class Participation < ActiveRecord::Base
 
   # Removes Participation-Feeds, when complete
   def check_complete
-      self.user.feeder.remove_feeds(self) if participation.complete
+      self.user.feeder.remove_feeds(self) if self.complete
   end
   # End after_update
 
@@ -74,26 +74,26 @@ class Participation < ActiveRecord::Base
       # Ende BasisPriorität im Feeder feststellen
 
       # Prüfen, ob die Challenge eine feste Ordnung hat
-      if participation.challenge.strict_order
+      if self.challenge.strict_order
 
         # Anzahl der Fragen der Challenge festellen
-        question_count = participation.challenge.questions.count
+        question_count = self.challenge.questions.count
         order = question_count
         # OPTIMIZE Das sollte auch mal hübsch gemacht werden
-        participation.challenge.questions.each do |question|
-          feed = Feed.new(:feeder_id => participation.user.feeder.id, :question_id => question.id, :priority => base_priority+order+1, :challenge_id => participation.challenge.id, :participation_id => participation.id)
+        self.challenge.questions.each do |question|
+          feed = Feed.new(:feeder_id => self.user.feeder.id, :question_id => question.id, :priority => base_priority+order+1, :challenge_id => self.challenge.id, :participation_id => self.id)
           feed.save
           order -= 1
         end
       else
-        participation.challenge.questions.each do |question|
-          feed = Feed.new(:feeder_id => participation.user.feeder.id, :question_id => question.id, :priority => base_priority+1, :challenge_id => participation.challenge.id, :participation_id => participation.id)
+        self.challenge.questions.each do |question|
+          feed = Feed.new(:feeder_id => self.user.feeder.id, :question_id => question.id, :priority => base_priority+1, :challenge_id => self.challenge.id, :participation_id => self.id)
           feed.save
         end
       end
       # TODO Remove Feeds with Prio 0.
       # OPTIMIZE Warum mache ich das????
-      participation.user.feeder.remove_prio_zero_feeds
+      self.user.feeder.remove_prio_zero_feeds
   end
   # End after_create
 
