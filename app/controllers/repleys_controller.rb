@@ -170,10 +170,13 @@ class RepleysController < ApplicationController
 
     # Check Feeder
     def check_feeder
-      # Get User and check for feeds
-      if current_user.feeds.size <= 0
-        current_user.feeder.add_feed
+      unless current_user.nil?
+        # Get User and check for feeds
+        if current_user.feeds.size <= 0
+          current_user.feeder.add_feed
+        end
       end
+
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
