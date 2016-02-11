@@ -1,9 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 
-#Building SampleUser without Passwords
+#Building SampleUser
 <% 100.times do |n| %>
 user_<%= n %>:
   name: <%= "user#{n}" %>
   email: <%= "user#{n}@example.com" %>
+  password: password
 <% end %>
