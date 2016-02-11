@@ -38,6 +38,14 @@ class SelectionsController < ApplicationController
   def create
     @selection = Selection.new(selection_params)
 
+    if current_user.nil?
+      @tag_select = Tag.all
+      @feeder_select = Feeder.all
+    else
+      @tag_select = current_user.untied_tags
+      @feeder = current_user.feeder
+    end
+
     respond_to do |format|
       if @selection.save
         format.html { redirect_to selections_url, notice: 'Selection was successfully created.' }

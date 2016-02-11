@@ -6,8 +6,8 @@
 #
 
 
-one:
-  name: Tag One
+movies:
+  name: Movies
 
-two:
-  name: Tag Two
+comics:
+  name: Comics
