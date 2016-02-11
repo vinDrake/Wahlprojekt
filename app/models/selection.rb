@@ -3,9 +3,17 @@ class Selection < ActiveRecord::Base
   belongs_to :feeder
   has_one :user, through: :feeder
 
+  validate :can_not_be_a_clone
   validates :tag, :feeder, presence: true
 
   # TODO Dokumentieren
+
+  # Validates if the same Selection already exists
+  def can_not_be_a_clone
+    if feeder.selections.where(tag: tag).nil?
+      errors.add(:tag,  "this tag is already selected" )
+    end
+  end
 
   # Begin after_create
   after_create do |selection|
