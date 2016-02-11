@@ -21,4 +21,4 @@
 
 Gemfile
 Gemfile.lock
-config/database.yml
+/config/database.yml
