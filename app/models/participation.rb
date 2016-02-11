@@ -6,6 +6,7 @@ class Participation < ActiveRecord::Base
   validates :user, :challenge, :strikes, presence: true
   validates :strikes, numericality: { only_integer: true }
   # validates :complete, :succeeded, inclusion: { in: [true, false] }
+  validate :can_not_be_a_clone
 
   after_find :check_participation
   after_create :add_challenge_feeds
@@ -13,6 +14,18 @@ class Participation < ActiveRecord::Base
 
   # TODO Dokumentieren
   # OPTIMIZE Statt after_find lieber einen job schreiben
+
+  # Validates if the same Participation already exists AND isn't complete
+  def can_not_be_a_clone
+    user.participations.where(challenge: challenge).each do |p|
+        unless p.complete
+          errors.add(:participation,  "this user is already aktiv in this challenge" )
+        end
+    end
+  end
+
+
+
   def check_participation
     # logger.debug "Participation touched"
 
