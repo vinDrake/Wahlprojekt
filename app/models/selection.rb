@@ -4,14 +4,16 @@ class Selection < ActiveRecord::Base
   has_one :user, through: :feeder
 
   validates :tag, :feeder, presence: true
-  validate :can_not_be_a_clone
-  
+  validate :can_not_be_a_selection_clone
+
   # TODO Dokumentieren
 
   # Validates if the same Selection already exists
-  def can_not_be_a_clone
-    if feeder.selections.where(tag: tag).nil? # TODO Ist das so richtig. Eigentlich würde ich sagen da muss ein unless statt dem if hin.
-      errors.add(:tag,  "this tag is already selected" )
+  def can_not_be_a_selection_clone
+    unless self.tag.nil? || self.feeder.nil?
+      if Selection.where( feeder: self.feeder ).where( tag: self.tag ).exists?
+        errors.add(:selection, "is a clone")
+      end
     end
   end
 
