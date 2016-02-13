@@ -27,15 +27,15 @@ class MessageTest < ActiveSupport::TestCase
     assert_not message.save
   end
 
-  def test_create_message_with_empty_subject
-    message = Message.new( sender: User.all.first , receiver: User.all.first , subject: "" , content: "Bla bla bla" )
-    assert message.save
-  end
+  # def test_create_message_with_empty_subject
+  #   message = Message.new( sender: User.all.first , receiver: User.all.first , subject: "" , content: "Bla bla bla" )
+  #   assert message.save
+  # end
 
-  def test_create_message_with_empty_content
-    message = Message.new( sender: User.all.first , receiver: User.all.first , subject: "Bla bla bla" , content: "" )
-    assert message.save
-  end
+  # def test_create_message_with_empty_content
+  #   message = Message.new( sender: User.all.first , receiver: User.all.first , subject: "Bla bla bla" , content: "" )
+  #   assert message.save
+  # end
 
 
   def test_create_message
