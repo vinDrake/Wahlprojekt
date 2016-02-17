@@ -7,6 +7,11 @@ class AnswerTest < ActiveSupport::TestCase
     assert true
   end
 
+  def test_create_true_without_parameter
+    answer = Answer.new(  )
+    assert_not answer.save
+  end
+
   def test_create_true_answer
     answer = Answer.new( question: Question.all.first , correct: true , answer_body: "Bla bla bla" )
     assert answer.save
