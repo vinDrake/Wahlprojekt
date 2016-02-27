@@ -1,3 +1,5 @@
+# Dieser Controller uebernimmt das Erstellen des Feeders.
+
 class FeedersController < ApplicationController
   before_action :set_feeder, only: [:show, :edit, :update, :destroy]
  # before_action :require_user, only: [:index, :show]
@@ -15,6 +17,7 @@ class FeedersController < ApplicationController
 
   # TODO Dokumentieren
   # GET /feeders/new
+  # Diese Methode erstellt ein neues Feeder-Objekt.
   def new
     @feeder = Feeder.new
     @user_select = current_user.other_users
@@ -26,6 +29,9 @@ class FeedersController < ApplicationController
 
   # POST /feeders
   # POST /feeders.json
+  
+  # Diese Methode erstellt ein neues Feeder-Objekt, welches einem User zugewiesen wird. Ist dies nicht moeglich, wird eine Fehlermeldung angezeigt.
+  
   def create
     @feeder = Feeder.new(feeder_params)
     # @user = User.find_by(feeder_params[:user])
@@ -47,7 +53,10 @@ class FeedersController < ApplicationController
 
   # PATCH/PUT /feeders/1
   # PATCH/PUT /feeders/1.json
+  
+  # Diese Methode aendert die Parameter eines Feeders. Ist dies nicht moeglich, wird eine Fehlermeldung angezeigt.
   def update
+  
     respond_to do |format|
       if @feeder.update(feeder_params)
         format.html { redirect_to @feeder, notice: 'Feeder was successfully updated.' }
@@ -61,6 +70,9 @@ class FeedersController < ApplicationController
 
   # DELETE /feeders/1
   # DELETE /feeders/1.json
+  
+  # Diese Methode loescht einen Feeder.
+  
   def destroy
     @feeder.destroy
     respond_to do |format|

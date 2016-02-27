@@ -1,7 +1,12 @@
+# Dieser Controller berechnet die Statistik eines Benutzers.
+
 class StatsController < ApplicationController
 
   # TODO Dokumentieren
   # TODO Ordentlich implementieren oder ganz raus nehmen
+  
+  # Diese Methode berechnet den neuen Punktestand eines Benutzers sowie das Verhaeltnis zwischen richtig und falsch beantworteten Fragen.
+  
   def show
     @user = User.find(session[:user_id])
     @challenges = @user.challenges

@@ -1,3 +1,5 @@
+# dieser Controller behandelt die Logik der Benutzermethoden.
+
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   ## before_action :require_user, only: [:index, :show]
@@ -28,6 +30,9 @@ class UsersController < ApplicationController
 
   # POST /users
   # POST /users.json
+  
+  # Diese Methode erstellt einen neuen Benutzer mit den uebergebenen Daten. Ist dies nicht moeglich, wird eine Fehlermeldung angezeigt.
+  
   def create
     @user = User.new(user_params)
 
@@ -44,6 +49,9 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
+  
+  # Diese Methode aendert die Daten eines Benutzers. Ist dies nicht moeglich, wird eine Fehlermeldung angezeigt.
+  
   def update
     respond_to do |format|
       if @user.update(user_params)
@@ -58,6 +66,9 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   # DELETE /users/1.json
+  
+  # Diese Methode loescht einen Benutzer.
+  
   def destroy
     @user.destroy
     respond_to do |format|

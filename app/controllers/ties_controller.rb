@@ -1,3 +1,5 @@
+# Dieser Controller weist jeder Frage ihre entsprechenden Tags zu.
+
 class TiesController < ApplicationController
 
     before_action :set_tie, only: [:show, :edit, :update, :destroy]
@@ -16,6 +18,9 @@ class TiesController < ApplicationController
 
     # TODO Dokumentieren
     # GET /ties/new
+	
+	# Diese Methode erstellt eine neue Zuweisung zwischen Tag und Frag und die findet die Frage, deren ID uebergeben wurde.
+	
     def new
       @tie = Tie.new
       @tag_select = Tag.all # OPTIMIZE Nur in Frage kommenden Tags anzeigen
@@ -31,6 +36,9 @@ class TiesController < ApplicationController
 
     # POST /ties
     # POST /ties.json
+	
+	# Diese Methode weist einer Frage einen neuen Tag zu. Ist dies nicht moeglich, wird eine Fehlermeldung angezeigt.
+	
     def create
       @tie = Tie.new(tie_params)
 
@@ -47,6 +55,9 @@ class TiesController < ApplicationController
 
     # PATCH/PUT /ties/1
     # PATCH/PUT /ties/1.json
+	
+	# Diese Methode weist einer Frage einen zusaetzlichen Tag zu. Ist dies nicht moeglich, wird eine Fehlermeldung angezeigt.
+	
     def update
       respond_to do |format|
         if @tie.update(tie_params)
@@ -61,6 +72,9 @@ class TiesController < ApplicationController
 
     # DELETE /ties/1
     # DELETE /ties/1.json
+	
+	# Diese Methode entfernt einen Tag einer Frage.
+	
     def destroy
       @tie.destroy
       respond_to do |format|

@@ -1,3 +1,5 @@
+# Dieser Controller verwaltet die Methodenaufrufe fuer Fragen.
+
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
   # before_action :require_user, only: [:index, :show]
@@ -27,6 +29,9 @@ class QuestionsController < ApplicationController
 
   # POST /questions
   # POST /questions.json
+  
+  # Diese Methoe erstellt eine neue Frage entsprechend den uebergebenen Parametern. Ist dies nicht moeglich, wird eine Fehlermeldung angezeigt.
+  
   def create
     @question = Question.new(question_params)
 
@@ -47,6 +52,9 @@ class QuestionsController < ApplicationController
 
   # PATCH/PUT /questions/1
   # PATCH/PUT /questions/1.json
+  
+  # Diese Methode aendert eine Frage. Ist dies nicht moeglich, wird eine Fehlermeldung angezeigt.
+  
   def update
     respond_to do |format|
       if @question.update(question_params)
@@ -61,6 +69,9 @@ class QuestionsController < ApplicationController
 
   # DELETE /questions/1
   # DELETE /questions/1.json
+  
+  # Diese Methode loescht eine Frage.
+  
   def destroy
     @question.destroy
     respond_to do |format|

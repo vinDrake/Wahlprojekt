@@ -1,3 +1,5 @@
+# Dieser Controller verwaltet die Methodenaufrufe fuer Gruppen.
+
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
  # before_action :require_user, only: [:index, :show]
@@ -14,6 +16,9 @@ class GroupsController < ApplicationController
   end
 
   # GET /groups/new
+  
+  # Diese Methode erstellt eine neue, leere Gruppe.
+  
   def new
     @group = Group.new
   end
@@ -24,6 +29,9 @@ class GroupsController < ApplicationController
 
   # POST /groups
   # POST /groups.json
+  
+  # Diese Methode erstellt eine neue Gruppe und weist dieser einen Namen zu. Ist dies nicht moeglich, wird eine Fehlermeldung angezeigt.
+  
   def create
     @group = Group.new(group_params)
 
@@ -40,7 +48,10 @@ class GroupsController < ApplicationController
 
   # PATCH/PUT /groups/1
   # PATCH/PUT /groups/1.json
+  
+  # Diese Methode aendert den Namen einer Gruppe. Ist dies nicht moeglich, wird eine Fehlermeldung angezeigt.
   def update
+  
     respond_to do |format|
       if @group.update(group_params)
         format.html { redirect_to @group, notice: 'Group was successfully updated.' }
@@ -54,7 +65,10 @@ class GroupsController < ApplicationController
 
   # DELETE /groups/1
   # DELETE /groups/1.json
+  
+  # Diese Methode loescht eine Gruppe.
   def destroy
+  
     @group.destroy
     respond_to do |format|
       format.html { redirect_to groups_url, notice: 'Group was successfully destroyed.' }

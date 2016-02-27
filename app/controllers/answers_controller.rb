@@ -1,3 +1,5 @@
+# Dieser Controller enthaelt die Logik fuer die Antwortmoeglichkeiten.
+
 class AnswersController < ApplicationController
   before_action :set_answer, only: [:show, :edit, :update, :destroy]
  # before_action :require_user, only: [:index, :show]
@@ -16,6 +18,9 @@ class AnswersController < ApplicationController
 
   # OPTIMIZE Hier wäre ein Helper sinnvoll
   # GET /answers/new
+  
+  # Falls die Methode mit einer question_id aufgerufen wird, wir die entsprechende Frage zwischengespeichert.
+  
   def new
     @answer = Answer.new
     if params.has_key?(:question_id)
@@ -31,6 +36,9 @@ class AnswersController < ApplicationController
   # OPTIMIZE Hier wäre ein Helper sinnvoll (siehe new)
   # POST /answers
   # POST /answers.json
+  
+  # Diese Methode fuegt erstellte Antworten einer bestimmten Frage hinzu. Es muessen mindestens 4 Antworten eingetragen werden, ansonsten wird ein Fehler angezeigt.
+  
   def create
     @answer = Answer.new(answer_params)
     @question_select = Question.all
@@ -42,7 +50,7 @@ class AnswersController < ApplicationController
     respond_to do |format|
       if @answer.save
         # Wenn man eine Antwort erstellt und die Frage dazu noch keine 4 Antworten hat,
-        # dann braucht die noch eine Antworten
+        # dann braucht diese noch eine Antwort
         # OPTIMIZE Das könnte eleganter sein.
         if @answer.question.answers.count < 4
           format.html { redirect_to new_answer_path(question_id: @answer.question), notice: 'Answer was successfully created.'}
@@ -61,6 +69,9 @@ class AnswersController < ApplicationController
 
   # PATCH/PUT /answers/1
   # PATCH/PUT /answers/1.json
+  
+  # Diese Methode aendert eine Antwort einer Frage. Ist dies nicht moeglich, wird eine Fehlermeldung angezeigt.
+  
   def update
     respond_to do |format|
       if @answer.update(answer_params)
@@ -75,6 +86,9 @@ class AnswersController < ApplicationController
 
   # DELETE /answers/1
   # DELETE /answers/1.json
+  
+  # Diese Methode loescht eine Antwort einer Question.
+  
   def destroy
     @answer.destroy
     respond_to do |format|

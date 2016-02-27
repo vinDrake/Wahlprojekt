@@ -1,3 +1,5 @@
+# Dieser Controller uebernimmt die Logik der ausgewaehlten Antwort.
+
 class RepleysController < ApplicationController
   before_action :set_repley, only: [:show, :edit, :update, :destroy]
   # before_action :require_user, only: [:index, :show, :new]
@@ -15,6 +17,9 @@ class RepleysController < ApplicationController
 
   # TODO Dokumentieren
   # GET /repleys/new
+  
+  # Diese Methode fuegt dem Feed eine neue Frage zu, falls momentan zwei oder weniger Fragen aktiv sind.
+  
   def new
     # TODO Hier steht mir auch viel zu viel.
     @user_select = User.all
@@ -45,6 +50,10 @@ class RepleysController < ApplicationController
 
   # POST /repleys
   # POST /repleys.json
+  
+  # Diese Methode formatiert die Antwortmoeglichkeiten in einer zufaelligen Reihenfolge, wertet die gegebene Antwort aus,
+  # berechnet die zu vergebenden Punkte und beendet ggf. die Participation. Ist dies nicht moeglich, wird eine Fehlermeldung angezeigt.
+  
   def create # OPTIMIZE Am besten die ganze Methode neu schreiben
     #Scaffold generated
     @repley = Repley.new(repley_params)
@@ -78,23 +87,23 @@ class RepleysController < ApplicationController
         user_feeds.find_by(repley_params[:question]).destroy
         # TODO Debug-Code raus
         # Begin Check if it was the last one of this Challenge
-        logger.debug "Check, if it was a Challenge, qou are takeing part of"
+        logger.debug "Check if it was a challenge you are taking part of"
         unless @feed.participation.nil?
-          logger.debug "It was a Challenge-Question. Check, if it was the last Question of this Participation: "+@feed.participation.challenge.to_s
+          logger.debug "It was a Challenge-Question. Check if it was the last question of this participation: "+@feed.participation.challenge.to_s
           last = true
           user_feeds.each do |feed|
             if feed.participation_id == @feed.participation_id
-              logger.debug "No, there was an other Question"
+              logger.debug "No, there was another question"
               last = false
               break
             end
           end
           if last
-            logger.debug "It was the last Question"
+            logger.debug "It was the last question"
             participation = @feed.participation
             participation.attributes = { :complete => true, :succeeded => true }
             if participation.save
-              logger.debug "This Participation is now complete and succeeded"
+              logger.debug "This participation is now complete and succeeded"
             end
             # participation.update(succeeded: true)
             # logger.debug "It is now succeeded"
@@ -104,12 +113,12 @@ class RepleysController < ApplicationController
         end
         # End Check if it was the last one of this Challenge
         if @repley.answer.correct
-          note = 'Repley was successfully created and the answer was correct.'
+          note = 'Reply was successfully created and the answer was correct.'
         else
-          note = 'Repley was successfully created and the answer was wrong.'
+          note = 'Reply was successfully created and the answer was wrong.'
         end
         if last
-          note += ' It also was the last Question of "'+participation.challenge.name+'".'
+          note += ' It also was the last question of "'+participation.challenge.name+'".'
         end
 
         format.html { redirect_to @repley, notice: note }
@@ -123,10 +132,13 @@ class RepleysController < ApplicationController
 
   # PATCH/PUT /repleys/1
   # PATCH/PUT /repleys/1.json
+  
+  # Diese Methode aendert eine gegebene Antwort. Ist dies nicht moeglich, wird eine Fehlermeldung angezeigt.
+  
   def update
     respond_to do |format|
       if @repley.update(repley_params)
-        format.html { redirect_to @repley, notice: 'Repley was successfully updated.' }
+        format.html { redirect_to @repley, notice: 'Reply was successfully updated.' }
         format.json { render :show, status: :ok, location: @repley }
       else
         format.html { render :edit }
@@ -137,10 +149,13 @@ class RepleysController < ApplicationController
 
   # DELETE /repleys/1
   # DELETE /repleys/1.json
+  
+  # Diese Methode loescht eine gegebene Antwort. Ist dies nicht moeglich, wird eine Fehlermeldung angezeigt.
   def destroy
+  
     @repley.destroy
     respond_to do |format|
-      format.html { redirect_to repleys_url, notice: 'Repley was successfully destroyed.' }
+      format.html { redirect_to repleys_url, notice: 'Reply was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

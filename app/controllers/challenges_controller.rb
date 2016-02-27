@@ -1,3 +1,5 @@
+# Dieser Controller enthaelt die Logik fuer die Challenges.
+
 class ChallengesController < ApplicationController
   before_action :set_challenge, only: [:show, :edit, :update, :destroy]
   # before_action :require_user, only: [:index, :show]
@@ -25,6 +27,9 @@ class ChallengesController < ApplicationController
 
   # POST /challenges
   # POST /challenges.json
+  
+  # Diese Methode erstellt eine neue Challenge anhand der uebergebenen Parameter. Ist dies nicht moeglich, wird eine Fehlermeldung angezeigt.
+  
   def create
     @challenge = Challenge.new(challenge_params)
 
@@ -41,6 +46,9 @@ class ChallengesController < ApplicationController
 
   # PATCH/PUT /challenges/1
   # PATCH/PUT /challenges/1.json
+  
+  # Diese Methode veraendert eine Challenge. Ist dies nicht moeglich, wird eine Fehlermeldung angezeigt.
+  
   def update
     respond_to do |format|
       if @challenge.update(challenge_params)
@@ -63,6 +71,9 @@ class ChallengesController < ApplicationController
 
   # DELETE /challenges/1
   # DELETE /challenges/1.json
+  
+  # Diese Methode loescht eine Challenge.
+  
   def destroy
     @challenge.destroy
     respond_to do |format|
