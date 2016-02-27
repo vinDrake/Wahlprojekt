@@ -2,5 +2,11 @@
 <%= @feed.feeder.user.name %>
 <%= @feed.question.problem %>
 <%= @feed.priority %>
+<% unless @feed.challenge.nil? %>
+  <%= @feed.challenge.name %>
+<% end %>
+<% unless @feed.participation.nil? %>
+  <%= @feed.participation.challenge.name %>
+<% end %>
 <%= link_to 'Edit', edit_feed_path(@feed) %> |
 <%= link_to 'Back', feeds_path %>

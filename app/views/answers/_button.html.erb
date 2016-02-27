@@ -1,0 +1,25 @@
+<%= form_for(@repley) do |f| %>
+  <% if @repley.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@repley.errors.count, "error") %> prohibited this repley from being saved:</h2>
+      <ul>
+      <% @repley.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+    <%= f.hidden_field :user_id, :value => @user.id %>
+
+    <%= f.hidden_field :question_id, :value => @question.id %>
+
+    <%= f.hidden_field :answer_id, :value => answer.id %>
+
+
+  <div class="actions">
+    <%= f.submit answer.answer_body %>
+  </div>
+<% end %>

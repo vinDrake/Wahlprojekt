@@ -1,6 +1,8 @@
+# Dieser Controller uebernimmt die Verwaltung der Tags.
+
 class TagsController < ApplicationController
   before_action :set_tag, only: [:show, :edit, :update, :destroy]
-  before_action :require_user, only: [:index, :show]
+ # before_action :require_user, only: [:index, :show]
 
   # GET /tags
   # GET /tags.json
@@ -24,6 +26,9 @@ class TagsController < ApplicationController
 
   # POST /tags
   # POST /tags.json
+  
+  # Diese Methode erstellt einen neuen Tag und ermoeglicht es diesen bei der Erstellung neuer Fragen auszuwaehlen. Ist dies nicht moeglich, wird eine Fehlermeldung angezeigt.
+  
   def create
     @tag = Tag.new(tag_params)
 
@@ -32,7 +37,7 @@ class TagsController < ApplicationController
         format.html { redirect_to @tag, notice: 'Tag was successfully created.' }
         format.json { render :show, status: :created, location: @tag }
       else
-        format.html { render :new }
+        format.html { render :new } # OPTIMIZE Eine notice wäre nett
         format.json { render json: @tag.errors, status: :unprocessable_entity }
       end
     end
@@ -40,6 +45,9 @@ class TagsController < ApplicationController
 
   # PATCH/PUT /tags/1
   # PATCH/PUT /tags/1.json
+  
+  # Diese Methode aendert den Namen eines Tags. Ist dies nicht moeglich, wird eine Fehlermeldung angezeigt.
+  
   def update
     respond_to do |format|
       if @tag.update(tag_params)
@@ -54,6 +62,9 @@ class TagsController < ApplicationController
 
   # DELETE /tags/1
   # DELETE /tags/1.json
+  
+  # Diese Methode loescht einen Tag.
+  
   def destroy
     @tag.destroy
     respond_to do |format|

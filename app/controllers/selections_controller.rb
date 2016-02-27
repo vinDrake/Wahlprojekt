@@ -1,11 +1,13 @@
+# Dieser Controller verwaltet die Tags, deren Fragen in den Feedern vorkommen sollen.
+
 class SelectionsController < ApplicationController
   before_action :set_selection, only: [:show, :edit, :update, :destroy]
-  before_action :require_user, only: [:index, :show]
+ # before_action :require_user, only: [:index, :show]
 
   # GET /selections
   # GET /selections.json
   def index
-    @selections = Selection.all
+    @selections = Selection.where(feeder: current_user.feeder)
   end
 
   # GET /selections/1
@@ -26,6 +28,9 @@ class SelectionsController < ApplicationController
 
   # POST /selections
   # POST /selections.json
+  
+  # Diese Methode erstellt eine neue Zuweisung eines Tags zu einem Feeder. Ist dies nicht moeglich, wird eine Fehlermeldung angezeigt.
+  
   def create
     @selection = Selection.new(selection_params)
 
@@ -42,6 +47,9 @@ class SelectionsController < ApplicationController
 
   # PATCH/PUT /selections/1
   # PATCH/PUT /selections/1.json
+  
+  # Diese Methode fuegt einem Feeder einen neuen Tag hinzu. Ist dies nicht moeglich, wird eine Fehlermeldung angezeigt.
+  
   def update
     respond_to do |format|
       if @selection.update(selection_params)
@@ -56,6 +64,9 @@ class SelectionsController < ApplicationController
 
   # DELETE /selections/1
   # DELETE /selections/1.json
+  
+  # Diese Methode entfernt einen Tag aus einem Feeder.
+  
   def destroy
     @selection.destroy
     respond_to do |format|

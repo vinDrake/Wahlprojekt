@@ -16,6 +16,8 @@
         <td><%= participation.user.name %></td>
         <td><%= participation.challenge.name %></td>
         <td><%= participation.complete %></td>
+        <td><%= participation.succeeded %></td>
+        <td><%= participation.strikes %></td>
         <td><%= link_to 'Show', participation %></td>
         <td><%= link_to 'Edit', edit_participation_path(participation) %></td>
         <td><%= link_to 'Destroy', participation, method: :delete, data: { confirm: 'Are you sure?' } %></td>

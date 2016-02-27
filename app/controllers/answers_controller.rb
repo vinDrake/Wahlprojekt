@@ -1,6 +1,9 @@
+# Dieser Controller enthaelt die Logik fuer die Antwortmoeglichkeiten.
+
 class AnswersController < ApplicationController
   before_action :set_answer, only: [:show, :edit, :update, :destroy]
-  before_action :require_user, only: [:index, :show]
+ # before_action :require_user, only: [:index, :show]
+
 
   # GET /answers
   # GET /answers.json
@@ -13,9 +16,16 @@ class AnswersController < ApplicationController
   def show
   end
 
+  # OPTIMIZE Hier wäre ein Helper sinnvoll
   # GET /answers/new
+  
+  # Falls die Methode mit einer question_id aufgerufen wird, wir die entsprechende Frage zwischengespeichert.
+  
   def new
     @answer = Answer.new
+    if params.has_key?(:question_id)
+    @question = Question.find(params[:question_id])
+    end
     @question_select = Question.all
   end
 
@@ -23,14 +33,32 @@ class AnswersController < ApplicationController
   def edit
   end
 
+  # OPTIMIZE Hier wäre ein Helper sinnvoll (siehe new)
   # POST /answers
   # POST /answers.json
+  
+  # Diese Methode fuegt erstellte Antworten einer bestimmten Frage hinzu. Es muessen mindestens 4 Antworten eingetragen werden, ansonsten wird ein Fehler angezeigt.
+  
   def create
     @answer = Answer.new(answer_params)
+    @question_select = Question.all
+    if params.has_key?(:question_id)
+     @question = Question.find(params[:question_id])
+    end
+
 
     respond_to do |format|
       if @answer.save
-        format.html { redirect_to @answer, notice: 'Answer was successfully created.' }
+        # Wenn man eine Antwort erstellt und die Frage dazu noch keine 4 Antworten hat,
+        # dann braucht diese noch eine Antwort
+        # OPTIMIZE Das könnte eleganter sein.
+        if @answer.question.answers.count < 4
+          format.html { redirect_to new_answer_path(question_id: @answer.question), notice: 'Answer was successfully created.'}
+        else
+          # Die alte Weiterleitung zu questions#show
+          format.html { redirect_to @answer, notice: 'Answer was successfully created.' }
+        end
+        # Die JSON-Version gibt nach wie vor das gleiche zurück
         format.json { render :show, status: :created, location: @answer }
       else
         format.html { render :new }
@@ -41,13 +69,16 @@ class AnswersController < ApplicationController
 
   # PATCH/PUT /answers/1
   # PATCH/PUT /answers/1.json
+  
+  # Diese Methode aendert eine Antwort einer Frage. Ist dies nicht moeglich, wird eine Fehlermeldung angezeigt.
+  
   def update
     respond_to do |format|
       if @answer.update(answer_params)
         format.html { redirect_to @answer, notice: 'Answer was successfully updated.' }
         format.json { render :show, status: :ok, location: @answer }
       else
-        format.html { render :edit }
+        format.html { render :edit } # OPTIMIZE Eine notice wäre nett
         format.json { render json: @answer.errors, status: :unprocessable_entity }
       end
     end
@@ -55,6 +86,9 @@ class AnswersController < ApplicationController
 
   # DELETE /answers/1
   # DELETE /answers/1.json
+  
+  # Diese Methode loescht eine Antwort einer Question.
+  
   def destroy
     @answer.destroy
     respond_to do |format|

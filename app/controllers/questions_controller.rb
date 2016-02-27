@@ -1,6 +1,8 @@
+# Dieser Controller verwaltet die Methodenaufrufe fuer Fragen.
+
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
-  before_action :require_user, only: [:index, :show]
+  # before_action :require_user, only: [:index, :show]
 
   # GET /questions
   # GET /questions.json
@@ -11,12 +13,13 @@ class QuestionsController < ApplicationController
   # GET /questions/1
   # GET /questions/1.json
   def show
-   @tags = @question.tags
+  #  @tags = @question.tags # OPTIMIZE Das ist Mist und gehört ins Model DONE
   end
 
+  # TODO Dokumentieren
   # GET /questions/new
   def new
-    @tag_select = Tag.all
+    @tag_select = Tag.all # OPTIMIZE Nur Tags übergeben, die die Frage noch nicht hat.
     @question = Question.new
   end
 
@@ -26,15 +29,22 @@ class QuestionsController < ApplicationController
 
   # POST /questions
   # POST /questions.json
+  
+  # Diese Methoe erstellt eine neue Frage entsprechend den uebergebenen Parametern. Ist dies nicht moeglich, wird eine Fehlermeldung angezeigt.
+  
   def create
     @question = Question.new(question_params)
 
     respond_to do |format|
       if @question.save
-        format.html { redirect_to @question, notice: 'Question was successfully created.' }
+        # Wenn man eine Frage erstellt, dann braucht die auch Antworten
+        format.html { redirect_to new_answer_path(question_id: @question)}
+        # Die alte Weiterleitung zu questions#show
+        # format.html { redirect_to @question, notice: 'Question was successfully created.' }
+        # Die JSON-Version gibt nach wie vor das gleiche zurück
         format.json { render :show, status: :created, location: @question }
       else
-        format.html { render :new }
+        format.html { render :new } # OPTIMIZE Eine notice wäre nett
         format.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end
@@ -42,6 +52,9 @@ class QuestionsController < ApplicationController
 
   # PATCH/PUT /questions/1
   # PATCH/PUT /questions/1.json
+  
+  # Diese Methode aendert eine Frage. Ist dies nicht moeglich, wird eine Fehlermeldung angezeigt.
+  
   def update
     respond_to do |format|
       if @question.update(question_params)
@@ -56,6 +69,9 @@ class QuestionsController < ApplicationController
 
   # DELETE /questions/1
   # DELETE /questions/1.json
+  
+  # Diese Methode loescht eine Frage.
+  
   def destroy
     @question.destroy
     respond_to do |format|

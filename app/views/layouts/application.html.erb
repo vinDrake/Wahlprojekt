@@ -1,27 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>ProjectBPlus</title>
+  <title>QuizStudy</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
+  <%= render "partials/navigation" %>
+
+  <!-- Messenger Slider -->
   <% if current_user %>
-      <ul>
-        <li><%= link_to current_user.email, user_path(current_user) %></li>
-        <li><%= link_to "Log out", logout_path, method: "delete" %></li>
-      </ul>
-    <% else %>
-      <ul>
-        <li><%= link_to "Login", 'login' %></a></li>
-        <li><%= link_to "Signup", 'signup' %></a></li>
-      </ul>
-    <% end %>
+    <%= render "partials/messenger" %>
+  <% end %>
+  <!-- Messenger Slider -->
+
+<div align="center">
+
+  <!-- Anfang Pop-Up -->
+  <%= render "popups/feederpopup" %>
+  <%= render "popups/notificationpopup" %>
 
 
-<%= yield %>
+  <!-- Ende Pop-Up -->
+
+  <%= image_tag "Logo.png" %>
+
+  <!-- <% flash.each do |key, value| %> -->
+    <!-- <div class="alert alert-<%= key %>"><%= value %></div> -->
+  <!-- <% end %> -->
+
+  <%= yield %>
+
+</div>
 
 </body>
 </html>

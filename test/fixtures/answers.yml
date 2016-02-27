@@ -2,8 +2,10 @@
 
 one:
   correct: false
-  answer_body: MyString
+  answer_body: This is a wrong answer
+  question: one
 
 two:
-  correct: false
-  answer_body: MyString
+  correct: true
+  answer_body: This is a right answer
+  question: one

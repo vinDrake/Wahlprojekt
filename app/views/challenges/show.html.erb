@@ -10,17 +10,54 @@
   <%= @challenge.alive %>
 </p>
 
-<strong>Questions:</strong>
+<p>
+  <strong>Max Challenge Time:</strong>
+  <%= @challenge.max_challenge_time %> ( 0 = Egal )
+</p>
+
+<p>
+  <strong>Latest End:</strong>
+  <%= @challenge.latest_end %>
+</p>
+
+<p>
+  <strong>Strict Order:</strong>
+  <%= @challenge.strict_order %>
+</p>
+
+<p>
+  <strong>Strikes:</strong>
+  <%= @challenge.strikes %> ( 0 = Egal )
+</p>
+
+<p>
+<strong>Questions:</strong><br>
 <% @challenge.elements.each do |e| %>
   <%= e.question.problem %><br>
-<% end %><br>
-
-
-<strong>Users:</strong>
-<% @challenge.participations.each do |p| %>
-  <%= link_to p.user.name, user_path(p.user) %> <%= p.complete %><br>
 <% end %>
-<br>
+</p>
+
+<p>
+<strong>Active Users:</strong><br>
+<% @challenge.get_active_users.each do |p| %>
+  <%= link_to p.user.name, user_path(p.user) %>(Is complete: <%= p.complete %>)<br>
+<% end %>
+</p>
+
+<p>
+<strong>Complete Users:</strong><br>
+<% @challenge.get_complete_users.each do |p| %>
+  <%= link_to p.user.name, user_path(p.user) %><br>
+<% end %>
+</p>
+
+<p>
+<strong>Succeeded Users:</strong><br>
+<% @challenge.get_succeeded_users.each do |p| %>
+  <%= link_to p.user.name, user_path(p.user) %><br>
+<% end %>
+</p>
 
 <%= link_to 'Edit', edit_challenge_path(@challenge) %> |
+<%= link_to 'Add Questions', new_element_path(challenge_id: @challenge) %> |
 <%= link_to 'Back', challenges_path %>
