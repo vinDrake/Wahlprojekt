@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
       rescue ActiveRecord::RecordNotFound
       flash[:notice] = "Session Error"
       session[:user_id] = nil
+      @user = nil
       redirect_to '/'
   end
   def require_user
