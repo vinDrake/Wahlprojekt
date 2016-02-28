@@ -1,3 +1,5 @@
+# Dieser Controller verwaltet die Nachrichtenuebertragung.
+
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
   # before_action :require_user, only: [:index, :show]
@@ -17,6 +19,9 @@ class MessagesController < ApplicationController
 
   # TODO Dokumentieren
   # GET /messages/new
+
+  # Diese Methode erstellt eine neue Nachricht und traegt den Empfaenger ein. Der Name des Users wird uebergeben und die zugehoerige User-ID zu diesem herausgesucht.
+
   def new
     @sender = current_user
     @user_select = User.all
@@ -36,6 +41,9 @@ class MessagesController < ApplicationController
 
   # POST /messages
   # POST /messages.json
+
+  # Diese Methode erstellt eine neue Nachricht mit Absender, Empfaenger, Betreff und Inhalt. Ist dies nicht moeglich, wird eine Fehlermeldung angezeigt.
+
   def create
     @message = Message.new(message_params)
 
@@ -52,6 +60,9 @@ class MessagesController < ApplicationController
 
   # PATCH/PUT /messages/1
   # PATCH/PUT /messages/1.json
+
+  # Diese Methode aendert eine Nachricht. Ist dies nicht moeglich, wird eine Fehlermeldung angezeigt.
+
   def update
     respond_to do |format|
       if @message.update(message_params)
@@ -66,6 +77,9 @@ class MessagesController < ApplicationController
 
   # DELETE /messages/1
   # DELETE /messages/1.json
+
+  # Diese Methode loescht eine Nachricht.
+  
   def destroy
     @message.destroy
     respond_to do |format|

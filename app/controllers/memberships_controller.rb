@@ -1,3 +1,5 @@
+# Dieser Controller enthaelt die Logik fuer die Mitgliedschaften der Benutzer in Gruppen.
+
 class MembershipsController < ApplicationController
   before_action :set_membership, only: [:show, :edit, :update, :destroy]
  # before_action :require_user, only: [:index, :show]
@@ -14,10 +16,13 @@ class MembershipsController < ApplicationController
   end
 
   # GET /memberships/new
+
+  # Diese Methode erstellt eine neue leere Mitgliedschaft.
+
   def new
     @membership = Membership.new
-    # TODO Trennen in BEitreten und jemanden hinzufügen/einladen
-    # TODO DOkumentieren
+    # TODO Trennen in Beitreten  und jemanden hinzufügen/einladen
+    # TODO Dokumentieren
     @user_select = User.all
     @group_select = Group.all
   end
@@ -28,6 +33,9 @@ class MembershipsController < ApplicationController
 
   # POST /memberships
   # POST /memberships.json
+
+  # Diese Methode erstellt eine Mitgliedschaft und weist so eine User-ID einer Gruppen-ID zu. Ist dies nicht moeglich, wird eine Fehlermeldung angezeigt.
+
   def create
     @membership = Membership.new(membership_params)
 
@@ -44,6 +52,9 @@ class MembershipsController < ApplicationController
 
   # PATCH/PUT /memberships/1
   # PATCH/PUT /memberships/1.json
+
+  # Diese Methode aendert die Zuweisung einer User-ID zu einer anderen Gruppen-ID. Ist dies nicht moeglich, wird eine Fehlermeldung angezeigt.
+
   def update
     respond_to do |format|
       if @membership.update(membership_params)
@@ -58,6 +69,9 @@ class MembershipsController < ApplicationController
 
   # DELETE /memberships/1
   # DELETE /memberships/1.json
+
+  # Diese Methode loescht die Mitgliedschaft eines Users einer Gruppe.
+  
   def destroy
     @membership.destroy
     respond_to do |format|

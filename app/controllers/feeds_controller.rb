@@ -1,3 +1,5 @@
+# Dieser Controller uebernimmt die Bearbeitung und Zuweisung eines Feeds zu einem Feeder.
+
 class FeedsController < ApplicationController
   before_action :set_feed, only: [:show, :edit, :update, :destroy]
  # before_action :require_user, only: [:index, :show]
@@ -16,6 +18,9 @@ class FeedsController < ApplicationController
   # TODO Dokumentieren
   # TODO Sollte Feed eine VIEW haben?
   # GET /feeds/new
+
+  # Diese Methode erstellt ein Feed, welches einem Feeder zugewiesen wird.
+
   def new
     @feed = Feed.new
     @question_select = Question.all
@@ -30,6 +35,9 @@ class FeedsController < ApplicationController
 
   # POST /feeds
   # POST /feeds.json
+
+  # Diese Methode fuellt ein Feed mit den noetigen Parametern. Ist dies nicht moeglich, wird eine Fehlermeldung angezeigt.
+
   def create
     @feed = Feed.new(feed_params)
 
@@ -46,6 +54,9 @@ class FeedsController < ApplicationController
 
   # PATCH/PUT /feeds/1
   # PATCH/PUT /feeds/1.json
+
+  # Diese Methode aendert die Parameter des Feeds. Ist dies nicht moeglich, wird eine Fehlermeldung angezeigt.
+
   def update
     respond_to do |format|
       if @feed.update(feed_params)
@@ -60,6 +71,9 @@ class FeedsController < ApplicationController
 
   # DELETE /feeds/1
   # DELETE /feeds/1.json
+
+  # Diese Methode loescht ein Feed.
+  
   def destroy
     @feed.destroy
     respond_to do |format|

@@ -1,3 +1,5 @@
+# Dieser Controller verwaltet die Zugehoerigkeit von Benutzern zu Challenges
+
 class ParticipationsController < ApplicationController
   before_action :set_participation, only: [:show, :edit, :update, :destroy]
   # before_action :require_user, only: [:index, :show]
@@ -15,6 +17,9 @@ class ParticipationsController < ApplicationController
 
   # TODO Dokumentieren
   # GET /participations/new
+
+  # Diese Methode erstellt eine Participation. Der Name des Users wird uebergeben und die zugehoerige User-ID zu diesem herausgesucht.
+
   def new
     @challenge_select = Challenge.get_alive_challenges
     if params.has_key?(:user)
@@ -35,6 +40,9 @@ class ParticipationsController < ApplicationController
 
   # POST /participations
   # POST /participations.json
+
+  # Diese Methode erstellt eine neue Participation entsprechend den uebergebenen Parametern. Ist dies nicht moeglich, wird eine Fehlermeldung angezeigt.
+
   def create # OPTIMIZE Hier ist mir viel zu viel Code. DAvon gehört bestimmt einiges in das Model
     #Scaffold generated
     @user_select = User.all
@@ -71,6 +79,9 @@ class ParticipationsController < ApplicationController
 
   # PATCH/PUT /participations/1
   # PATCH/PUT /participations/1.json
+
+  # Diese Methode aendert eine Participation. Ist dies nicht moeglich, wird eine Fehlermeldung angezeigt.
+
   def update
     respond_to do |format|
       if participation_params[:id].nil?
@@ -90,6 +101,9 @@ class ParticipationsController < ApplicationController
 
   # DELETE /participations/1
   # DELETE /participations/1.json
+
+  # Diese Methode loescht eine Participation.
+  
   def destroy
     @participation.destroy
     respond_to do |format|
