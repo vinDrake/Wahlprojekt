@@ -1,6 +1,6 @@
 
 
-<h1>Listing Ties</h1>
+<h1>Ties</h1>
 
 <table>
   <thead>
@@ -14,9 +14,9 @@
       <tr>
         <td><%= tie.question.problem %></td>
         <td><%= tie.tag.name %></td>
-        <td><%= link_to 'Show', tie %></td>
+        <td><%= link_to (image_tag "lupe_318-1787.jpg"), tie %></td>
 
-        <td><%= link_to 'Destroy', tie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to (image_tag "delete96.png"), tie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +24,4 @@
 
 <br>
 <!-- Tie ist hier TY geschrieben, weil der pluralizer da rumspinnt -->
-<%= link_to 'New Tie', new_ty_path %>
+<%= link_to 'Neuer Tie', new_ty_path %>

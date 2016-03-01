@@ -1,43 +1,46 @@
 
 
-<h1>Listing Challenges</h1>
+<h1>Challenges</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Alive</th>
-      <th>Max Challenge Time</th>
-      <th>Latest End</th>
-      <th>Strict Order</th>
-      <th>Strikes</th>
-      <th>Questions</th>
-      <th>Active Users</th>
-      <th>Succeeded Users</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<%= link_to 'Neue Challenge', new_challenge_path %>
+<br/>
+<div class="challenges">
+	<table>
+	  <thead>
+		<tr>
+		  <th>Name</th>
+		  <th>Alive</th>
+		  <th>Max Challenge Zeit</th>
+		  <th>Ende</th>
+		  <th>Strict Order</th>
+		  <th>Strikes</th>
+		  <th>Fragen</th>
+		  <th>Aktive User</th>
+		  <th>Bestanden</th>
+		  <th colspan="3"></th>
+		</tr>
+	  </thead>
 
-  <tbody>
-    <% @challenges.each do |challenge| %>
-      <tr>
-        <td><%= challenge.name %></td>
-        <td><%= challenge.alive %></td>
-        <td><%= challenge.max_challenge_time unless challenge.max_challenge_time == 0 %></td>
-        <td><%= challenge.latest_end %></td>
-        <td><%= challenge.strict_order unless challenge.strict_order == false %></td>
-        <td><%= challenge.strikes unless challenge.strikes == 0 %></td>
-        <td><%= challenge.questions.size %></td>
-        <td><%= challenge.get_active_users.size unless challenge.get_active_users.size == 0 %></td>
-        <td><%= challenge.get_succeeded_users.size unless challenge.get_succeeded_users.size == 0 %></td>
-        <td><%= link_to 'Show', challenge %></td>
-        <!-- <td><%= link_to 'Edit', edit_challenge_path(challenge) %></td> -->
-        <!-- <td><%= link_to 'Destroy', challenge, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+	  <tbody>
+		<% @challenges.each do |challenge| %>
+		  <tr>
+			<td><%= challenge.name %></td>
+			<td><%= challenge.alive %></td>
+			<td><%= challenge.max_challenge_time unless challenge.max_challenge_time == 0 %></td>
+			<td><%= challenge.latest_end %></td>
+			<td><%= challenge.strict_order unless challenge.strict_order == false %></td>
+			<td><%= challenge.strikes unless challenge.strikes == 0 %></td>
+			<td><%= challenge.questions.size %></td>
+			<td><%= challenge.get_active_users.size unless challenge.get_active_users.size == 0 %></td>
+			<td><%= challenge.get_succeeded_users.size unless challenge.get_succeeded_users.size == 0 %></td>
+			<td><%= link_to (image_tag "lupe_318-1787.jpg"), challenge %></td>
+			<!-- <td><%= link_to (image_tag "pen29.png"), edit_challenge_path(challenge) %></td> -->
+			<!-- <td><%= link_to (image_tag "delete96.png"), challenge, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+		  </tr>
+		<% end %>
+	  </tbody>
+	</table>
+</div>
 
 <br>
 
-<%= link_to 'New Challenge', new_challenge_path %>

@@ -1,7 +1,7 @@
-<h1>Welcome to QuizStudy!</h1>
+<h1>Willkommen bei QuizStudy!</h1>
 <p>Please LogIn or SignUp</p>
 <%= form_for(:session, url: login_path) do |f| %>
   <%= f.email_field :email, :placeholder => "Email" %>
-  <%= f.password_field :password, :placeholder => "Password" %>
+  <%= f.password_field :password, :placeholder => "Passwort" %>
   <%= f.submit "Log in", class: "btn-submit" %>
 <% end %>

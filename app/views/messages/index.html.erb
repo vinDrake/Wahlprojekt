@@ -1,14 +1,14 @@
 
 
-<h1>Listing Messages</h1>
+<h1>Nachrichten</h1>
 
-<h2>Incoming:</h2>
+<h2>Eingehende Nachrichten:</h2>
 <table>
   <thead>
     <tr>
       <th>Sender</th>
-      <th>Subject</th>
-      <th>Content</th>
+      <th>Betreff</th>
+      <th>Inhalt</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,21 +18,21 @@
         <td><%= message.sender.name %></td>
         <td><%= message.subject %></td>
         <td><%= message.content %></td>
-        <td><%= link_to 'Show', message %></td>
-        <!-- <td><%= link_to 'Edit', edit_message_path(message) %></td> -->
-        <td><%= link_to 'Destroy', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to (image_tag "lupe_318-1787.jpg"), message %></td>
+        <!-- <td><%= link_to (image_tag "pen29.png"), edit_message_path(message) %></td> -->
+        <td><%= link_to (image_tag "delete96.png"), message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<h2>Sent Messages:</h2>
+<h2>Gesendete Nachrichten:</h2>
 <table>
   <thead>
     <tr>
-      <th>Receiver</th>
-      <th>Subject</th>
-      <th>Content</th>
+      <th>Empfänger</th>
+      <th>Betreff</th>
+      <th>Inhalt</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -42,9 +42,9 @@
         <td><%= message.receiver.name %></td>
         <td><%= message.subject %></td>
         <td><%= message.content %></td>
-        <td><%= link_to 'Show', message %></td>
-        <!-- <td><%= link_to 'Edit', edit_message_path(message) %></td> -->
-        <td><%= link_to 'Destroy', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to (image_tag "lupe_318-1787.jpg"), message %></td>
+        <!-- <td><%= link_to (image_tag "pen29.png"), edit_message_path(message) %></td> -->
+        <td><%= link_to (image_tag "delete96.png"), message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -53,4 +53,4 @@
 
 <br>
 
-<%= link_to 'New Message', new_message_path %>
+<%= link_to 'Neue Nachricht', new_message_path %>
