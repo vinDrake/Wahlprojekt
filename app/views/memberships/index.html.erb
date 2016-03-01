@@ -1,12 +1,12 @@
 
 
-<h1>Listing Memberships</h1>
+<h1>Mitglieder</h1>
 
 <table>
   <thead>
     <tr>
       <th>User</th>
-      <th>Group</th>
+      <th>Gruppe</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,9 +16,9 @@
       <tr>
         <td><%= membership.user.name %></td>
         <td><%= membership.group.name %></td>
-        <td><%= link_to 'Show', membership %></td>
-        <td><%= link_to 'Edit', edit_membership_path(membership) %></td>
-        <td><%= link_to 'Destroy', membership, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to (image_tag "lupe_318-1787.jpg"), membership %></td>
+        <td><%= link_to (image_tag "pen29.png"), edit_membership_path(membership) %></td>
+        <td><%= link_to (image_tag "delete96.png"), membership, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Membership', new_membership_path %>
+<%= link_to 'Neue Mitgliedschaft', new_membership_path %>

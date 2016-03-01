@@ -22,7 +22,7 @@
     <%= f.hidden_field :user_id, :value => @user.id %>
   <% end %>
 
-  <strong>Question:</strong>
+  <strong>Frage:</strong>
   <div class="field">
     <% if @question.nil? %>
       <%= f.label :question %><br>
@@ -33,7 +33,7 @@
     <% end %>
   </div>
 
-  <strong>Answer:</strong>
+  <strong>Antwort:</strong>
   <div class="field">
   <% unless @question.nil? %>
       <%= f.select :answer_id, @question.answers.map { |a| [a.answer_body,a.id]} %>

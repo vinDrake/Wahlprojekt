@@ -6,7 +6,7 @@
 </p>
 
 <p>
-  <strong>Started at:</strong>
+  <strong>Gestartet:</strong>
   <%= @participation.created_at %>
 </p>
 
@@ -16,12 +16,12 @@
 </p>
 
 <p>
-  <strong>Complete:</strong>
+  <strong>Fertig:</strong>
   <%= @participation.complete %>
 </p>
 
 <p>
-  <strong>Succeeded:</strong>
+  <strong>Geschafft:</strong>
   <%= @participation.succeeded %>
 </p>
 
@@ -31,10 +31,10 @@
 </p>
 
 <p>
-  <strong>Personal Deadline:</strong>
+  <strong>Eigene Deadline:</strong>
   <%= @participation.created_at + @participation.challenge.max_challenge_time %>
 </p>
 
 
-<%= link_to 'Edit', edit_participation_path(@participation) %> |
-<%= link_to 'Back', participations_path %>
+<%= link_to (image_tag "pen29.png"), edit_participation_path(@participation) %> 
+<%= link_to (image_tag "pfeil-nach-links_318-1440.jpg"), participations_path %>

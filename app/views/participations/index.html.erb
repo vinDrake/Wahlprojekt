@@ -1,11 +1,11 @@
 
 
-<h1>Listing Participations</h1>
+<h1>Teilnahmen</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Complete</th>
+      <th>Komplett</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,9 +18,9 @@
         <td><%= participation.complete %></td>
         <td><%= participation.succeeded %></td>
         <td><%= participation.strikes %></td>
-        <td><%= link_to 'Show', participation %></td>
-        <td><%= link_to 'Edit', edit_participation_path(participation) %></td>
-        <td><%= link_to 'Destroy', participation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to (image_tag "lupe_318-1787.jpg"), participation %></td>
+        <td><%= link_to (image_tag "pen29.png"), edit_participation_path(participation) %></td>
+        <td><%= link_to (image_tag "delete96.png"), participation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Participation', new_participation_path %>
+<%= link_to 'Neue Teilnahmen', new_participation_path %>

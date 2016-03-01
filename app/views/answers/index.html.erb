@@ -1,12 +1,12 @@
 
 
-<h1>Listing Answers</h1>
+<h1>Antworten</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Correct</th>
-      <th>Answer body</th>
+      <th>Korrekt</th>
+      <th>Inhalt</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,9 +16,9 @@
       <tr>
         <td><%= answer.correct %></td>
         <td><%= answer.answer_body %></td>
-        <td><%= link_to 'Show', answer %></td>
-        <td><%= link_to 'Edit', edit_answer_path(answer) %></td>
-        <td><%= link_to 'Destroy', answer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to (image_tag "lupe_318-1787.jpg"), answer %></td>
+        <td><%= link_to (image_tag "pen29.png"), edit_answer_path(answer) %></td>
+        <td><%= link_to (image_tag "delete96.png"), answer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Answer', new_answer_path %>
+<%= link_to 'Neue Antwort', new_answer_path %>

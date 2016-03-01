@@ -1,6 +1,6 @@
 
 
-<h1>Listing Repleys</h1>
+<h1>Historie</h1>
 
 <table>
   <thead>
@@ -11,23 +11,21 @@
 
   <tbody>
     <tr>
-      <!-- <td>User</td> -->
-      <td>Question</td>
-      <td>Given Answer</td>
-      <td>Correct Answer</td>
-      <td>Points</td>
+      <td>User</td>
+      <td>Frage</td>
+      <td>Gegebene Antwort</td>
+      <td>Punkte</td>
 
     </tr>
     <% @repleys.each do |repley| %>
       <tr>
-        <!-- <td><%= repley.user.name %></td> -->
+        <td><%= repley.user.name %></td>
         <td><%= repley.question.problem %></td>
         <td><%= repley.answer.answer_body %></td>
-        <td><%= repley.question.correct_answer.answer_body if repley.points == 0 %></td>
         <td><%= repley.points %></td>
-        <td><%= link_to 'Show', repley %></td>
-        <!-- <td><%= link_to 'Edit', edit_repley_path(repley) %></td> -->
-        <!-- <td><%= link_to 'Destroy', repley, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+        <td><%= link_to (image_tag "lupe_318-1787.jpg"), repley %></td>
+        <!-- <td><%= link_to (image_tag "pen29.png"), edit_repley_path(repley) %></td> -->
+        <!-- <td><%= link_to (image_tag "delete96.png"), repley, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
       </tr>
     <% end %>
   </tbody>
@@ -35,4 +33,4 @@
 
 <br>
 
-<!-- <%= link_to 'New Repley', new_repley_path %> -->
+<!-- <%= link_to 'Neue Antwort', new_repley_path %> -->

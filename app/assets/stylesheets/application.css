@@ -80,6 +80,8 @@
    position:relative;
    /*height: 100%;*/
    width: 100%;
+   
+   z-index:0;
  }
 
  #logo {
@@ -147,7 +149,7 @@
    padding: 15px;
    height:auto;
    display: block;
-   line-height: 1;
+   line-height = 1;
    border-radius: 7px;
 
  }
@@ -168,7 +170,7 @@
    padding: 15px;
    height:auto;
    display: block;
-   line-height: 1;
+   line-height = 1;
    border-radius: 7px;
 
  }
@@ -223,7 +225,7 @@
   /*padding: 15px;*/
   /*height:auto;*/
   /*display: block;*/
-  /*line-height: 1;*/
+  /*line-height = 1;*/
   /*border-radius: 7px;*/
 
    /*color: #000;*/
@@ -270,7 +272,7 @@
   /*padding: 15px;*/
   /*height:auto;*/
   /*display: block;*/
-  line-height: 1;
+  line-height = 1;
   border-radius: 7px;
 
    /*color: #000;*/
@@ -505,6 +507,7 @@
 
 
    #messages{
+	 z-index:11111;
      box-shadow: 0 2px 3px #000;
      border-radius: 7px;
      position:absolute;
@@ -533,7 +536,7 @@
      }
 
      #eingabe{
-       bottom:5%;
+       bottom:5px%;
 
      }
 
@@ -558,3 +561,4 @@
 
      }
      h1 { font-size: 48px; }
+a { text-decoration: none; } a:link{color: none;}

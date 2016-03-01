@@ -1,20 +1,20 @@
 
 
 <p>
-  <strong>Question:</strong>
+  <strong>Frage:</strong>
   <%= @answer.question.problem %>
 </p>
 
 <p>
-  <strong>Answer:</strong>
+  <strong>Antwort:</strong>
   <%= @answer.answer_body %>
 </p>
 
 <p>
-  <strong>This is:</strong>
+  <strong>Das ist:</strong>
   <%= @answer.correct %>
 </p>
 
 
-<%= link_to 'Edit', edit_answer_path(@answer) %> |
-<%= link_to 'Back', answers_path %>
+<%= link_to (image_tag "pen29.png"), edit_answer_path(@answer) %> 
+<%= link_to (image_tag "pfeil-nach-links_318-1440.jpg"), answers_path %>
