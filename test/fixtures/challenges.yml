@@ -1,9 +1,18 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+dead_challenge:
   name: Dead Challenge
   alive: false
+  max_challenge_time: 1000
+  latest_end: DateTime.now
+  strict_order: true
+  strikes: 3
 
-two:
+
+live_challenge:
   name: Live Challenge
   alive: true
+  max_challenge_time: 1000
+  latest_end: DateTime.now.next_week
+  strict_order: true
+  strikes: 3

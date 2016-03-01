@@ -1,6 +1,6 @@
 
 
-<h1>Listing Feeds</h1>
+<h1>Feeds</h1>
 
 <table>
   <thead>
@@ -21,9 +21,9 @@
         <% unless feed.participation.nil? %>
           <td><%= feed.participation.challenge.name %></td>
         <% end %>
-        <td><%= link_to 'Show', feed %></td>
-        <td><%= link_to 'Edit', edit_feed_path(feed) %></td>
-        <td><%= link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to (image_tag "lupe_318-1787.png"), feed %></td>
+        <td><%= link_to (image_tag "pen29.png"), edit_feed_path(feed) %></td>
+        <td><%= link_to (image_tag "delete96.png"), feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -31,4 +31,4 @@
 
 <br>
 
-<%= link_to 'New Feed', new_feed_path %>
+<%= link_to 'Neuer Feed', new_feed_path %>

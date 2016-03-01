@@ -4,5 +4,5 @@
 <% @feeder.feeds.each do |f| %>
   <%= f.question.problem %><br>
 <% end %>
-<%= link_to 'Edit', edit_feeder_path(@feeder) %> |
-<%= link_to 'Back', feeders_path %>
+<%= link_to (image_tag "pen29.png"), edit_feeder_path(@feeder) %> 
+<%= link_to (image_tag "pfeil-nach-links_318-1440.jpg"), feeders_path %>

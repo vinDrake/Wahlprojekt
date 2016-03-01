@@ -20,12 +20,12 @@
       <%= f.hidden_field :feeder_id, :value => @user.feeder.id %>
     <% end %>
   </div>
-  <strong>Question:</strong>
+  <strong>Frage:</strong>
   <div class="field">
     <%= f.label :question %><br>
     <%= f.select :question_id, @question_select.map { |q| [q.problem,q.id]} %>
   </div>
-  <strong>Priority:</strong>
+  <strong>Priorität:</strong>
   <div class="field">
     <%= f.label :priority %><br>
     <%= f.number_field :priority %>

@@ -5,11 +5,11 @@
   <%= @group.name %>
 </p>
 <p>
-  <strong>Member:</strong>
+  <strong>Mitglieder:</strong>
   <% @group.user.each do |user| %>
     <%= user.name %><br>
   <% end %>
 </p>
 
-<%= link_to 'Edit', edit_group_path(@group) %> |
-<%= link_to 'Back', groups_path %>
+<%= link_to (image_tag "pen29.png"), edit_group_path(@group) %> 
+<%= link_to (image_tag "pfeil-nach-links_318-1440.jpg"), groups_path %>

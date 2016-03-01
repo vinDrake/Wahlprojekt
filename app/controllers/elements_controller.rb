@@ -1,3 +1,5 @@
+# Dieser Controller verbindet Challenges und Fragen.
+
 class ElementsController < ApplicationController
   before_action :set_element, only: [:show, :edit, :update, :destroy]
  # before_action :require_user, only: [:index, :show]
@@ -15,6 +17,9 @@ class ElementsController < ApplicationController
 
   # TODO Dokumentieren
   # GET /elements/new
+
+  # Diese Methode findet eine Challenge anhand der uebergebenen ID.
+
   def new
     @element = Element.new
     if params.has_key?(:challenge_id)
@@ -30,6 +35,9 @@ class ElementsController < ApplicationController
 
   # POST /elements
   # POST /elements.json
+
+  # Diese Methode weist einer Challenge eine Frage zu. Ist dies nicht moeglich, wird eine Fehlermeldung angezeigt.
+
   def create
     @element = Element.new(element_params)
 
@@ -46,6 +54,9 @@ class ElementsController < ApplicationController
 
   # PATCH/PUT /elements/1
   # PATCH/PUT /elements/1.json
+
+  # Diese Methode aendert eine Verbindung zwischen Challenge und Frage. Ist dies nicht moeglich, wird eine Fehlermeldung angezeigt.
+
   def update
     respond_to do |format|
       if @element.update(element_params)
@@ -60,6 +71,9 @@ class ElementsController < ApplicationController
 
   # DELETE /elements/1
   # DELETE /elements/1.json
+
+  # Diese Methode loescht eine Verbindung zwischen Challenge und Frage.
+  
   def destroy
     @element.destroy
     respond_to do |format|

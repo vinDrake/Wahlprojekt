@@ -5,6 +5,9 @@ class Challenge < ActiveRecord::Base
   has_many :questions, through: :elements
   has_many :feeds, dependent: :destroy
 
+  validates :name , length: { in: 3..255 }
+  validates :max_challenge_time, :strikes , numericality: { only_integer: true , greater_than_or_equal_to: 0 }
+  # validates :latest_end , numericality: { greater_than_or_equal_to: DateTime.now } GEht so nicht
   validates :name, :max_challenge_time, :latest_end, :strikes, presence: true
   validates :alive, :strict_order, inclusion: { in: [true, false] }
 

@@ -9,7 +9,7 @@ class Question < ActiveRecord::Base
   has_many :ties, :class_name => 'Tie'
   has_many :tags, through: :ties
 
-  validates :problem, presence: true
+  validates :problem, presence: true, uniqueness: true, length: { in: 3..255 }
 
   # TODO Dokumentieren
 

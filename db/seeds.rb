@@ -58,7 +58,7 @@ question_list = [
   [  "Wann wurde die Berliner Mauer abgerissen?" , "1989" , "1990" , "1991" , "1988" ],
   [  "Wann wurde Sedna entdeckt?" , "2003" , "2005" , "1998" , "2007" ],
   [  "Wie heißt der höchste Berg Deutschlands?" , "Zugspitze" , "Mount Everest" , "Matterhorn" , "Watzmann" ],
-  [  "Wie hoch ist der höchste Berg der Erde?" , "8840m" , "8920m" , "8790" , "8810" ],
+  [  "Wie hoch ist der höchste Berg der Erde?" , "8840m" , "8920m" , "8790m" , "8810m" ],
   [  "Wie viele Länder grenzen an die Schweiz?" , "5" , "4" , "6" , "7" ],
   [  "Mit welcher Filmrolle ist Pierre Brice berühmt geworden?" , "Winnetou" , "Titanic" , "Casablanca" , "Frühstück bei Tiffany" ],
   [  "Was enthält mehr Eisen?" , "Schokolade" , "Spinat" , "Rindfleisch" , "Milch" ],

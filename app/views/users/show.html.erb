@@ -11,7 +11,7 @@
 </p>
 
 <p>
-  <strong>Points:</strong>
+  <strong>Punkte:</strong>
   <%= @user_points %> / <%= @user.question_count %>
 </p>
 
@@ -21,25 +21,25 @@
 </p>
 
 <p>
-  <strong>Groups:</strong>
+  <strong>Gruppen:</strong>
   <% @user.groups.each do |group| %>
     <%= group.name %><br>
   <% end %>
 </p>
 
 <p>
-  <strong>Active Challenges:</strong><br>
+  <strong>Aktive Challenges:</strong><br>
   <% @user.active_participations.each do |participation| %>
     <%= participation.challenge.name %><br>
   <% end %>
 </p>
 
 <p>
-  <strong>Succeeded Challenges:</strong><br>
+  <strong>Geschaffte Challenges:</strong><br>
   <% @user.succeeded_participations.each do |participation| %>
     <%= participation.challenge.name %><br>
   <% end %>
 </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= link_to (image_tag "pen29.png"), edit_user_path(@user) %> 
+<%= link_to (image_tag "pfeil-nach-links_318-1440.jpg"), users_path %>

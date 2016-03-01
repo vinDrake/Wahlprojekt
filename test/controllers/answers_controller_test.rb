@@ -2,7 +2,7 @@ require 'test_helper'
 
 class AnswersControllerTest < ActionController::TestCase
   setup do
-    @answer = answers(:one)
+    @answer = Answer.all.first
   end
 
   test "should get index" do
@@ -18,7 +18,7 @@ class AnswersControllerTest < ActionController::TestCase
 
   test "should create answer" do
     assert_difference('Answer.count') do
-      post :create, answer: { answer_body: @answer.answer_body, correct: @answer.correct }
+      post :create, answer: { question: Question.all.first, answer_body: @answer.answer_body, correct: @answer.correct }
     end
 
     assert_redirected_to answer_path(assigns(:answer))

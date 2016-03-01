@@ -1,6 +1,6 @@
 
 
-<h1>Listing Questions</h1>
+<h1>Fragen</h1>
 
 <table>
   <thead>
@@ -14,9 +14,9 @@
     <% @questions.each do |question| %>
       <tr>
         <td><%= question.problem %></td>
-        <td><%= link_to 'Show', question %></td>
-        <td><%= link_to 'Edit', edit_question_path(question) %></td>
-        <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to (image_tag "lupe_318-1787.jpg"), question %></td>
+        <td><%= link_to (image_tag "pen29.png"), edit_question_path(question) %></td>
+        <td><%= link_to (image_tag "delete96.png"), question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +24,4 @@
 
 <br>
 
-<%= link_to 'New Question', new_question_path %>
+<%= link_to 'Neue Frage', new_question_path %>

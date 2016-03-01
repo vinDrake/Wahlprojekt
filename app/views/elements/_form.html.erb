@@ -21,7 +21,7 @@
     <%= f.select :challenge_id, @challenge_select.map { |c| [c.name,c.id]} %>
     <% end %>
   </div>
-  <strong>Question:</strong>
+  <strong>Frage:</strong>
   <div class="field">
     <%= f.label :question %><br>
     <%= f.select :question_id, @question_select.map { |q| [q.problem,q.id]} %>

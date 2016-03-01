@@ -8,5 +8,5 @@
 <% unless @feed.participation.nil? %>
   <%= @feed.participation.challenge.name %>
 <% end %>
-<%= link_to 'Edit', edit_feed_path(@feed) %> |
-<%= link_to 'Back', feeds_path %>
+<%= link_to (image_tag "pen29.png"), edit_feed_path(@feed) %> 
+<%= link_to (image_tag "pfeil-nach-links_318-1440.jpg"), feeds_path %>

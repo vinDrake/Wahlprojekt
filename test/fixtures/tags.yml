@@ -11,3 +11,6 @@ movies:
 
 comics:
   name: Comics
+
+math:
+  name: Math
